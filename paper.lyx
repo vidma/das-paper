@@ -176,7 +176,7 @@ ead{$^1$vidmantas.zemleris@cern.ch}
 
 \begin_layout Abstract
 \begin_inset Note Note
-status open
+status collapsed
 
 \begin_layout Plain Layout
 Background: 
@@ -193,7 +193,7 @@ The goal of the virtual data service integration is to provide a coherent
 
 \begin_layout Abstract
 \begin_inset Note Note
-status open
+status collapsed
 
 \begin_layout Plain Layout
 Problem: 
@@ -213,7 +213,7 @@ Querying is usually carried out through a structured query language, such
 
 \begin_layout Abstract
 \begin_inset Note Note
-status open
+status collapsed
 
 \begin_layout Plain Layout
 Solution: 
@@ -251,19 +251,31 @@ Virtual Data Integration
 SQL
 \emph default
 .
- EII performs a number of transformations on queries and their results (eliminat
-ing the inconsistencies in data formats, naming; combining the results,
- etc.) which allows querying the sources in a coherent way.
- 
+ To allow querying the sources in a coherent way, EII performs a number
+ of transformations on queries and their results (eliminating the inconsistencie
+s in data formats and [entity] naming; combine the results, etc.).
+ Unfortunately, this
 \series bold
-However, this 
+ 
 \series default
 \lang english
-requires its users to learn the query language and to get acquainted with
- data organization (i.e.
- the mediated schema) thus negatively impacting the system’s usability
+requires the users to learn the query language and to get acquainted with
+ organization of data (i.e.
+ the mediated schema), which is often not straight-forward.
+ 
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+Even worse, the data services may provide only limited black-box-like interfaces
+ without direct access to inspect their contents
+\end_layout
+
+\end_inset
+
+
 \lang british
-.
+
 \begin_inset Note Note
 status collapsed
 
@@ -324,35 +336,9 @@ tes; 2) the keyword search based on metadata returning query results directly,
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
-
-\lang british
-The objective of this work is to investigate the keyword search proposing
- a ranked list of queries, as a more intuitive alternative, which, in fact,
- received relatively little attention in the field of data 
-\series bold
-(service)
-\series default
- integration
-\begin_inset CommandInset citation
-LatexCommand citep
-key "nl_to_dataservices_guerrisi2012natural"
-
-\end_inset
-
-.
- 
-\end_layout
-
-\begin_layout Standard
-
-\lang british
 Virtual integration presents an additional challenge, since only limited
- access to the data instances is available, rendering the traditional methods
- that return data-tuples
+ access to the data instances is available, rendering the traditional keyword
+ search methods that return data-tuples
 \series bold
  
 \series default
@@ -361,6 +347,23 @@ inapplicable (e.g.
 \end_layout
 
 \begin_layout Standard
+
+\lang british
+The objective of this work is to investigate keyword search that proposes
+ a ranked list of structured queries, as a more intuitive alternative, which,
+ in fact, received relatively little attention in the field of data integration
+\begin_inset CommandInset citation
+LatexCommand citep
+key "nl_to_dataservices_guerrisi2012natural"
+
+\end_inset
+
+.
+ 
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
 
 \lang british
 Building on the experience gained while working on an EII system
@@ -393,6 +396,11 @@ we will focus on the implementation of keyword search, also touching and
 more distant topics such as usability and performance of an EII.
 \end_layout
 
+\end_inset
+
+
+\end_layout
+
 \begin_layout Subsection
 The Data Aggregation System
 \end_layout
@@ -403,6 +411,8 @@ The Data Aggregation System
 The
 \emph on
  
+\emph default
+
 \begin_inset Quotes eld
 \end_inset
 
@@ -410,6 +420,8 @@ CMS Data Aggregation System
 \begin_inset Quotes erd
 \end_inset
 
+
+\emph on
  (DAS
 \begin_inset CommandInset nomenclature
 LatexCommand nomenclature
@@ -419,15 +431,19 @@ description "CMS Data Aggregation System - The EII system used at CMS"
 \end_inset
 
 ) 
+\emph default
+
 \begin_inset CommandInset citation
 LatexCommand citep
 key "Kuznetsov2010,Kuznetsov2011"
 
 \end_inset
 
+
+\emph on
  
 \emph default
-allows integrated access to a number of proprietary data-sources through
+provides an integrated access to a number of proprietary data-sources through
  simple structured queries eliminating the inconsistencies in entity naming,
  data formats and combining the results.
  It uses the 
