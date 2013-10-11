@@ -9,7 +9,8 @@
 %\usepackage[utf8]{inputenc}
 
 \usepackage[cm]{fullpage}
-\usepackage{booktabs}
+%\usepackage{booktabs}
+\usepackage{longtable}
 \end_preamble
 \use_default_options true
 \maintain_unincluded_children false
@@ -129,6 +130,10 @@ adds additional interdependencies between solution costs, e.g.
 .
 \end_layout
 
+\begin_layout Section
+Comparison of existing approaches
+\end_layout
+
 \begin_layout Standard
 \begin_inset Float table
 placement H
@@ -150,6 +155,7 @@ status open
 \begin_layout Plain Layout
 
 \series bold
+\size small
 Method
 \end_layout
 
@@ -161,6 +167,7 @@ Method
 \begin_layout Plain Layout
 
 \series bold
+\size small
 Advantages
 \end_layout
 
@@ -172,6 +179,7 @@ Advantages
 \begin_layout Plain Layout
 
 \series bold
+\size small
 Disadvantages
 \end_layout
 
@@ -185,6 +193,7 @@ Disadvantages
 \begin_layout Plain Layout
 
 \series bold
+\size small
 Exhaustive search
 \end_layout
 
@@ -194,10 +203,14 @@ Exhaustive search
 \begin_inset Text
 
 \begin_layout Plain Layout
+
+\size small
 easy pruning and contextualization
 \end_layout
 
 \begin_layout Plain Layout
+
+\size small
 optimal answers
 \end_layout
 
@@ -207,6 +220,8 @@ optimal answers
 \begin_inset Text
 
 \begin_layout Plain Layout
+
+\size small
 computationally expensive (exponential)
 \end_layout
 
@@ -220,6 +235,7 @@ computationally expensive (exponential)
 \begin_layout Plain Layout
 
 \series bold
+\size small
 Munkres
 \series default
 
@@ -233,6 +249,8 @@ key "munkres_cern_rect"
 \end_layout
 
 \begin_layout Plain Layout
+
+\size small
 gets the best solution to assignment problem in 
 \begin_inset Formula $\Theta(N^{2}M)$
 \end_inset
@@ -246,6 +264,8 @@ gets the best solution to assignment problem in
 \begin_inset Text
 
 \begin_layout Plain Layout
+
+\size small
 quite fast
 \end_layout
 
@@ -255,10 +275,14 @@ quite fast
 \begin_inset Text
 
 \begin_layout Plain Layout
+
+\size small
 no contextualization
 \end_layout
 
 \begin_layout Plain Layout
+
+\size small
 only one best result
 \end_layout
 
@@ -272,6 +296,7 @@ only one best result
 \begin_layout Plain Layout
 
 \series bold
+\size small
 Keymantic
 \series default
 
@@ -286,6 +311,7 @@ key "keymantic_kws_metadata_bergamaschi2011"
 
 \begin_layout Plain Layout
 
+\size small
 \color red
 recursively evaluate all mappings, pruning on current cost, do some unreliable
  magic inside Munkres algorithm to get contextualization
@@ -297,14 +323,20 @@ recursively evaluate all mappings, pruning on current cost, do some unreliable
 \begin_inset Text
 
 \begin_layout Plain Layout
+
+\size small
 quite fast
 \end_layout
 
 \begin_layout Plain Layout
+
+\size small
 some contextualization
 \end_layout
 
 \begin_layout Plain Layout
+
+\size small
 some of top-k answers
 \end_layout
 
@@ -314,10 +346,14 @@ some of top-k answers
 \begin_inset Text
 
 \begin_layout Plain Layout
+
+\size small
 only approximate - return only some of top-k answers
 \end_layout
 
 \begin_layout Plain Layout
+
+\size small
 no guarantee all conceptualizations to be explored if not exploring ALL
  solution space (i.e.
  not real top-K)
@@ -333,6 +369,7 @@ no guarantee all conceptualizations to be explored if not exploring ALL
 \begin_layout Plain Layout
 
 \series bold
+\size small
 Murty
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -344,6 +381,8 @@ key "murty_ranked"
 \end_layout
 
 \begin_layout Plain Layout
+
+\size small
 to get each additional result, call Munkres to solve 
 \begin_inset Formula $n-1$
 \end_inset
@@ -356,6 +395,8 @@ to get each additional result, call Munkres to solve
 \end_layout
 
 \begin_layout Plain Layout
+
+\size small
 Can be greatly optimized through heuristics
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -383,6 +424,7 @@ status open
 
 \begin_layout Plain Layout
 
+\size small
 \emph on
 top-k optimal
 \emph default
@@ -390,6 +432,8 @@ top-k optimal
 \end_layout
 
 \begin_layout Plain Layout
+
+\size small
 quite fast
 \end_layout
 
@@ -399,10 +443,14 @@ quite fast
 \begin_inset Text
 
 \begin_layout Plain Layout
+
+\size small
 no early pruning (an augmenting path may change much...)
 \end_layout
 
 \begin_layout Plain Layout
+
+\size small
 no contextualization (or at least hard to get)
 \end_layout
 
@@ -416,6 +464,7 @@ no contextualization (or at least hard to get)
 \begin_layout Plain Layout
 
 \series bold
+\size small
 HMM
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -441,16 +490,22 @@ or some related conditional models such as CRF
 \begin_inset Text
 
 \begin_layout Plain Layout
+
+\size small
 optimal top-k results
 \end_layout
 
 \begin_layout Plain Layout
+
+\size small
 allows some contextualization of l
 \emph on
 imited length
 \end_layout
 
 \begin_layout Plain Layout
+
+\size small
 quite fast
 \end_layout
 
@@ -460,10 +515,14 @@ quite fast
 \begin_inset Text
 
 \begin_layout Plain Layout
+
+\size small
 no pruning
 \end_layout
 
 \begin_layout Plain Layout
+
+\size small
 no guarantee of mutual exclusiveness
 \end_layout
 
@@ -477,15 +536,28 @@ no guarantee of mutual exclusiveness
 \begin_layout Plain Layout
 
 \series bold
+\size small
 Proposed by us 
 \series default
 (case of few dependencies)
 \end_layout
 
 \begin_layout Plain Layout
-enumerateing over all contextualization possibilities, use Murty to get
- top-k results over matrix with contextualizations applied: reusing older
- sub-solutions by using the 
+
+\size small
+1) enumerateing over all contextualization possibilities
+\end_layout
+
+\begin_layout Plain Layout
+
+\size small
+2) use Murty to get top-k results over matrix with contextualizations applied
+\end_layout
+
+\begin_layout Plain Layout
+
+\size small
+3) reuse older sub-solutions by using the 
 \begin_inset Quotes eld
 \end_inset
 
@@ -500,7 +572,11 @@ key "munkres_dynamic"
 
 \end_inset
 
- 
+, so each modified row/column costs 
+\begin_inset Formula $\Theta(NM)$
+\end_inset
+
+, each modification can be reused if exploring them in depth-first fashion.
 \end_layout
 
 \end_inset
@@ -511,12 +587,14 @@ key "munkres_dynamic"
 \begin_layout Plain Layout
 
 \series bold
+\size small
 top-k optimal results
 \end_layout
 
 \begin_layout Plain Layout
 
 \series bold
+\size small
 fast
 \series default
  if # contextualizations is small
@@ -528,6 +606,8 @@ fast
 \begin_inset Text
 
 \begin_layout Plain Layout
+
+\size small
 intractable/exponential for complex contextualizations
 \end_layout
 
@@ -560,6 +640,10 @@ comparison of different methods
 \end_inset
 
 
+\end_layout
+
+\begin_layout Section
+The proposed algorithm
 \end_layout
 
 \begin_layout Standard
