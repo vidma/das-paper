@@ -403,24 +403,7 @@ key "nl_to_dataservices_guerrisi2012natural"
 
 \begin_layout Standard
 
-\color red
 \lang british
-\begin_inset Marginal
-status open
-
-\begin_layout Plain Layout
-
-\color red
-\lang british
-TODO! 
-\series bold
-contextualization!
-\end_layout
-
-\end_inset
-
-
-\color inherit
 Keyword queries are 
 \lang english
 ambiguous
@@ -442,36 +425,33 @@ key "ethz2012,keymantic10,bergamaschi2011hidden"
 
 \end_inset
 
-.
- As
-\lang british
- queries over data-services can be quite expensive to execute, we display
- a list of query suggestions to the user before actually evaluating them.
 
-\color red
- 
-\begin_inset Note Note
+\lang british
+ for the user to choose from
+\begin_inset Foot
 status open
 
 \begin_layout Plain Layout
+as
+\lang british
+ query execution can be quite expensive, the suggestions are shown to the
+ user, instead executing immediately.
+\end_layout
+
+\end_inset
+
+.
 
 \color red
-\lang british
-Second, even if keyword queries do not have clear syntactic structure, keywords
- referring to related concepts usually come close to each other in the query
- 
+ Second, even if keyword queries have no clear syntactic structure, keywords
+ referring to related concepts usually come close to each other 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "characterization_search_behaviour_kumar2009,Kws_metadata_2011"
 
 \end_inset
 
-, which can be used to improve the quality of suggestions.
-\end_layout
-
-\end_inset
-
-
+, this can be used to improve the ranking.
 \begin_inset Note Note
 status open
 
@@ -762,10 +742,6 @@ unique
 \end_layout
 
 \begin_layout Section
-Mappings keywords into structured query suggestions
-\end_layout
-
-\begin_layout Subsubsection*
 Problem definition
 \end_layout
 
@@ -1078,6 +1054,10 @@ joins
 
 \end_layout
 
+\begin_layout Section
+Mapping keywords into structured query suggestions
+\end_layout
+
 \begin_layout Subsection
 
 \lang british
@@ -1104,7 +1084,7 @@ status open
 
 
 \backslash
-vspace{-40pt}
+vspace{-30pt}
 \end_layout
 
 \end_inset
@@ -2208,6 +2188,13 @@ description "Inverse Document Frequency, used to downrank frequent and therefore
  information retrieval techniques.
 \end_layout
 
+\begin_layout Standard
+
+\color red
+\lang british
+TODO: describe in more details the crappy stuff we have
+\end_layout
+
 \begin_layout Subsection
 
 \lang british
@@ -2737,7 +2724,7 @@ not yet implemented
 \end_layout
 
 \begin_layout Section
-Related work
+Related works
 \end_layout
 
 \begin_layout Standard
@@ -2768,23 +2755,27 @@ key "keymantic_kws_metadata_bergamaschi2011,keymantic10"
 \end_inset
 
  answers keyword queries over relational databases with limited access to
- the data instances or over data integration 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "keymantic10"
-
-\end_inset
-
-.
+ the data instances (including data integration).
  First, based on meta-data
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\lang british
 \begin_inset Foot
 status collapsed
 
 \begin_layout Plain Layout
 
 \lang british
-in EII, only limited access to data instances is available, therefore instead
+in VDI, only limited access to data instances is available, therefore instead
  of just indexing the all data, the meta-data shall be used
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -2793,20 +2784,36 @@ in EII, only limited access to data instances is available, therefore instead
 \emph on
 schema terms
 \emph default
- (entity names and their attributes, using some entity matching techniques)
- or as potential 
+ (using various entity matching techniques) or as potential 
 \emph on
 value
 \emph default
  matches (by checking any available constraints, such as the regular expressions
  imposed by the database or data-services).
- Then, these scores are combined
+ Next, to obtain the 
 \series bold
-, 
+global ranking, 
 \series default
-and refined by heuristics that increase the scores of query interpretations
- with the nearby keywords having related labels assigned.
+they consider the 
+\begin_inset Quotes eld
+\end_inset
+
+min-cost weighted bipartite matching
+\begin_inset Quotes erd
+\end_inset
+
+ problem (of keywords into their tags) extended with weight contextualizations
+ (i.e.
+ conditional increase of scores for those keyword mappings where the nearby
+ keywords have obtained related labels).
  Finally, these labels are interpreted as SQL queries.
+
+\color red
+ To cope with contextualization the internal steps of Munkres algorithm
+ have been modified, the presumptive implications of this change are discussed
+ in the following section.
+\color inherit
+
 \begin_inset Note Note
 status collapsed
 
@@ -3112,7 +3119,7 @@ http://www.jbiomedsem.com/content/pdf/2041-1480-2-8.pdf
 \color cyan
 
 \begin_inset Marginal
-status collapsed
+status open
 
 \begin_layout Plain Layout
 
@@ -3165,8 +3172,8 @@ key "bergamaschi2011hidden"
 
 \end_inset
 
- attempts to incorporate users feedback through training an Hidden Markov
- Model's (HMM)
+ attempted to incorporate users feedback by training an Hidden Markov Model's
+ (HMM)
 \begin_inset CommandInset nomenclature
 LatexCommand nomenclature
 symbol "HMM"
@@ -3213,20 +3220,7 @@ key "bergamaschi2011hidden"
 
 \end_inset
 
- the accuracy of the two systems didn't differ much
-\begin_inset Marginal
-status open
-
-\begin_layout Plain Layout
-
-\color blue
-\lang british
-but they mentioned a better evaluation may be needed...
-\end_layout
-
-\end_inset
-
-.
+ the accuracy of the later system didn't differ much from Keymantic.
 \begin_inset Marginal
 status open
 
@@ -3243,23 +3237,67 @@ also mention: NL querying over services
 \end_layout
 
 \begin_layout Section
-Discussion
-\end_layout
-
-\begin_layout Section
-Future work
+Discussion and Future work
 \end_layout
 
 \begin_layout Standard
-Terminology
+
+\series bold
+\color red
+TODO: 
+\series default
+Discuss differneses from our implementation
 \end_layout
 
 \begin_layout Standard
-Data Virtualization...
+Keymantic which is the closest work
+\end_layout
+
+\begin_layout Paragraph*
+
+\lang british
+HMM and what's modelled
+\end_layout
+
+\begin_layout Paragraph*
+
+\lang british
+On weighted bipartite matching extended with contextualizations
+\end_layout
+
+\begin_layout Standard
+
+\lang british
+blah blah
+\end_layout
+
+\begin_layout Standard
+
+\lang british
+Our proposed algorithm?
 \end_layout
 
 \begin_layout Section
 Conclusions
+\end_layout
+
+\begin_layout Section*
+\begin_inset Note Note
+status open
+
+\begin_layout Section*
+Acknowledgments
+\end_layout
+
+\begin_layout Plain Layout
+Part of this work was conducted as a Master Thesis project between École
+ Polytechnique Fédérale de Lausanne and CMS Experiment, CERN.
+ The main author is thankful to his supervisors for their support.
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section*
