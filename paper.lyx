@@ -4,12 +4,14 @@
 \begin_header
 \textclass jpconf
 \begin_preamble
-\renewcommand{\maketitle}{}
+%\renewcommand{\maketitle}{}
+\newcommand{\maketitle}{}
+
 \AtBeginDocument{
        \let\oldmarginpar\marginpar
     % TO hide margin notes in the final:
-     \renewcommand\marginpar[1]{}
-     %\renewcommand\marginpar[1]{{\oldmarginpar[#1]{\footnotesize{#1}}}}
+     %\renewcommand\marginpar[1]{}
+     \renewcommand\marginpar[1]{{\oldmarginpar[#1]{\color{red}\tiny{#1}}}}
 
 }
 \end_preamble
@@ -232,28 +234,66 @@ Introduction
 \end_layout
 
 \begin_layout Standard
-In 
+
 \emph on
 Virtual Data Integration
 \emph default
 \lang british
- (EII), data physically stays at its origin, and is requested only on demand,
- usually, through structured query languages such as 
-\emph on
-SQL
-\emph default
-.
- To allow querying the sources in a coherent way, EII performs a number
- of transformations on queries and their results (eliminating the inconsistencie
-s in data formats and [entity] naming; combine the results, etc.).
- Unfortunately, it
-\series bold
- 
-\series default
+ (VDI) is an approach of 
 \lang english
-requires the users to learn the query language and to get acquainted with
- organization of data (i.e.
- the mediated schema), which is often not straight-forward.
+“integrating data from multiple sources without having to first load data
+ into a central warehouse”
+\begin_inset CommandInset citation
+LatexCommand citep
+after "page 1"
+key "eii_2005"
+
+\end_inset
+
+
+\lang british
+.
+ Instead, data physically stays at its origin, and is requested on demand.
+ A VDI system parses and transforms the query, sends it to services and
+ performs a number of transformations on the results such as elimination
+ of inconsistencies in data formats, entity naming.
+ 
+\begin_inset Marginal
+status open
+
+\begin_layout Plain Layout
+
+\color blue
+\lang british
+Unfortunately
+\color inherit
+/
+\end_layout
+
+\end_inset
+
+Still, that forces its users 
+\lang english
+to learn the query language and to get acquainted with data organization
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+ (i.e.
+ the mediated schema)
+\end_layout
+
+\end_inset
+
+, which is often not straight-forward
+\color blue
+ when where is no direct access to the data
+\color inherit
+ at 
+\color blue
+the data-services
+\color inherit
+.
  
 \begin_inset Note Note
 status collapsed
@@ -328,6 +368,13 @@ tes; 2) the keyword search based on metadata returning query results directly,
 
 \end_inset
 
+
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+
+\lang british
 Virtual integration presents an additional challenge, since only limited
  access to the data instances is available, rendering the traditional keyword
  search methods that return data-tuples
@@ -338,12 +385,12 @@ inapplicable (e.g.
  Information Retrieval or Keyword search over relational databases).
 \end_layout
 
-\begin_layout Standard
+\end_inset
 
-\lang british
-The objective of this work is to investigate keyword search that proposes
- a ranked list of structured queries, as a more intuitive alternative, which,
- in fact, received relatively little attention in the field of data integration
+In this work, we explore the keyword search, as a more intuitive alternative
+ to writing structured queries from scratch.
+ This subject in fact, received relatively little attention in the field
+ of data integration
 \begin_inset CommandInset citation
 LatexCommand citep
 key "nl_to_dataservices_guerrisi2012natural"
@@ -351,10 +398,157 @@ key "nl_to_dataservices_guerrisi2012natural"
 \end_inset
 
 .
- The keyword search implementation presented in this work was developed
- as part of a data discovery system at the CMS Experiment, CERN and covers
- some specific use-cases, however it is quite generic to be adapter in other
- environments.
+ 
+\end_layout
+
+\begin_layout Standard
+
+\color red
+\lang british
+\begin_inset Marginal
+status open
+
+\begin_layout Plain Layout
+
+\color red
+\lang british
+TODO! 
+\series bold
+contextualization!
+\end_layout
+
+\end_inset
+
+
+\color inherit
+Keyword queries are 
+\lang english
+ambiguous
+\lang british
+ and often underspecified
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Kws_metadata_2011"
+
+\end_inset
+
+
+\lang english
+, thus the standard approach is to produce a ranked list of most-likely
+ structured query suggestions
+\begin_inset CommandInset citation
+LatexCommand citep
+key "ethz2012,keymantic10,bergamaschi2011hidden"
+
+\end_inset
+
+.
+ As
+\lang british
+ queries over data-services can be quite expensive to execute, we display
+ a list of query suggestions to the user before actually evaluating them.
+
+\color red
+ 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\color red
+\lang british
+Second, even if keyword queries do not have clear syntactic structure, keywords
+ referring to related concepts usually come close to each other in the query
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "characterization_search_behaviour_kumar2009,Kws_metadata_2011"
+
+\end_inset
+
+, which can be used to improve the quality of suggestions.
+\end_layout
+
+\end_inset
+
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\lang british
+Second, the average query length continues to increase, which shows that
+ users are moving towards preference of expressing their information need
+ in natural languages than just typing keywords.
+ 
+\begin_inset Quotes eld
+\end_inset
+
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\lang british
+http://searchuserinterfaces.com/book/sui_ch12_emerging.html
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang british
+The system presented was developed at the CMS Experiment, CERN as part of
+ a data discovery/integration system called 
+\begin_inset Quotes eld
+\end_inset
+
+CMS Data Aggregation System
+\begin_inset Quotes erd
+\end_inset
+
+
+\emph on
+, (DAS
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+symbol "DAS"
+description "CMS Data Aggregation System - The EII system used at CMS"
+
+\end_inset
+
+
+\emph default
+)
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Kuznetsov2010,Kuznetsov2011"
+
+\end_inset
+
+
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+
+\lang british
+and covers some specific use-cases
+\end_layout
+
+\end_inset
+
+, which is released as open source.
  
 \begin_inset Note Note
 status collapsed
@@ -394,51 +588,8 @@ more distant topics such as usability and performance of an EII.
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Subsection
-DAS - a system for virtual service integration
-\end_layout
-
-\begin_layout Standard
-
-\lang british
-\begin_inset Quotes eld
-\end_inset
-
-CMS Data Aggregation System
-\begin_inset Quotes erd
-\end_inset
-
-
-\emph on
- (DAS
-\begin_inset CommandInset nomenclature
-LatexCommand nomenclature
-symbol "DAS"
-description "CMS Data Aggregation System - The EII system used at CMS"
-
-\end_inset
-
-) 
-\emph default
-
-\begin_inset CommandInset citation
-LatexCommand citep
-key "Kuznetsov2010,Kuznetsov2011"
-
-\end_inset
-
-
-\emph on
- 
-\emph default
-provides an integrated access to a number of proprietary data-sources through
- simple structured queries eliminating the inconsistencies in entity naming,
- data formats and combining the results.
- As DAS has no predefined schema, only minimal mappings are required to
- map differences among the services.
+DAS has no predefined schema, thus only minimal mappings are needed to describe
+ the differences among the services.
  
 \begin_inset Note Note
 status collapsed
@@ -486,18 +637,42 @@ Query language (DASQL) and its execution
 \end_inset
 
 
-\end_layout
+\series default
+It
+\emph on
+ 
+\emph default
+uses simple structured queries
+\begin_inset Note Note
+status collapsed
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 \lang british
-Its queries are formed specifying the entity to be retrieved (e.g.
- dataset, file, etc) and providing selection criteria (e.g.
- attribute=value).
- The results could be later 'piped' for further filtering, sorting or aggregatio
-n (min, max, avg, sum, etc.).
-\begin_inset Note Note
+ eliminating the inconsistencies in entity naming, data formats and combining
+ the results
+\end_layout
+
+\end_inset
+
+ which are formed specifying an entity to be retrieved and some selection
+ criteria
+\begin_inset Foot
 status open
+
+\begin_layout Plain Layout
+
+\lang british
+passed as input to the services, including the virtual ones which abstract
+ or combine physical data services
+\end_layout
+
+\end_inset
+
+.
+ The results could be further filtered, sorted or aggregated.
+\begin_inset Note Note
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -586,127 +761,11 @@ unique
 
 \end_layout
 
+\begin_layout Section
+Mappings keywords into structured query suggestions
+\end_layout
+
 \begin_layout Subsubsection*
-
-\lang british
-Nature of keyword queries
-\end_layout
-
-\begin_layout Standard
-
-\lang british
-Keyword queries are often underspecified, therefore every possible interpretatio
-n has to be included in the results 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "Kws_metadata_2011"
-
-\end_inset
-
-
-\lang english
-.
- Still, some interpretations are more likely than the others, therefore,
- when the users are interested in complete answer sets
-\begin_inset Marginal
-status open
-
-\begin_layout Plain Layout
-other terminology?
-\end_layout
-
-\end_inset
-
-, the standard approach is to produce a ranked list of most-likely structured
- queries 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "ethz2012,keymantic10,bergamaschi2011hidden"
-
-\end_inset
-
-.
-
-\lang british
- Further, it has been noticed that even if keyword queries do not have any
- clear syntactic structure, keywords referring to related concepts usually
- come close to each other in the query 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "characterization_search_behaviour_kumar2009,Kws_metadata_2011"
-
-\end_inset
-
-.
-
-\color cyan
- 
-\color inherit
-The existing approaches attempt to ameliorate their candidate answers ranking
- by taking this into account.
-\color cyan
-
-\begin_inset Marginal
-status collapsed
-
-\begin_layout Plain Layout
-
-\color cyan
-\lang british
-this also justifies the applicability of sequential machine learning models
- such as the Hidden Markov Model in 
-\emph on
-KEYRY
-\emph default
- 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "bergamaschi2011hidden"
-
-\end_inset
-
-.
-\end_layout
-
-\end_inset
-
-
-\color inherit
-
-\begin_inset Note Note
-status collapsed
-
-\begin_layout Plain Layout
-
-\lang british
-Second, the average query length continues to increase, which shows that
- users are moving towards preference of expressing their information need
- in natural languages than just typing keywords.
- 
-\begin_inset Quotes eld
-\end_inset
-
-
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-
-\lang british
-http://searchuserinterfaces.com/book/sui_ch12_emerging.html
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsection
 Problem definition
 \end_layout
 
@@ -800,7 +859,8 @@ description "keyword query\\\\"
 \begin_inset Formula $\left(kw_{1},kw_{2},..,kw_{n}\right)$
 \end_inset
 
-, we are interested in translating it into a ranked list of structured queries.
+, we are interested in translating it into a ranked list of best matching
+ structured queries.
  We are given this metadata:
 \end_layout
 
@@ -826,7 +886,7 @@ description "names of entities in integration schema and their attributes (names
 
 \end_inset
 
-: names of entities and their attributes (either 
+: entities and their attributes (
 \emph on
 inputs
 \emph default
@@ -839,9 +899,8 @@ output
 
 \begin_layout Itemize
 
-\lang british
-information about possible 
 \emph on
+\lang british
 value terms
 \emph default
 
@@ -864,8 +923,7 @@ description "values of entity attributes (that could be input parameters of data
 
 \end_inset
 
-.
- For some fields we have a list of values, while for others only 
+: for some fields a list of values, but for most only 
 \emph on
 
 \begin_inset Note Note
@@ -887,13 +945,8 @@ the
 
 constraints
 \emph default
- on values allowed as data-service inputs are available (mandatory inputs,
- regular expressions defining input values accepted).
-\end_layout
-
-\begin_layout Standard
-
-\lang british
+ on data-service inputs (mandatory inputs, regular expressions defining
+ values accepted).
 \begin_inset Note Note
 status collapsed
 
@@ -985,11 +1038,6 @@ avg(dataset.size)
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
-
-\lang british
 \begin_inset Note Note
 status collapsed
 
@@ -1030,23 +1078,10 @@ joins
 
 \end_layout
 
-\begin_layout Standard
-
-\lang british
-\begin_inset Newpage clearpage
-\end_inset
-
-
-\end_layout
-
-\begin_layout Section
-From Keywords to Structured Queries
-\end_layout
-
 \begin_layout Subsection
 
 \lang british
-Overview of our approach
+Overview of our implementation
 \end_layout
 
 \begin_layout Standard
@@ -1055,9 +1090,9 @@ Overview of our approach
 \begin_inset Wrap figure
 lines 0
 placement r
-overhang 1cm
+overhang 0in
 width "45text%"
-status collapsed
+status open
 
 \begin_layout Plain Layout
 
@@ -1082,9 +1117,9 @@ vspace{-40pt}
 \series bold
 \lang british
 \begin_inset Graphics
-	filename /home/vidma/DAS_paper/poster/fancytikzposter_sources/figures/kws_architecture.pdf
+	filename figures/kws_architecture.pdf
 	lyxscale 40
-	width 50text%
+	width 45text%
 
 \end_inset
 
@@ -1148,42 +1183,8 @@ vspace{-10pt}
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
-
-\lang british
-In the following sections,
-\color cyan
- 
-\color inherit
-we present a fairly simple implementation, that produces a ranked list of
- best matching structured queries, where we focused on the quality of results
- with the goal of not enforcing any assumptions on the input queries (it
- could be plain keywords or a full-sentence, while existence of predefined
- structural patterns could be used to improve the result quality).
- 
 \begin_inset Note Note
 status collapsed
-
-\begin_layout Plain Layout
-
-\lang british
-The implementation is designed with the goal to be able to employ the user
- feedback for future improvements to various components of the system, such
- as initial entry points, or ranking of the results.
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-
-\lang british
-\begin_inset Note Note
-status open
 
 \begin_layout Plain Layout
 
@@ -1209,32 +1210,63 @@ reference "fig:query-translation-steps"
 
 \end_inset
 
+ 
+\begin_inset Note Note
+status collapsed
 
-\end_layout
-
-\begin_layout Standard
+\begin_layout Plain Layout
 
 \lang british
-Firstly, the query is pre-processed by the 
+When designing the system we were focusing on its simplicity, ranking quality
+ and robustness (queries can be full sentence, plain keywords, or contain
+ structural patterns).
+\end_layout
+
+\end_inset
+
+Firstly, the query is 
 \emph on
-tokenizer
+tokenized
 \emph default
-: it cleans up the query, identifies any explicit phrase tokens, or basic
- operators (see section 
+ cleaning up the query and identifying any explicit quoted phrase tokens,
+ operators
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+
+\lang british
+ (see section 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sub:Tokenizer"
 
 \end_inset
 
-).
+)
+\end_layout
+
+\end_inset
+
+, or other structural patterns
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+
+\lang british
+ to improve the quality of suggestions
+\end_layout
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
 
 \lang british
-Secondly, employing a number of entity matching techniques operating on
- metadata, the 
+Then, employing a number of entity matching techniques, the 
 \begin_inset Quotes eld
 \end_inset
 
@@ -1246,46 +1278,17 @@ entry points
 \begin_inset Quotes erd
 \end_inset
 
- are identified: for each keyword, we obtain a listing of schema
-\begin_inset Foot
-status collapsed
-
-\begin_layout Plain Layout
-
-\lang british
-schema term is the name of an entity or it's attribute in the integration
- schema (e.g.
- the 
-\begin_inset Quotes eld
-\end_inset
-
-result type
-\begin_inset Quotes erd
-\end_inset
-
-, input parameter or output field for some data service)
-\end_layout
-
-\end_inset
-
- and value
+ are identified: for each keyword, we obtain a listing of schema and value
 \series bold
-
-\begin_inset Foot
-status collapsed
-
-\begin_layout Plain Layout
-
-\lang british
-value term - is the name of schema term which could gain value of given
- keyword
-\end_layout
-
-\end_inset
-
  
 \series default
-terms it may correspond to along with a rough estimate of our confidence
+terms it may correspond to along with a rough estimate of the likelihood
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+
+\lang british
  (see Section 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -1293,20 +1296,21 @@ reference "sub:Matching-keywords"
 
 \end_inset
 
-).
- This includes identifying keyword chunks corresponding to multi-word terms
+)
+\end_layout
+
+\end_inset
+
+.
+ 
 \begin_inset Note Note
 status open
 
 \begin_layout Plain Layout
 
 \lang british
- (currently, only fields in service results);
-\end_layout
-
-\end_inset
-
-: many of them are unclean, machine-readable field-names, with irrelevant
+This includes identifying keyword chunks corresponding to multi-word terms:
+ many of them are unclean, machine-readable field-names, with irrelevant
  and frequent terms, motivating the use of IDF-based
 \begin_inset CommandInset nomenclature
 LatexCommand nomenclature
@@ -1318,21 +1322,30 @@ description "Inverse Document Frequency, used to downrank frequent and therefore
  information retrieval techniques.
 \end_layout
 
+\end_inset
+
+
+\end_layout
+
 \begin_layout Standard
 
 \lang british
-Lastly, the 
+Lastly, different permutations of 
 \emph on
 entry points
 \emph default
- are combined, evaluating the different permutations of them (called 
+ are evaluated combining the scores of individual keywords and applying
+ 
+\color blue
+the
+\series bold
+ 
+\series default
+contextual rules
+\color inherit
+ to boost scores of 
 \emph on
-configuration
-\emph default
-s) by means of combining the scores of individual keywords and using heuristic
- contextual rules to boost the scores of 
-\emph on
-configurations
+query interpretations
 \emph default
  that 
 \begin_inset Quotes eld
@@ -1343,129 +1356,61 @@ respect
 \end_inset
 
  the likely dependencies between the nearby keywords.
- During the same step, the configurations that are compatible with our data
- integration system are identified and interpreted as structured queries,
- where we disambiguate the keyword matchings between: result types, projections,
- selections (filters on service inputs or outputs), or some simple operators.
- The ranking is presented in the section 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sub:Ranking-function"
-
-\end_inset
-
-.
-\begin_inset Marginal
-status collapsed
-
-\begin_layout Plain Layout
-
-\color red
-\lang british
-[min, avg, unique etc]
-\series bold
- not fully implemented, lower priority 
-\end_layout
-
-\end_inset
-
-
-\begin_inset Note Note
-status collapsed
-
-\begin_layout Plain Layout
-
-\color magenta
-\lang british
- (for databases the join order is important; in our case (services): applying
- any operators and how services are combined)
-\end_layout
-
-\end_inset
-
-
-\begin_inset Note Note
-status collapsed
-
-\begin_layout Plain Layout
-
-\lang british
- The queries could be further re-ranked by executing those of the best queries,
- that are estimated to be less heavy than some small threshold
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-
-\lang british
-this is not yet implemented; partially due to service performance issues,
- see our case study in section 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sub:cms-Performance-Issues"
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
+ During the same step, the 
+\emph on
+interpretations
+\emph default
+ not compatible with the data integration system are filtered out.
  
-\end_layout
-
-\end_inset
-
-
+\color blue
+Then these are interpreted as structured queries, disambiguating the keyword
+ matchings between: result types, projections, selections (filters on service
+ inputs or outputs), or some simple operators.
 \end_layout
 
 \begin_layout Standard
 
-\series bold
+\emph on
 \lang british
 Example.
 
-\series default
+\emph default
  Consider this query
 \color blue
 :
 \family typewriter
 \size footnotesize
 \color inherit
- RelVal 
-\begin_inset Quotes eld
-\end_inset
-
-number of events > 1000
-\begin_inset Quotes erd
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-
-\lang british
+ 
+\emph on
+RelVal `number of events > 1000
+\emph default
+'.
+ 
+\family default
+\size default
 Tokenizer would return these tokens: 
 \family typewriter
-RelVal; `number of events>1000'
-\end_layout
-
-\begin_layout Standard
-
-\lang british
-Second, Each token result in some entry points:
+\size footnotesize
+\emph on
+`RelVal'; `number of events>1000'
+\family default
+\size default
+\emph default
+.
+ Then, each token result in some entry points:
 \color magenta
  
-\end_layout
-
-\begin_layout Standard
-\paragraph_spacing single
-
 \family typewriter
 \size footnotesize
-\lang british
-RelVal
+\color inherit
+
+\begin_inset Newline newline
+\end_inset
+
+
+\emph on
+'RelVal'
 \family default
  →
 \family typewriter
@@ -1481,18 +1426,18 @@ RelVal
 \begin_inset space ~
 \end_inset
 
-RelVal
+'RelVal'
 \family default
  →
 \family typewriter
  (0.7, input-value: dataset=*RelVal*)
-\emph on
+\emph default
 
 \begin_inset Newline newline
 \end_inset
 
 
-\emph default
+\emph on
 
 \begin_inset space ~
 \end_inset
@@ -1523,23 +1468,22 @@ RelVal
 \family typewriter
  (0.93, output-filter: file.nevents>100
 \size scriptsize
-\emph on
+\emph default
 )
 \begin_inset Newline newline
 \end_inset
 
 
-\begin_inset Note Greyedout
+\begin_inset ERT
 status open
 
 \begin_layout Plain Layout
 
-\family typewriter
-\size scriptsize
-\emph on
-\lang british
-...
- and some more with lower scores...
+
+\backslash
+definecolor{grey_dark}{rgb}{0.7, 0.7, 0.7}{
+\backslash
+color{grey_dark}and more with lower scores...}
 \end_layout
 
 \end_inset
@@ -1550,69 +1494,160 @@ status open
 \begin_layout Standard
 
 \lang british
-As one can see from the entry points, the `RelVal' keyword is ambiguous,
- there is a `RelVal' group, and also `RelVal' could be part of dataset name.
- While, `number of events' could be attribute of dataset, file or block.
- Also well there is some ambiguity in chunking, 'dataset sizes' may map
- to 
-\emph on
-dataset.size
-\emph default
- attribute, while dataset is also the entity type
-\begin_inset Note Note
+\begin_inset Wrap figure
+lines 0
+placement r
+overhang 0.5cm
+width "45text%"
 status open
 
 \begin_layout Plain Layout
 
 \lang british
- (in this case it doesn't a big difference as the earlier is part of the
- same entity, however entities may have )
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vspace{-0.8cm}
 \end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\series bold
+\lang british
+\begin_inset Graphics
+	filename figures/ui_larger.png
+	lyxscale 40
+	width 45text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang british
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+vspace{-10pt}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang british
+\begin_inset Caption
+
+\begin_layout Plain Layout
+
+\lang british
+Results - query suggestions
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:query-results"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vspace{-10pt}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+It can be seen that the 
+\emph on
+`RelVal'
+\emph default
+ keyword is ambiguous
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+
+\lang british
+, there is a `RelVal' group, and also `RelVal' could be part of dataset
+ name.
+ While,
+\end_layout
+
+\end_inset
+
+ , while 
+\emph on
+`number of events'
+\emph default
+ could be attribute of 
+\emph on
+dataset, file
+\emph default
+ or 
+\emph on
+block
+\emph default
+.
+ 
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+
+\lang british
+Also well there is some ambiguity in chunking, 'dataset sizes' may map to
+ 
+\emph on
+dataset.size
+\emph default
+ attribute, while dataset is also the entity type.
+\end_layout
+
+\end_inset
+
+Combining the entry point scores yields the shown results in fig.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:query-results"
 
 \end_inset
 
 .
-\end_layout
-
-\begin_layout Standard
-
-\lang british
-After combining the entry point scores, some of the top-four results are:
-\end_layout
-
-\begin_layout Standard
-
-\lang british
-\begin_inset Graphics
-	filename /home/vidma/DAS_paper/poster/fancytikzposter_sources/images/ui_larger.png
-	lyxscale 30
-	width 80text%
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-
-\lang british
-The first result we see because the score of group=RelVal is higher than
- the other option for the same keyword.
- 
 \begin_inset Note Note
 status open
-
-\begin_layout Plain Layout
-
-\lang british
-The second results is however mapping dataset as requested entity, and sizes
- to dataset.size
-\end_layout
-
-\end_inset
-
-
-\end_layout
 
 \begin_layout Subsection
 
@@ -1627,7 +1662,7 @@ name "sub:Tokenizer"
 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 \lang british
 First the keyword query is cleaned-up, standardizing its notation (e.g.
@@ -1641,7 +1676,7 @@ natural language such as simple operators [X equals Y, X more than Y, etc]).
  
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 \lang british
 Then, the keyword query is tokenized into tokens of:
@@ -1691,10 +1726,15 @@ phrases s in brackets (e.g.
 individual query terms, otherwise
 \end_layout
 
-\begin_layout Subsection
+\end_inset
 
+
+\end_layout
+
+\begin_layout Subsection
+Scoring individual keywords
 \lang british
-Step 2: Identifying entry points
+ (step 2)
 \begin_inset CommandInset label
 LatexCommand label
 name "sub:Matching-keywords"
@@ -1704,244 +1744,11 @@ name "sub:Matching-keywords"
 
 \end_layout
 
-\begin_layout Standard
-
-\lang british
-The second step of query processing is identifying the starting points by
- applying the techniques below.
- To lower false positives, only the matches that score above some predefined
- cut-off threshold are included.
-\end_layout
-
-\begin_layout Subsubsection
-
-\lang british
-Matching the schema terms
-\end_layout
-
 \begin_layout Paragraph*
-
-\lang british
-Custom string similarity function
-\end_layout
-
-\begin_layout Standard
-
-\lang british
-Our experience is that basic string-edit distance metrics, such as the standard
- Levenshtein edit-distance (where inserts, edits, and mutations are equal)
- or 
-\emph on
-Jaro-Winker's
-\emph default
- being designed for general matching tasks (e.g.
- matching people names, correcting typing errors, etc.), do not perform well
- in the task of matching keywords into specific entity names, either introducing
- too many false-positives (e.g.
- 'file' for 'site'), or not recognizing lexically farther word combinations
- that still make sense, such as 
-\emph on
-config
-\emph default
- vs 
-\emph on
-configuration
-\emph default
-.
- 
-\end_layout
-
-\begin_layout Standard
-
-\lang british
-Therefore, to minimize the false positives (which have direct effect on
- ranking), we propose a simple combination of more trustful metrics in the
- order of decreasing score: full match, lemma match (indicating also the
- meaning match), stem-match (meaning is further), and finally a stem match
- within a very small edit distance (see eq.
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:string_dist"
-
-\end_inset
-
-).
- Below 
-\begin_inset Formula $dist$
-\end_inset
-
- is some string distance metric with tight limitations with score 
-\begin_inset Formula $\in[0,1]$
-\end_inset
-
- (e.g.
- max 1-3 characters differing with beginning or end preferred, max 1 mutation/tr
-ansposion).
-\begin_inset Marginal
-status open
-
-\begin_layout Plain Layout
-
-\color magenta
-\lang british
-TODO: lematization depend on POS tags (saw[v]->see, [n]->saw)
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-
-\lang british
-\begin_inset Formula 
-\begin{equation}
-similarity(A,B)=\begin{cases}
-1, & if\, A=B\\
-0.9, & if\, lemma(A)=lemma(B)\\
-0.7, & if\, stem(A)=stem(B)\\
-0.6\cdot dist(stem(A),stem(B)), & otherwise
-\end{cases}\label{eq:string_dist}
-\end{equation}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-
-\lang british
-This improves the matching by incorporating basic linguistic knowledge,
- and without requiring any domain-specific lexical resources
-\begin_inset Foot
-status collapsed
-
-\begin_layout Plain Layout
-
-\lang british
-machine-learning based string similarity functions have shown improvements
- in the accuracy
-\begin_inset CommandInset citation
-LatexCommand citep
-key "string_edit_crf_mccallum2012conditional"
-
-\end_inset
-
-, however they require domain-specific training data, that is often not
- available or costly to obtain, especially in the beginning of a project
- when no post logs can be used
-\end_layout
-
-\end_inset
-
-.
- Further, this is easy to implement using existing libraries (such as 
-\emph on
-PorterStemmer
-\emph default
- and 
-\emph on
-WordNetLemmatizer
-\emph default
- in the 
-\emph on
-nltk
-\emph default
-
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-
-\lang british
-an open-source natural language processing toolkit for Python 
-\begin_inset CommandInset href
-LatexCommand href
-name "http://nltk.org/"
-target "http://nltk.org/"
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-).
-\end_layout
-
-\begin_layout Standard
 
 \lang british
 \begin_inset Note Note
 status collapsed
-
-\begin_layout Itemize
-
-\lang british
-String similarity (edit-distance)
-\end_layout
-
-\begin_deeper
-\begin_layout Itemize
-
-\lang british
-need to alter the weights...
-\end_layout
-
-\begin_deeper
-\begin_layout Itemize
-
-\lang british
-cheap removing from the end
-\end_layout
-
-\begin_layout Itemize
-
-\lang british
-expensive mutations, removals from inside
-\end_layout
-
-\end_deeper
-\begin_layout Itemize
-
-\lang british
-matching the entity and attribute names
-\end_layout
-
-\begin_layout Itemize
-
-\lang british
-values within small edit-distance (spelling-correction)
-\end_layout
-
-\begin_layout Itemize
-
-\lang british
-also: learned edit-distances
-\end_layout
-
-\end_deeper
-\begin_layout Itemize
-
-\lang british
-Semantic distance
-\end_layout
-
-\begin_deeper
-\begin_layout Itemize
-
-\lang british
-could also match the possible values
-\end_layout
-
-\end_deeper
-\end_inset
-
-
-\end_layout
 
 \begin_layout Paragraph*
 
@@ -1949,7 +1756,7 @@ could also match the possible values
 Matching multi-word schema terms
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 \lang british
 This component identifies keyword chunks corresponding to 
@@ -1979,7 +1786,7 @@ description "Inverse Document Frequency, used to downrank frequent and therefore
  block.replica.creation_time vs block.creation_time).
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 \series bold
 \color magenta
@@ -2000,7 +1807,7 @@ TODO: mention paper from XML retrieval
 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 \lang british
 For simplicity, we used an existing IR library, Whoosh
@@ -2122,7 +1929,7 @@ only tokenized+stemmed version --- it seems creating multiple versions of
 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 \lang british
 To find the matches, we query the IR library, both for phrase and single
@@ -2132,7 +1939,7 @@ To find the matches, we query the IR library, both for phrase and single
  
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 \lang british
 The ranking is done using BM25F scoring function.
@@ -2191,7 +1998,7 @@ normalization: threshold based on weights signifying a good score + (maybe
  it works already not so bad.
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 \lang british
 Finally, the same functionality could be also achieved through retrieving
@@ -2333,51 +2140,12 @@ Matching keyword into an sample of values (guessing which is the best attribute
 
 \end_layout
 
-\begin_layout Subsubsection
+\end_inset
 
-\lang british
 Matching the value terms
-\end_layout
-
-\begin_layout Paragraph*
-
-\lang british
-Regular expressions
-\end_layout
-
-\begin_layout Standard
-
-\lang british
-For the most of service interfaces there exist regular expressions that
- constraint the 
-\emph on
-input
-\emph default
- 
-\emph on
-values
-\emph default
- accepted by services.
- A regular expression (regexp) match do not guarantee that a certain value
- exists, but also it could result in incorrect keyword interpretations,
- as as a regexp could be loosely defined.
- Thus, in the general case, the regexp matches are scored lower than matches
- of other matching methods.
- Still, some of the regular expressions are sufficiently restrictive (e.g.
- email), which we selectively score higher.
-\end_layout
-
-\begin_layout Paragraph*
-
-\lang british
-Known values
-\end_layout
-
-\begin_layout Standard
-
 \series bold
 \color red
-\lang british
+
 \begin_inset Marginal
 status open
 
@@ -2386,36 +2154,8 @@ status open
 \series bold
 \color red
 \lang british
-there are some specific cases with wildcard matches
+shorten down!
 \end_layout
-
-\end_inset
-
-
-\series default
-\color inherit
- For some schema terms, we have a list of possible values, that we obtained
- bootstrapping them through respective data service interfaces.
- For matching we have a number of cases, with the decreasing score: full
- match, partial match, and matches of keywords containing wildcards.
- If keyword's value matches a regular expression, but is not contained in
- the known values list and the accepted values of the given field are considered
- to be static (not changing often), we exclude this very likely false match
- that reduces the false positives\SpecialChar \@.
-
-\begin_inset Newpage clearpage
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsection
-
-\lang british
-Step 3: Answer-candidate generation and ranking
-\begin_inset CommandInset label
-LatexCommand label
-name "sub:Ranking-function"
 
 \end_inset
 
@@ -2425,94 +2165,74 @@ name "sub:Ranking-function"
 \begin_layout Standard
 
 \lang british
-As the last step, different combinations of the entry points (where each
- permutation of keyword 
-\begin_inset Quotes eld
-\end_inset
-
-meanings
-\begin_inset Quotes erd
-\end_inset
-
- is called a 
+DAS mappings contain regular expressions (regexp) that describe the input
 \emph on
-configuration
-\emph default
-, defining a tagging of input keywords as schema or value terms) and ranked
- combining the scores of individual keywords in some way (e.g.
- summing of log likelihoods, averaging, described below) with addition of
- a couple of heuristics that boost the scores of 
-\emph on
-configurations
-\emph default
- that 
-\begin_inset Quotes eld
-\end_inset
-
-respect
-\begin_inset Quotes erd
-\end_inset
-
- the likely dependencies between the nearby keywords
-\begin_inset Foot
-status collapsed
-
-\begin_layout Plain Layout
-
-\lang british
-the nearby keywords are expected to be related
-\begin_inset CommandInset citation
-LatexCommand citep
-key "keymantic_kws_metadata_bergamaschi2011"
-
-\end_inset
-
-, e.g.
- a configuration is promoted if the tags of nearby keywords refer to the
- same entity
-\end_layout
-
-\end_inset
-
  
-\color cyan
+\emph default
+values accepted by services.
+ As some of regexp's could be loosely defined, this can result in false
+ positives, thus, the regexp matches are scored lower than others, distinguishin
+g different levels of regexp's accuracy.
+ For some schema terms, a list of possible values, that were obtained by
+ bootstrapping them through respective data service interfaces.
+ Different cases of matches are distinguished: full match, partial match,
+ and matches of keywords containing wildcards (in order of decreasing score).
+ If a value matches a regexp, but is not contained in the known values list
+ and the values listing of the given field is considered to be changing
+ not often, we exclude this very likely false match to reduce the false
+ positives\SpecialChar \@.
 
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-
-\color cyan
-\lang british
-(the heuristics are presented after the scoring functions)
 \end_layout
+
+\begin_layout Paragraph*
+
+\color blue
+\lang british
+Matching the schema terms: TODO
+\end_layout
+
+\begin_layout Standard
+
+\lang british
+This also includes identifying keyword chunks corresponding to multi-word
+ terms (output fields in service results): many of them are unclean, machine-rea
+dable field-names, with irrelevant and frequent terms, motivating the use
+ of IDF-based
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+symbol "IDF"
+description "Inverse Document Frequency, used to downrank frequent and therefore likely irrelevant terms"
 
 \end_inset
 
-.
-\color blue
+ information retrieval techniques.
+\end_layout
+
+\begin_layout Subsection
+
+\lang british
+The ranker and scoring functions
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Ranking-function"
+
+\end_inset
+
+ (step 3)
+\end_layout
+
+\begin_layout Standard
+
+\lang british
+As the last step, different combinations of the entry points have to be
+ explored combining the scores of individual keywords in some way (e.g.
+ summing of log likelihoods, averaging, described below).
 \lang english
 
 \begin_inset Note Note
 status collapsed
 
 \begin_layout Plain Layout
-
-\color blue
-entity near wildcard may mean what is being requested: what is the average
- size of 
-\series bold
-Zmm datesets
-\series default
- where number of events is more than 1000
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsubsection*
 The scoring functions 
 \begin_inset CommandInset label
 LatexCommand label
@@ -2523,17 +2243,160 @@ name "sub:Scoring-functions-used"
 
 \end_layout
 
-\begin_layout Standard
-We experimented with two scoring functions, the first one basically averaging
- the scores (as it was used by Keymantic
+\end_inset
+
+ We experimented with two scoring functions: 1) first one averaging the
+ scores, as used by Keymantic
 \begin_inset CommandInset citation
 LatexCommand citep
 key "keymantic10"
 
 \end_inset
 
-), and the other of more probabilistic nature - summing the log likelihoods.
- There, the 
+, and 2) summing the log likelihoods which is closer to probabilistic [
+\series bold
+thinking]
+\series default
+.
+ In the beginning two methods
+\series bold
+ 
+\series default
+seemed to perform almost equally well
+\series bold
+,
+\series default
+ with the probabilistic approach being more sensitive to 
+\series bold
+inaccuracies
+\series default
+ in scoring of the entry points, but it became clearly better than 
+\emph on
+averaging
+\emph default
+ when entry points accuracy was slightly improved
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+
+\color blue
+the scores are just estimates of our confidence, not real probabilities;
+ the results improved with improvements to accuracy of string matching functions
+ and removed the unreliable semantic matching
+\end_layout
+
+\end_inset
+
+.
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+The final scores of the probabilistic approach are also more complex to
+ interpret (we would like to present the user with color coding which identifies
+ the our confidence, and the scores if exponented vary much more than in
+ averaging).
+ 
+\end_layout
+
+\end_inset
+
+
+\begin_inset Note Note
+status open
+
+\begin_layout Subsection
+
+\lang british
+Setting the scoring parameters
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang british
+First the individual system components has been tuned to a 
+\begin_inset Quotes eld
+\end_inset
+
+sufficient
+\begin_inset Quotes erd
+\end_inset
+
+ level using a number of unit tests, and manual testing.
+ In some cases it required assigning arbitrary estimates likelihood/confidence.
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang british
+Then using a number of keyword queries either written by the end users of
+ the system, or the developer to address 
+\series bold
+marginal/specific
+\series default
+ use cases, a number of global system parameters had been fine-tuned by
+ hand: weights for regexps, not taking a keyword, multi-word matching.
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\lang british
+packages, tool-kits: uncertainties, nltk, wordnet,mongodb
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+score\_avg(tags|KWQ)=\frac{{\displaystyle \sum_{i=1}^{|KWQ|}{\displaystyle \left(score_{tag_{i}|kw_{i}}+{\displaystyle \sum_{h_{j}\in H}h_{j}(tag_{i}|kw_{i};tag_{i-1,..,1})}\right)}}}{N\_non\_stopword}
+\end{equation}
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vspace{-1cm}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+score\_prob(tags|KWQ)=\sum_{i=1}^{|KWQ|}\left({\displaystyle {\displaystyle \log}\left(score_{tag_{i}|kw_{i}}\right)}+\sum_{h_{j}\in H}h_{j}(tag_{i}|kw_{i};tag_{i-1,..,1})\right)
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Notation:
+\emph default
+ 
 \family roman
 \series medium
 \shape up
@@ -2546,10 +2409,10 @@ key "keymantic10"
 \noun off
 \color none
 
-\begin_inset Formula $score(tag_{i}|kw_{i})$
+\begin_inset Formula $score_{tag_{i}|kw_{i}}$
 \end_inset
 
- signifies the score assigned for scoring an individual keyword 
+ is the likelihood of matching an individual keyword 
 \begin_inset Formula $kw_{i}$
 \end_inset
 
@@ -2561,50 +2424,12 @@ key "keymantic10"
 \begin_inset Formula $h_{j}(tag_{i}|kw_{i};tag_{i-1,..,1})$
 \end_inset
 
- denotes the score boost returned by heuristic 
+ denotes the score boost returned by contextualization heuristic 
 \begin_inset Formula $h_{j}$
 \end_inset
 
- given a concrete tagging so far (in most cases all tags are not needed).
- 
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{equation}
-score\_avg(tags|KWQ)=\frac{{\displaystyle \sum_{i=1}^{|KWQ|}{\displaystyle \left(score(tag_{i}|kw_{i})+{\displaystyle \sum_{h_{j}\in H}h_{j}(tag_{i}|kw_{i};tag_{i-1,..,1})}\right)}}}{N\_non\_stopword}
-\end{equation}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{equation}
-score\_prob(tags|KWQ)=\sum_{i=1}^{|KWQ|}\left({\displaystyle {\displaystyle \ln}\left(score(tag_{i}|kw_{i})\right)}+\sum_{h_{j}\in H}h_{j}(tag_{i}|kw_{i};tag_{i-1,..,1})\right)
-\end{equation}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-Note that in 
+ given a concrete tagging so far (or last few tags).
+ T
 \family default
 \series default
 \shape default
@@ -2616,7 +2441,7 @@ Note that in
 \uwave default
 \noun default
 \color inherit
-the
+he
 \series bold
 \emph on
  
@@ -2626,7 +2451,7 @@ probabilistic
  
 \series default
 \emph default
-approach we introduce a set of 
+approach uses a set of 
 \begin_inset Quotes eld
 \end_inset
 
@@ -2634,79 +2459,17 @@ fake
 \begin_inset Quotes erd
 \end_inset
 
- tags where keywords are not mapped to any known entity or operator (e.g.
- a keyword is unrecognized, or it is a stop word) and we assign some predefined
- score to it depending on it's category (e.g.
- no score for stopword
-\begin_inset Marginal
-status collapsed
-
-\begin_layout Plain Layout
-
-\color cyan
-\lang british
-sort of useful stopwords: where, who, when?
+ tags with predefined scores: unmapped, unmapped stop word.
 \end_layout
 
-\end_inset
+\begin_layout Paragraph*
 
-).
+\color red
+Heuristics and contextual rules in ranking.
 \end_layout
 
 \begin_layout Standard
-The two methods
-\series bold
- 
-\series default
-seemed to perform almost equally well
-\series bold
-,
-\series default
- with the probabilistic approach being more sensitive to variations in scoring
- quality of the entry points (the scores are just estimates of our confidence,
- not real probabilities; the results improved with improvements to accuracy
- of string matching functions), however it seems the probabilistic approach
- is more exact in ranking the results when the entry point scores are quite
- exact.
- 
-\end_layout
-
-\begin_layout Standard
-The final scores of the probabilistic approach are also more complex to
- interpret (we would like to present the user with color coding which identifies
- the our confidence, and the scores if exponented vary much more than in
- averaging
-\begin_inset Marginal
-status open
-
-\begin_layout Plain Layout
-, still one could estimate the high and low thresholds based on initial
- scores
-\end_layout
-
-\end_inset
-
-).
- 
-\end_layout
-
-\begin_layout Subsubsection*
-The heuristics and pruning out the unacceptable candidates
-\end_layout
-
-\begin_layout Itemize
-
-\lang british
-Relationships between keywords:
-\end_layout
-
-\begin_deeper
-\begin_layout Itemize
-
-\lang british
-promoting such combinations where nearby keywords refer to related schema
- terms (e.g.
- entity name and it's value)
+As part of entry points:
 \end_layout
 
 \begin_layout Itemize
@@ -2728,6 +2491,14 @@ Keymantic assumed all keyword have interpretation!
 \end_inset
 
 
+\end_layout
+
+\begin_layout Itemize
+
+\lang british
+rare use-cases: prevent schema terms to be mapped to values with high score,
+ as this is unlikely (e.g.
+ dataset names include 'dataset')
 \end_layout
 
 \begin_layout Itemize
@@ -2755,7 +2526,135 @@ only stop-words are distinguished now; '(tell|show|display|find) me?' filtered
 
 \end_layout
 
-\end_deeper
+\begin_layout Standard
+Contextualization rules:
+\end_layout
+
+\begin_layout Itemize
+
+\lang british
+promoting such combinations where nearby keywords refer to related schema
+ terms (e.g.
+ entity name and it's value)
+\end_layout
+
+\begin_layout Subsection
+
+\lang british
+Miscellanea
+\end_layout
+
+\begin_layout Paragraph
+
+\lang british
+Automatically identifying the qualities of data services
+\end_layout
+
+\begin_layout Standard
+
+\lang british
+The data integration system, DAS, uses only minimal mappings - they describe
+ services, their input parameters, and mappings between inconsistently named
+ output fields.
+ Any other information, such as the complete listing of fields in the service
+ outputs, or their types are identified by processing results of historical
+ queries.
+ To get satisfactory coverage immediately, a list of bootstrapping queries
+ is used to initialize the most important field and value listings.
+\color red
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\color red
+\lang british
+In future we may also the data types (string, integer) as hints for scoring
+ ambiguous predicate predicate tokens (e.g.
+ event number>10).
+\end_layout
+
+\end_inset
+
+
+\color inherit
+
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Paragraph
+
+\lang british
+Performance
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang british
+At the CMS collaboration, implementing additional optimizations is not of
+ a highest priority, as with the current implementation, the queries runs
+ faster than in a second (the time needed to run the queries in average
+ is 0.2s, with the maximum of 1s
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+
+\lang british
+measured on an 4 years old laptop with 1.7Ghz processor and 4GB of RAM; server
+ hardware is much more powerful; 
+\end_layout
+
+\end_inset
+
+), while for most of the queries the EII system requires tens of seconds
+ to minutes to retrieve the actual query results from the data services.
+ 
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang british
+Still a number of methods are available for improving the performance (e.g.
+ bipartite matching problem approached with the top-k results version of
+ Hungarian-Munkres algorithm
+\begin_inset CommandInset citation
+LatexCommand citep
+key "keymantic10"
+
+\end_inset
+
+, or dynamic programming with assumption of short maximum length of keyword
+ dependences) in exchange for additional complexity of the implementation
+ or the additional assumptions.
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang british
+---------------------
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Subsubsection*
+The heuristics and pruning out the unacceptable candidates
+\end_layout
+
+\begin_layout Itemize
+
+\lang british
+Relationships between keywords:
+\end_layout
+
 \begin_layout Itemize
 
 \lang british
@@ -2774,6 +2673,7 @@ promote data service inputs over filters on their results: 1) it is more
 
 \begin_layout Itemize
 
+\series bold
 \lang british
 if some keyword can be matched as the requested entity, and mapping of other
  keywords fits the service constraints
@@ -2782,6 +2682,7 @@ status collapsed
 
 \begin_layout Plain Layout
 
+\series bold
 \color cyan
 \lang british
 shall we allow both as filter name and result type? no?
@@ -2830,250 +2731,16 @@ not yet implemented
 \end_layout
 
 \end_deeper
-\begin_layout Subsection
-
-\lang british
-Tuning the scoring parameters
-\end_layout
-
-\begin_layout Standard
-
-\lang british
-First the individual system components has been tuned to a 
-\begin_inset Quotes eld
-\end_inset
-
-sufficient
-\begin_inset Quotes erd
-\end_inset
-
- level using a number of unit tests, and manual testing.
- In some cases it required assigning arbitrary estimates likelihood/confidence.
-\end_layout
-
-\begin_layout Standard
-
-\lang british
-Then using a number of keyword queries either written by the end users of
- the system, or the developer to address 
-\series bold
-marginal/specific
-\series default
- use cases, a number of global system parameters had been fine-tuned by
- hand:
-\end_layout
-
-\begin_layout Itemize
-
-\lang british
-weights for regexps, etc
-\end_layout
-
-\begin_layout Itemize
-
-\lang british
-not taking a keyword
-\end_layout
-
-\begin_layout Itemize
-
-\lang british
-multi-word matching
-\end_layout
-
-\begin_layout Standard
-
-\lang british
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-
-\lang british
-packages, tool-kits: uncertainties, nltk, wordnet,mongodb
-\end_layout
-
 \end_inset
 
 
-\end_layout
-
-\begin_layout Subsection
-
-\lang british
-Miscellanea
-\end_layout
-
-\begin_layout Subsubsection*
-
-\lang british
-Automatically identifying the qualities of data services
-\end_layout
-
-\begin_layout Standard
-
-\lang british
-The integration schema mappings that are used in the EII system are minimal
- - they only describe services, their input parameters, and mappings between
- inconsistently named output fields.
- Any other information, such as the complete listing of fields in the service
- outputs, or their types are identified by processing results of historical
- queries.
- To get satisfactory coverage immediately, a list of bootstrapping queries
- is used to initialize the most important field listings (of the services
- that retrieve entities by their 
-\begin_inset Quotes eld
-\end_inset
-
-primary key
-\begin_inset Quotes erd
-\end_inset
-
-).
-\color red
-
-\begin_inset Note Note
-status collapsed
-
-\begin_layout Plain Layout
-
-\color red
-\lang british
-In future we may also the data types (string, integer) as hints for scoring
- ambiguous predicate predicate tokens (e.g.
- event number>10).
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsubsection*
-
-\lang british
-Performance
-\end_layout
-
-\begin_layout Standard
-
-\lang british
-At the CMS collaboration, implementing additional optimizations is not of
- a highest priority, as with the current implementation, the queries runs
- faster than in a second (the time needed to run the queries in average
- is 0.2s, with the maximum of 1s
-\begin_inset Foot
-status collapsed
-
-\begin_layout Plain Layout
-
-\lang british
-measured on an 4 years old laptop with 1.7Ghz processor and 4GB of RAM; server
- hardware is much more powerful; 
-\end_layout
-
-\end_inset
-
-), while for most of the queries the EII system requires tens of seconds
- to minutes to retrieve the actual query results from the data services.
- 
-\end_layout
-
-\begin_layout Standard
-
-\lang british
-Still a number of methods are available for improving the performance (e.g.
- bipartite matching problem approached with the top-k results version of
- Hungarian-Munkres algorithm
-\begin_inset CommandInset citation
-LatexCommand citep
-key "keymantic10"
-
-\end_inset
-
-, or dynamic programming with assumption of short maximum length of keyword
- dependences) in exchange for additional complexity of the implementation
- or the additional assumptions.
-\end_layout
-
-\begin_layout Standard
-
-\lang british
----------------------
-\end_layout
-
-\begin_layout Subsubsection
-Overview
-\end_layout
-
-\begin_layout Subsubsection
-Tokenization
-\end_layout
-
-\begin_layout Subsubsection
-Scoring individual keywords (entry points)
-\end_layout
-
-\begin_layout Subsubsection
-Ranking function
-\end_layout
-
-\begin_layout Section
-Generating the results
-\end_layout
-
-\begin_layout Subsection
-via Exhaustive search
-\end_layout
-
-\begin_layout Standard
-allows filtering only those that DIS supports.
-\end_layout
-
-\begin_layout Subsection
-via Solving weighted-bipartite assignments
-\end_layout
-
-\begin_layout Subsection
-Combination(?)
-\end_layout
-
-\begin_layout Standard
-exhaustive for part that is well
-\end_layout
-
-\begin_layout Section
-Our implementation
-\end_layout
-
-\begin_layout Standard
-cython
-\end_layout
-
-\begin_layout Section
-Future work
-\end_layout
-
-\begin_layout Standard
-Terminology
-\end_layout
-
-\begin_layout Standard
-Data Virtualization...
 \end_layout
 
 \begin_layout Section
 Related work
 \end_layout
 
-\begin_layout Paragraph*
-
-\lang british
-Keyword querying over EII
-\end_layout
-
 \begin_layout Standard
-Two approaches were identified as the closest to our problem:
 \begin_inset Note Note
 status open
 
@@ -3573,6 +3240,22 @@ also mention: NL querying over services
 \end_inset
 
 
+\end_layout
+
+\begin_layout Section
+Discussion
+\end_layout
+
+\begin_layout Section
+Future work
+\end_layout
+
+\begin_layout Standard
+Terminology
+\end_layout
+
+\begin_layout Standard
+Data Virtualization...
 \end_layout
 
 \begin_layout Section
