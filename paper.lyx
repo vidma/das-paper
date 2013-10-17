@@ -239,10 +239,13 @@ Introduction
 Virtual Data Integration
 \emph default
 \lang british
- (VDI) is an approach of 
+ (VDI) is a lightweight approach to 
 \lang english
-“integrating data from multiple sources without having to first load data
- into a central warehouse”
+integrating data from 
+\begin_inset Quotes eld
+\end_inset
+
+multiple sources without having to first load data into a central warehouse”
 \begin_inset CommandInset citation
 LatexCommand citep
 after "page 1"
@@ -254,9 +257,9 @@ key "eii_2005"
 \lang british
 .
  Instead, data physically stays at its origin, and is requested on demand.
- A VDI system parses and transforms the query, sends it to services and
- performs a number of transformations on the results such as elimination
- of inconsistencies in data formats, entity naming.
+ The query is parsed, transformed and sent to relevant services.
+ Then, the service responses are transformed including elimination of inconsiste
+ncies in data formats or in entity naming, and finally combined.
  
 \begin_inset Marginal
 status open
@@ -387,9 +390,11 @@ inapplicable (e.g.
 
 \end_inset
 
-In this work, we explore the keyword search, as a more intuitive alternative
+In this work, we explore keyword search, as a more intuitive alternative
  to writing structured queries from scratch.
- This subject in fact, received relatively little attention in the field
+ 
+\color red
+This subject in fact, received relatively little attention in the field
  of data integration
 \begin_inset CommandInset citation
 LatexCommand citep
@@ -398,108 +403,51 @@ key "nl_to_dataservices_guerrisi2012natural"
 \end_inset
 
 .
- 
 \end_layout
 
 \begin_layout Standard
 
 \lang british
-Keyword queries are 
-\lang english
-ambiguous
-\lang british
- and often underspecified
-\begin_inset CommandInset citation
-LatexCommand citep
-key "Kws_metadata_2011"
-
-\end_inset
-
-
-\lang english
-, thus the standard approach is to produce a ranked list of most-likely
- structured query suggestions
-\begin_inset CommandInset citation
-LatexCommand citep
-key "ethz2012,keymantic10,bergamaschi2011hidden"
-
-\end_inset
-
-
-\lang british
- for the user to choose from
+We will present our implementation of a keyword search system, which proposes
+ a ranked list of structured queries.
+ Query suggestion operates mainly on the metadata
 \begin_inset Foot
 status open
 
 \begin_layout Plain Layout
-as
+
 \lang british
- query execution can be quite expensive, the suggestions are shown to the
- user, instead executing immediately.
+without contacting any of services before user has chosen the correct query
+ suggestion
 \end_layout
 
 \end_inset
 
-.
-
-\color red
- Second, even if keyword queries have no clear syntactic structure, keywords
- referring to related concepts usually come close to each other 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "characterization_search_behaviour_kumar2009,Kws_metadata_2011"
-
-\end_inset
-
-, this can be used to improve the ranking.
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-
-\lang british
-Second, the average query length continues to increase, which shows that
- users are moving towards preference of expressing their information need
- in natural languages than just typing keywords.
- 
-\begin_inset Quotes eld
-\end_inset
-
-
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-
-\lang british
-http://searchuserinterfaces.com/book/sui_ch12_emerging.html
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-
-\lang british
-The system presented was developed at the CMS Experiment, CERN as part of
- a data discovery/integration system called 
-\begin_inset Quotes eld
-\end_inset
-
-CMS Data Aggregation System
-\begin_inset Quotes erd
-\end_inset
-
-
+, such as the constraints on inputs accepted by services.
+ It was developed at the 
 \emph on
-, (DAS
+CMS Experiment, CERN
+\emph default
+ where it makes part of an open-source data integration 
+\series bold
+tool
+\begin_inset Marginal
+status open
+
+\begin_layout Plain Layout
+
+\series bold
+\lang british
+system repeats!
+\end_layout
+
+\end_inset
+
+
+\series default
+ called 
+\emph on
+Data Aggregation System (DAS
 \begin_inset CommandInset nomenclature
 LatexCommand nomenclature
 symbol "DAS"
@@ -528,7 +476,12 @@ and covers some specific use-cases
 
 \end_inset
 
-, which is released as open source.
+.
+ DAS integrates a 
+\series bold
+dozen
+\series default
+ of services with the largest storing over 700GB of relational data.
  
 \begin_inset Note Note
 status collapsed
@@ -569,7 +522,7 @@ more distant topics such as usability and performance of an EII.
 \end_inset
 
 DAS has no predefined schema, thus only minimal mappings are needed to describe
- the differences among the services.
+ differences among the services.
  
 \begin_inset Note Note
 status collapsed
@@ -622,21 +575,14 @@ It
 \emph on
  
 \emph default
-uses simple structured queries
+uses simple structured queries formed of an entity to be retrieved and some
+ selection criteria
 \begin_inset Note Note
-status collapsed
+status open
 
 \begin_layout Plain Layout
 
 \lang british
- eliminating the inconsistencies in entity naming, data formats and combining
- the results
-\end_layout
-
-\end_inset
-
- which are formed specifying an entity to be retrieved and some selection
- criteria
 \begin_inset Foot
 status open
 
@@ -649,96 +595,52 @@ passed as input to the services, including the virtual ones which abstract
 
 \end_inset
 
-.
- The results could be further filtered, sorted or aggregated.
-\begin_inset Note Note
-status collapsed
 
-\begin_layout Plain Layout
-
-\lang british
-, e.g.: 
 \end_layout
 
-\begin_layout Plain Layout
+\end_inset
 
-\lang british
+.
+ The results could be further filtered, sorted or aggregated:
+\begin_inset Newline newline
+\end_inset
+
+
 \begin_inset Graphics
 	filename /home/vidma/DAS_paper/figures/DASQL_1avg_problem_statement.pdf
-	width 70text%
+	width 50text%
+	rotateOrigin center
 
 \end_inset
 
 
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Standard
 
+\color red
 \lang british
-As seen above, DASQL closely corresponds to the physical execution flow
-\begin_inset Note Note
+As seen in the example above, the query language closely correspond to the
+ physical execution flow
+\begin_inset Foot
 status open
 
 \begin_layout Plain Layout
 
+\color red
 \lang british
- over the EII
-\end_layout
-
-\end_inset
-
-: based on the requested entity and the conditions on service inputs, DAS
- decides the set of services to be queried
-\begin_inset Foot
-status collapsed
-
-\begin_layout Plain Layout
-
-\lang british
-including pre-defined 
-\begin_inset Quotes eld
-\end_inset
-
-virtual services
-\begin_inset Quotes erd
-\end_inset
-
-, which feed results from one service into inputs of the others
-\end_layout
-
-\end_inset
-
-.
- Then, after retrieving, processing and merging the results from services,
- the filters and projections, and aggregators are applied.
-\color magenta
-
-\begin_inset Note Note
-status collapsed
-
-\begin_layout Plain Layout
-
-\color magenta
-\lang british
-In between there could be additional operations, such as 
-\emph on
-unique
-\emph default
- for selecting only unique records, or custom map-reduce processing steps.
+based on the requested entity and the conditions on service inputs, DAS
+ decides the set of services to be queried.
+ Then, after retrieving, processing and merging the service responses, the
+ filters, projections, and aggregators are applied and the results are cached
+ for subsequent uses.
  
 \end_layout
 
 \end_inset
 
-
-\color inherit
- Finally, the results are cached for subsequent uses.
- 
-\end_layout
-
-\end_inset
-
-
+, which allows users to explicitly specify the operations to be performed
+ and is motivated by large data volumes managed by services.
 \end_layout
 
 \begin_layout Section
@@ -2346,7 +2248,7 @@ packages, tool-kits: uncertainties, nltk, wordnet,mongodb
 \begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
-score\_avg(tags|KWQ)=\frac{{\displaystyle \sum_{i=1}^{|KWQ|}{\displaystyle \left(score_{tag_{i}|kw_{i}}+{\displaystyle \sum_{h_{j}\in H}h_{j}(tag_{i}|kw_{i};tag_{i-1,..,1})}\right)}}}{N\_non\_stopword}
+averaging\; score(tags,kwq):=\frac{{\displaystyle \sum_{kw_{i}\subset kwq}{\displaystyle \left(score_{tag_{i}|kw_{i}}+{\displaystyle \sum_{h_{j}\in H}h_{j}(tag_{i}|kw_{i};tag_{i-1,..,1})}\right)}}}{N\_non\_stopword}
 \end{equation}
 
 \end_inset
@@ -2370,7 +2272,7 @@ vspace{-1cm}
 \begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
-score\_prob(tags|KWQ)=\sum_{i=1}^{|KWQ|}\left({\displaystyle {\displaystyle \log}\left(score_{tag_{i}|kw_{i}}\right)}+\sum_{h_{j}\in H}h_{j}(tag_{i}|kw_{i};tag_{i-1,..,1})\right)
+\;\;\; likelihood\; score(tags,kwq):=\sum_{kw_{i}\subset kwq}\left({\displaystyle {\displaystyle \log}\left(score_{tag_{i}|kw_{i}}\right)}+\sum_{h_{j}\in H}h_{j}(tag_{i}|kw_{i};tag_{i-1,..,1})\right)
 \end{equation}
 
 \end_inset
@@ -2725,6 +2627,96 @@ not yet implemented
 
 \begin_layout Section
 Related works
+\end_layout
+
+\begin_layout Paragraph*
+
+\lang british
+Keyword Querying.
+\end_layout
+
+\begin_layout Standard
+
+\lang british
+Keyword queries are 
+\lang english
+ambiguous
+\lang british
+ and often underspecified
+\begin_inset CommandInset citation
+LatexCommand cite
+key "keymantic_kws_metadata_bergamaschi2011"
+
+\end_inset
+
+
+\lang english
+, thus the standard approach is to produce a ranked list of most-likely
+ structured query suggestions
+\begin_inset CommandInset citation
+LatexCommand citep
+key "ethz2012,keymantic10,bergamaschi2011hidden"
+
+\end_inset
+
+
+\lang british
+ for the user to choose from
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+as
+\lang british
+ query execution can be quite expensive, the suggestions are shown to the
+ user, instead executing immediately.
+\end_layout
+
+\end_inset
+
+.
+
+\color red
+ Second, even if keyword queries have no clear syntactic structure, keywords
+ referring to related concepts usually come close to each other 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "characterization_search_behaviour_kumar2009,Kws_metadata_2011"
+
+\end_inset
+
+, this can be used to improve the ranking.
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\lang british
+Second, the average query length continues to increase, which shows that
+ users are moving towards preference of expressing their information need
+ in natural languages than just typing keywords.
+ 
+\begin_inset Quotes eld
+\end_inset
+
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\lang british
+http://searchuserinterfaces.com/book/sui_ch12_emerging.html
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -3115,18 +3107,14 @@ http://www.jbiomedsem.com/content/pdf/2041-1480-2-8.pdf
 \end_inset
 
 
-\series bold
-\color cyan
+\end_layout
 
-\begin_inset Marginal
-status open
-
-\begin_layout Plain Layout
+\begin_layout Standard
 
 \series bold
 \color cyan
 \lang british
-Note: Their assumptions: 
+[[[Note: Their assumptions: 
 \series default
 
 \begin_inset Quotes eld
@@ -3151,12 +3139,7 @@ every keyword plays some role in the query, i.e., there are no unjustiﬁed
 \series bold
 \color red
 it seems it was summing the scores (no log()!) Weighted-bipartite matching
- as optimization; still exponencial because of first step?
-\end_layout
-
-\end_inset
-
-
+ as optimization; still exponencial because of first step?]]]
 \end_layout
 
 \begin_layout Standard
@@ -3221,8 +3204,13 @@ key "bergamaschi2011hidden"
 \end_inset
 
  the accuracy of the later system didn't differ much from Keymantic.
+\end_layout
+
+\begin_layout Standard
+
+\lang british
 \begin_inset Marginal
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -3231,6 +3219,38 @@ status open
 also mention: NL querying over services
 \end_layout
 
+\end_inset
+
+
+\end_layout
+
+\begin_layout Paragraph*
+
+\lang british
+String and entity matching
+\end_layout
+
+\begin_layout Itemize
+
+\lang british
+string distances; schema matching
+\end_layout
+
+\begin_layout Itemize
+
+\lang british
+other matching: google distance, 
+\end_layout
+
+\begin_layout Itemize
+
+\lang british
+methods - 
+\begin_inset Quotes eld
+\end_inset
+
+relevant values
+\begin_inset Quotes erd
 \end_inset
 
 
