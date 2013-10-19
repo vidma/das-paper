@@ -7,14 +7,14 @@
 %\renewcommand{\maketitle}{}
 \newcommand{\maketitle}{}
 % 
-\usepackage{showframe}
+%\usepackage{showframe}
 \AtBeginDocument{
       
        \let\oldmarginpar\marginpar
     % TO hide margin notes in the final:
      
      \renewcommand\marginpar[1]{{\oldmarginpar[#1]{\color{red}\tiny{#1}}}}
-     \renewcommand\marginpar[1]{}
+     %\renewcommand\marginpar[1]{}
 }
 \end_preamble
 \use_default_options true
@@ -1134,28 +1134,6 @@ reference "sub:Matching-keywords"
 
 .
  
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-
-\lang british
-This includes identifying keyword chunks corresponding to multi-word terms:
- many of them are unclean, machine-readable field-names, with irrelevant
- and frequent terms, motivating the use of IDF-based
-\begin_inset CommandInset nomenclature
-LatexCommand nomenclature
-symbol "IDF"
-description "Inverse Document Frequency, used to downrank frequent and therefore likely irrelevant terms"
-
-\end_inset
-
- information retrieval techniques.
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Standard
@@ -1558,9 +1536,8 @@ Levenshtein
  for general matching tasks, do not perform well in our case, introducing
  too many false-positives (e.g.
  'file' for 'site').
- Instead, we use a simple combination of more trustful metrics: full match,
- lemma match, stem-match, and finally a stem match within a very small edit
- distance.
+ Instead, we use a combination of more trustful metrics: full, lemma, stem
+ matches, and finally a stem match within a very small edit distance.
  
 \end_layout
 
@@ -2195,10 +2172,6 @@ vspace{-1cm}
 
 \begin_layout Standard
 
-\emph on
-Notation:
-\emph default
- 
 \family roman
 \series medium
 \shape up
@@ -2210,11 +2183,11 @@ Notation:
 \uwave off
 \noun off
 \color none
-
+Above, 
 \begin_inset Formula $score_{tag_{i}|kw_{i}}$
 \end_inset
 
- is the likelihood of matching an individual keyword 
+ - likelihood of matching an individual keyword 
 \begin_inset Formula $kw_{i}$
 \end_inset
 
@@ -2222,16 +2195,45 @@ Notation:
 \begin_inset Formula $tag_{i}$
 \end_inset
 
- (an entry point); 
+ (entry point); 
 \begin_inset Formula $h_{j}(tag_{i}|kw_{i};tag_{i-1,..,1})$
 \end_inset
 
- denotes the score boost returned by contextualization heuristic 
+ - score boost returned by contextualization heuristic 
 \begin_inset Formula $h_{j}$
 \end_inset
 
- given a concrete tagging so far (or last few tags).
- T
+ given earlier tags.
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+T
 \family default
 \series default
 \shape default
@@ -2253,7 +2255,7 @@ probabilistic
  
 \series default
 \emph default
-approach uses a set of 
+approach introduce a set of 
 \begin_inset Quotes eld
 \end_inset
 
@@ -2262,6 +2264,11 @@ fake
 \end_inset
 
  tags with predefined scores: unmapped, unmapped stop word.
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Paragraph*
@@ -2534,83 +2541,6 @@ not yet implemented
 
 \begin_layout Section
 Related works
-\end_layout
-
-\begin_layout Paragraph*
-
-\lang british
-Keyword queries.
-\end_layout
-
-\begin_layout Standard
-
-\lang british
-They are 
-\lang english
-ambiguous
-\lang british
- and often underspecified
-\begin_inset CommandInset citation
-LatexCommand cite
-key "keymantic_kws_metadata_bergamaschi2011"
-
-\end_inset
-
-
-\lang english
-, thus the standard approach is to produce a ranked list of most-likely
- structured query suggestions
-\begin_inset CommandInset citation
-LatexCommand citep
-key "ethz2012,keymantic10,bergamaschi2011hidden"
-
-\end_inset
-
-
-\lang british
-.
-
-\color red
- Second, even if keyword queries have no clear syntactic structure, keywords
- referring to related concepts usually come close to each other 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "characterization_search_behaviour_kumar2009,Kws_metadata_2011"
-
-\end_inset
-
-, this can be used to improve the ranking.
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-
-\lang british
-Lastly, the average query length continues to increase, which shows that
- users are moving towards preference of expressing their information need
- in natural languages than just typing keywords.
- 
-\begin_inset Quotes eld
-\end_inset
-
-
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-
-\lang british
-http://searchuserinterfaces.com/book/sui_ch12_emerging.html
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Subsection
@@ -3103,7 +3033,49 @@ key "bergamaschi2011hidden"
 
 \begin_layout Standard
 
+\size small
+\color blue
 \lang british
+Finally, 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "nl_to_dataservices_guerrisi2012natural"
+
+\end_inset
+
+
+\series bold
+\lang english
+ 
+\series default
+attempts to process multi-domain
+\series bold
+ 
+\series default
+full-sentence natural language queries over web-services.
+ It uses focus extraction to find the focus entity, splits the query into
+ constituents (sub-questions), classifies the domain of each constituent,
+ and then tries to combine and resolve these constituents over the data
+ service interfaces (tries recognizing the intent modifiers [e.g.
+ adjectives] as parameters to services).
+\begin_inset Marginal
+status open
+
+\begin_layout Plain Layout
+
+\color blue
+ ( too ambitious/not-mature; open domain, real natural language questions
+ - a bit farther from our focus, our domain is very specific.)
+\end_layout
+
+\end_inset
+
+.
+ 
+\size default
+\color inherit
+\lang british
+
 \begin_inset Marginal
 status collapsed
 
@@ -3117,38 +3089,111 @@ also mention: NL querying over services
 \end_inset
 
 
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Paragraph*
+
+\lang british
+\begin_inset Marginal
+status open
+
+\begin_layout Plain Layout
+
+\series bold
+\color red
+\lang british
+remove this?!
+\end_layout
+
+\end_inset
+
+Keyword queries
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang british
+are 
+\lang english
+ambiguous
+\lang british
+ and often underspecified
+\begin_inset CommandInset citation
+LatexCommand cite
+key "keymantic_kws_metadata_bergamaschi2011"
+
+\end_inset
+
+
+\lang english
+, thus the standard approach is to produce a ranked list of most-likely
+ structured query suggestions
+\begin_inset CommandInset citation
+LatexCommand citep
+key "ethz2012,keymantic10,bergamaschi2011hidden"
+
+\end_inset
+
+
+\lang british
+.
+
+\color red
+ Second, even if keyword queries have no clear syntactic structure, keywords
+ referring to related concepts usually come close to each other 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "characterization_search_behaviour_kumar2009,Kws_metadata_2011"
+
+\end_inset
+
+, this can be used to improve the ranking.
+ 
+\end_layout
+
+\end_inset
+
+
+\color red
+
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+
+\lang british
+Lastly, the average query length continues to increase, which shows that
+ users are moving towards preference of expressing their information need
+ in natural languages than just typing keywords.
+ 
+\begin_inset Quotes eld
+\end_inset
+
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\lang british
+http://searchuserinterfaces.com/book/sui_ch12_emerging.html
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
 
 \lang british
-String and entity matching
-\end_layout
-
-\begin_layout Itemize
-
-\lang british
-string distances; schema matching
-\end_layout
-
-\begin_layout Itemize
-
-\lang british
-other matching: google distance, 
-\end_layout
-
-\begin_layout Itemize
-
-\lang british
-methods - 
-\begin_inset Quotes eld
-\end_inset
-
-relevant values
-\begin_inset Quotes erd
-\end_inset
-
-
+Other fields
 \end_layout
 
 \begin_layout Description
@@ -3196,74 +3241,8 @@ There was also an attempt towards answering open-domain natural language
 \end_layout
 
 \begin_layout Description
-
-\lang british
-NL
-\begin_inset space ~
-\end_inset
-
-interfaces
-\begin_inset space ~
-\end_inset
-
-to
-\begin_inset space ~
-\end_inset
-
-Data
-\begin_inset space ~
-\end_inset
-
-Services: 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "nl_to_dataservices_guerrisi2012natural"
-
-\end_inset
-
-
-\series bold
-\lang english
- 
-\series default
-attempts to process multi-domain
-\series bold
- 
-\series default
-full-sentence natural language queries over web-services.
- It uses focus extraction to find the focus entity, splits the query into
- constituents (sub-questions), classifies the domain of each constituent,
- and then tries to combine and resolve these constituents over the data
- service interfaces (tries recognizing the intent modifiers [e.g.
- adjectives] as parameters to services).
- ( too ambitious/not-mature; open domain, real natural language questions
- - a bit farther from our focus, our domain is very specific.).
- 
 \begin_inset Note Note
 status open
-
-\begin_layout Description
-
-\lang british
-as part of 
-\begin_inset Quotes eld
-\end_inset
-
-Search
-\begin_inset space ~
-\end_inset
-
-Computing
-\begin_inset Quotes erd
-\end_inset
-
- project....
-\end_layout
-
-\end_inset
-
-
-\end_layout
 
 \begin_layout Subsection
 Searching
@@ -3277,7 +3256,7 @@ structured
 DBs
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 The problem of keyword search over relational and other structured databases
  received a significant attention within the last decade.
  It was explored from a number of perspectives: returning top-k ranked data-tupl
@@ -3344,6 +3323,11 @@ key "ethz2012"
  system has proved that if enough meta-data is in place, even quite complex
  queries given in business terms could be answered over a large and complex
  warehouse.
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
