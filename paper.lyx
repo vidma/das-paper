@@ -76,7 +76,11 @@
 \begin_body
 
 \begin_layout Title
-Keyword Search over Data Service Integration for Accurate Results
+Keyword Search over Data Service Integration
+\begin_inset Newline newline
+\end_inset
+
+ for Accurate Results
 \end_layout
 
 \begin_layout Author
@@ -156,12 +160,8 @@ status open
 
 
 \backslash
-address{$^1$Digital Science and Computing Center, Faculty of Mathematics
- and Informatics,
-\backslash
-
-\backslash
-Vilnius University, Lithuania}
+address{$^1$DiSCC, Faculty of Mathematics and Informatics,Vilnius University,
+ Lithuania}
 \end_layout
 
 \end_inset
@@ -203,9 +203,6 @@ address{$^3$Rheinisch-Westfaelische Tech.
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
 \begin_inset Note Note
 status open
 
@@ -227,6 +224,16 @@ address{$^1
 \end_inset
 
 
+\end_layout
+
+\end_inset
+
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Digital Science and Computing Center,
 \end_layout
 
 \end_inset
@@ -1097,7 +1104,7 @@ status open
 
 
 \backslash
-vspace{-30pt}
+vspace{-2cm}
 \end_layout
 
 \end_inset
@@ -1145,7 +1152,19 @@ vspace{-10pt}
 \begin_layout Plain Layout
 
 \lang british
-Components of our keyword search system
+Keyword search stages
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\lang british
+components
+\end_layout
+
+\end_inset
+
+
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:query-translation-steps"
@@ -1165,7 +1184,7 @@ status open
 
 
 \backslash
-vspace{0.5cm}
+vspace{1cm}
 \end_layout
 
 \end_inset
@@ -1226,18 +1245,6 @@ terms it may correspond to and a rough estimate of the likelihood.
 \begin_layout Standard
 
 \lang british
-\begin_inset Marginal
-status open
-
-\begin_layout Plain Layout
-
-\series bold
-\lang british
-make shorter?
-\end_layout
-
-\end_inset
-
 Lastly, different permutations of 
 \emph on
 entry points
@@ -1583,7 +1590,7 @@ status open
 
 
 \backslash
-vspace{-0.5cm}
+vspace{-0.3cm}
 \end_layout
 
 \end_inset
@@ -1655,7 +1662,7 @@ status open
 
 
 \backslash
-vspace{-0.5cm}
+vspace{-0.8cm}
 \end_layout
 
 \end_inset
@@ -1673,7 +1680,7 @@ Helping users to type queries: autocompletion prototype
 \end_layout
 
 \begin_layout Standard
-To aid users in typing the queries 
+To aid users in typing the queries, 
 \begin_inset Note Note
 status open
 
@@ -1683,7 +1690,7 @@ we try parsing the query while being typed and provide
 
 \end_inset
 
- live context-dependent suggestions and query coloring are provided
+ live context-dependent suggestions are shown
 \begin_inset Foot
 status open
 
@@ -1705,13 +1712,13 @@ e.g.
 \begin_inset Quotes erd
 \end_inset
 
- gives list of available values, while typing arbitrary keywords provide
- multiple implementations (as value, entity name, attribute name, etc)
+ gives list of available values, while typing arbitrary keywords return
+ multiple interpretations (as value, entity name, attribute name, etc)
 \end_layout
 
 \end_inset
 
- (see figure 
+ and query coloring is provided (see figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Autocompletion-prototype"
@@ -1719,7 +1726,7 @@ reference "fig:Autocompletion-prototype"
 \end_inset
 
 ).
- This is implemented on top of CodeMirror javascript-based 
+ This is implemented on top of CodeMirror's javascript-based 
 \begin_inset Quotes eld
 \end_inset
 
@@ -1727,7 +1734,7 @@ source-code editor
 \begin_inset Quotes erd
 \end_inset
 
- library implementing a custom parser, and custom autocompletion routines.
+ library implementing a custom parser and autocompletion routines.
 \end_layout
 
 \begin_layout Standard
@@ -1735,7 +1742,7 @@ source-code editor
 placement H
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset ERT
@@ -1751,12 +1758,22 @@ vspace{-0.5cm}
 \end_inset
 
 
-\end_layout
+\begin_inset ERT
+status open
 
 \begin_layout Plain Layout
+
+
+\backslash
+subfigure[attribute's list]{
+\end_layout
+
+\end_inset
+
+
 \begin_inset Graphics
-	filename /home/vidma/DAS_paper/poster/fancytikzposter_sources/poster_src/images/autocompl.png
-	width 60text%
+	filename figures/autocompl_nevents.png
+	width 30text%
 
 \end_inset
 
@@ -1769,9 +1786,61 @@ status open
 
 \begin_layout Plain Layout
 
-
+}
 \backslash
-vspace{-1cm}
+subfigure[values]{
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename figures/autocompl_dataset_relval.png
+	width 25text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\backslash
+subfigure[arbitrary keywords]{
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename figures/autocompl_short.png
+	width 30text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\backslash
+vspace{-0.2cm}
 \end_layout
 
 \end_inset
@@ -1827,13 +1896,13 @@ vspace{-0.8cm}
 \end_layout
 
 \begin_layout Section
-Keyword Search: Technical details
+Components of Keyword Search
 \end_layout
 
 \begin_layout Subsection
 Scoring individual keywords
 \lang british
- (step 2)
+ (stage 2)
 \begin_inset CommandInset label
 LatexCommand label
 name "sub:Matching-keywords"
@@ -1846,7 +1915,7 @@ name "sub:Matching-keywords"
 \begin_layout Standard
 
 \lang british
-In this step possible keyword interpretations are identified and assigned
+In this stage possible keyword interpretations are identified and assigned
  scores between 
 \begin_inset Formula $[0,1]$
 \end_inset
@@ -2195,13 +2264,13 @@ name "sub:Ranking-function"
 
 \end_inset
 
- (step 3)
+ (stage 3)
 \end_layout
 
 \begin_layout Standard
 
 \lang british
-In this step, different combinations of the entry points are explored and
+In this stage, different combinations of the entry points are explored and
  ranked.
  The final score is obtained combining the scores of individual keywords.
 
