@@ -567,7 +567,7 @@ It
 uses simple structured queries formed of an entity to be retrieved and some
  selection criteria
 \begin_inset Note Note
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -699,14 +699,14 @@ vspace{-0.5cm}
 
 
 \color blue
-As seen in figure 
+As seen in fig.
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:DAS-query-example"
 
 \end_inset
 
-, DAS queries closely correspond to the physical execution flow
+, DAS queries closely match the physical execution flow
 \begin_inset Note Note
 status collapsed
 
@@ -735,12 +735,14 @@ based on the entity requested and the conditions on service inputs, DAS
 
 \end_inset
 
- allowing to be aware of it (
+ 
 \series bold
-largely
+\color red
+requiring
 \series default
- motivated by vast large volumes managed by data services).
- Keyword search relaxes the need to know internal details
+\color blue
+ user to be aware of it (motivated by data volumes the services manage).
+ Keyword search relaxes the need of knowing the internals
 \begin_inset Note Note
 status open
 
@@ -1195,7 +1197,7 @@ vspace{1cm}
 
 
 \begin_inset Note Note
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -1690,8 +1692,12 @@ we try parsing the query while being typed and provide
 \end_inset
 
  live context-dependent suggestions are shown
-\begin_inset Foot
+\begin_inset Note Note
 status open
+
+\begin_layout Plain Layout
+\begin_inset Foot
+status collapsed
 
 \begin_layout Plain Layout
 e.g.
@@ -1713,6 +1719,11 @@ e.g.
 
  gives list of available values, while typing arbitrary keywords return
  multiple interpretations (as value, entity name, attribute name, etc)
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -1764,7 +1775,7 @@ status open
 
 
 \backslash
-subfigure[attribute's list]{
+subfigure[list of attributes]{
 \end_layout
 
 \end_inset
@@ -1787,7 +1798,7 @@ status open
 
 }
 \backslash
-subfigure[values]{
+subfigure[value matches]{
 \end_layout
 
 \end_inset
@@ -1798,7 +1809,7 @@ subfigure[values]{
 \begin_layout Plain Layout
 \begin_inset Graphics
 	filename figures/autocompl_dataset_relval.png
-	width 25text%
+	width 30text%
 
 \end_inset
 
@@ -1813,7 +1824,8 @@ status open
 
 }
 \backslash
-subfigure[arbitrary keywords]{
+subfigure[arbitrary keywords give multiple interpretations (value, entity
+ or attribute name)]{
 \end_layout
 
 \end_inset
@@ -1824,7 +1836,7 @@ subfigure[arbitrary keywords]{
 \begin_layout Plain Layout
 \begin_inset Graphics
 	filename figures/autocompl_short.png
-	width 30text%
+	width 40text%
 
 \end_inset
 
@@ -1851,7 +1863,7 @@ vspace{-0.2cm}
 \begin_inset Caption
 
 \begin_layout Plain Layout
-Autocompletion (prototype)
+Context-dependent autocompletion (prototype)
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:Autocompletion-prototype"
@@ -1937,10 +1949,17 @@ In this stage possible keyword interpretations are identified and assigned
 \end_inset
 
 For some fields, a list of possible values is available.
- Different cases are distinguished: full match, partial match, and matches
- containing wildcards.
+ Then, different cases are distinguished: full match, partial match, and
+ matches containing wildcards.
  Otherwise, regular expressions (regexp) describing inputs accepted by services
- are used.
+ are used
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+
+\lang british
+.
  As some of regexp's could be loosely defined, 
 \begin_inset Note Note
 status open
@@ -1953,13 +1972,17 @@ this can result in false positives,
 
 \end_inset
 
- the regexp matches are scored quite low, distinguishing multiple levels
- of regexp's accuracy.
+ the regexp matches are scored quite low
+\end_layout
+
+\end_inset
+
+, distinguishing multiple levels of regexp's accuracy.
 
 \color blue
- We also down-rank the unlikely interpretations where schema terms are partially
- contained in the value terms (e.g.
- dataset values include schema term 'block').
+ We also down-rank the unlikely interpretations where entity names are matches
+ as values (e.g.
+ entity 'block' is contained within values of dataset).
 \begin_inset ERT
 status open
 
@@ -1985,18 +2008,12 @@ Matching the schema terms
 \begin_layout Standard
 
 \lang british
-\begin_inset Marginal
-status open
+\begin_inset Note Note
+status collapsed
 
 \begin_layout Plain Layout
 
-\series bold
 \lang british
-is this needed at all?!
-\end_layout
-
-\end_inset
-
 We found that basic string similarity metrics, such as the 
 \emph on
 Levenshtein
@@ -2016,12 +2033,17 @@ status open
 \end_inset
 
 .
- Instead, we use a combination of more trustful metrics: full, lemma, stem
- matches, and 
+ Instead, w
+\end_layout
+
+\end_inset
+
+We use a combination of quite trustful metrics: full, lemma, stem matches,
+ and 
 \color red
 optionally
 \color inherit
- a stem match within a small string edit distance.
+ a stem match within a small string edit distance with a low weight.
 \begin_inset Note Note
 status collapsed
 
@@ -2054,11 +2076,23 @@ Above
 \end_inset
 
 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vspace{-0.5cm}
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Paragraph
 
-\color blue
 \lang british
 Matching names of fields in service outputs
 \end_layout
@@ -2067,8 +2101,9 @@ Matching names of fields in service outputs
 
 \lang british
 We also need to identify multi-word keyword chunks corresponding to names
- of fields in service results: many of them are unclean, technical names,
- with irrelevant and common terms (as obtained directly from JSON/XML responses).
+ of fields in query results: many of these field names are unclean, technical
+ names, with irrelevant and common terms (obtained directly from JSON/XML
+ responses).
 \begin_inset Note Note
 status collapsed
 
@@ -2109,7 +2144,7 @@ l information
 
 
 \color inherit
- Thus, we employ the 
+ Thus, we employ 
 \emph on
 whoosh
 \emph default
@@ -2146,7 +2181,7 @@ whoosh,
 
 \end_inset
 
- information retrieval library, where for each
+, an Information Retrieval (IR) library, where for each
 \color blue
  field
 \color inherit
@@ -2154,12 +2189,16 @@ whoosh,
 \begin_inset Quotes eld
 \end_inset
 
-fake multi-fielded document
+
+\color red
+fake
+\color inherit
+ multi-fielded document
 \begin_inset Quotes erd
 \end_inset
 
- containing its technical name, its parent, its name, and human readable
- name if exists.
+ containing: field's technical name, its parent, its base-name, and human
+ readable form if exists.
 \begin_inset Note Note
 status collapsed
 
@@ -2228,7 +2267,8 @@ Creation time
 
 \end_inset
 
- To find the matches, we enumerate chunks of k-nearby keywords (we use 
+ To find the matches, we query the IR library for each chunk of k-nearby
+ keywords (using 
 \begin_inset Formula $k\leq4$
 \end_inset
 
@@ -2245,11 +2285,30 @@ lly inexpensive
 
 \end_inset
 
-) and query the IR library for phrase and single term matches.
- The ranker uses BM25F scoring function
+)
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+
+\lang british
+ for phrase and single term matches
+\end_layout
+
+\end_inset
+
+.
+ The IR ranker uses BM25F scoring function
 \color blue
-, where fields are assigned different weights and full phrase matches are
- also scored higer
+, where 
+\begin_inset Quotes eld
+\end_inset
+
+document fields
+\begin_inset Quotes erd
+\end_inset
+
+ are assigned different weights and full phrase matches are scored higher
 \color inherit
 .
 \begin_inset Note Note
@@ -2265,9 +2324,7 @@ status collapsed
 
 \end_inset
 
- Currently we directly use the IR score normalized between [0..1].
- This could be potentially improved in future, e.g.
- by customizing the scoring function...
+ After normalizing the IR score, we use it directly as entry point score.
 \begin_inset Note Note
 status collapsed
 
@@ -2328,7 +2385,7 @@ name "sub:Ranking-function"
 \begin_layout Standard
 
 \lang british
-In this stage, different combinations of the entry points are explored and
+At this stage, different combinations of the entry points are explored and
  ranked.
  The final score is obtained combining the scores of individual keywords
 \lang english
@@ -2336,9 +2393,9 @@ In this stage, different combinations of the entry points are explored and
 \begin_inset Formula $score_{tag_{i}|kw_{i}}$
 \end_inset
 
-
+,
 \lang british
- and heuristic contextualization rules 
+ and scores returned by contextualization rules, 
 \begin_inset Formula $h_{j}(tag_{i,i-1,..,1})$
 \end_inset
 
@@ -2372,11 +2429,8 @@ seemed to perform almost equally well
 \series bold
 inaccuracies
 \series default
- in entry points scoring, but it became clearly better than 
-\emph on
-averaging
-\emph default
- when entry points accuracy was slightly improved
+ in entry points scoring, but it became clearly better when entry points
+ accuracy was slightly improved
 \color inherit
 .
 \begin_inset Note Note
@@ -2734,8 +2788,9 @@ only stop-words are distinguished now; '(tell|show|display|find) me?' filtered
 \color blue
 \lang british
 a) promote interpretations where the nearby keywords refer to related schema
- terms (e.g.
- entity name and it's value)
+ terms.
+ e.g.
+ entity name and it's value
 \begin_inset Marginal
 status collapsed
 
@@ -2768,14 +2823,14 @@ Implementation details
 \end_layout
 
 \begin_layout Standard
-Currently the ranker is implemented as exhaustive search with early branch
- pruning to remove the suggestions not supported by the services.
- Implemented in 
+Currently the ranker is implemented as exhaustive search with early pruning
+ to remove the suggestions not supported by the services.
+ Being implemented in 
 \emph on
 cython
 \emph default
- it already gives the performance in most cases dominated by the entry points
- step.
+, already gives sufficient performance, often dominated by the entry points
+ stage.
 \lang british
 
 \begin_inset Note Note
@@ -2955,16 +3010,11 @@ not yet implemented
 \end_deeper
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
-There are other alternatives, but the simplest one was chosen which allows
- early pruning, unlimited contextualization and returning top-k optimal
- (but not approximate) results.
+ There exist more complex alternatives, but the current one allows early
+ pruning, unlimited contextualization and listing multiple optimal results.
  
 \color blue
-See Discussion for more details.
+See next sections for details.
 \end_layout
 
 \begin_layout Section
@@ -3503,7 +3553,6 @@ status open
 \end_inset
 
 .
- 
 \size default
 \color inherit
 \lang british
@@ -3784,6 +3833,19 @@ blah blah
 
 \lang british
 Our proposed algorithm?
+\end_layout
+
+\begin_layout Standard
+
+\lang british
+possible improvements:
+\end_layout
+
+\begin_layout Standard
+
+\lang british
+multi-work chunk matching e.g.
+ by customizing the scoring function...
 \end_layout
 
 \begin_layout Section
