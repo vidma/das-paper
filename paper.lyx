@@ -612,7 +612,7 @@ status open
 
 
 \backslash
-vspace{-0.5cm}
+vspace{-0.6cm}
 \end_layout
 
 \end_inset
@@ -644,7 +644,7 @@ status open
 
 
 \backslash
-vspace{-0.8cm}
+vspace{-0.5cm}
 \end_layout
 
 \end_inset
@@ -654,14 +654,13 @@ vspace{-0.8cm}
 
 \begin_layout Plain Layout
 
-\color blue
 \lang british
 \begin_inset Caption
 
 \begin_layout Plain Layout
 
 \lang british
-DAS query: 
+a DAS query: 
 \emph on
 get average size of datasets matching *RelVal* with nevents>1000
 \begin_inset CommandInset label
@@ -1912,7 +1911,19 @@ name "sub:Matching-keywords"
 
 \end_layout
 
+\begin_layout Paragraph*
+
+\lang british
+Matching the value terms 
+\end_layout
+
 \begin_layout Standard
+
+\lang british
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
 
 \lang british
 In this stage possible keyword interpretations are identified and assigned
@@ -1923,63 +1934,46 @@ In this stage possible keyword interpretations are identified and assigned
 .
 \end_layout
 
-\begin_layout Paragraph*
+\end_inset
 
-\lang british
-Matching the value terms
-\series bold
-\color red
-
-\begin_inset Marginal
+For some fields, a list of possible values is available.
+ Different cases are distinguished: full match, partial match, and matches
+ containing wildcards.
+ Otherwise, regular expressions (regexp) describing inputs accepted by services
+ are used.
+ As some of regexp's could be loosely defined, 
+\begin_inset Note Note
 status open
 
 \begin_layout Plain Layout
 
-\series bold
-\color red
 \lang british
-shorten down!
+this can result in false positives, 
+\end_layout
+
+\end_inset
+
+ the regexp matches are scored quite low, distinguishing multiple levels
+ of regexp's accuracy.
+
+\color blue
+ We also down-rank the unlikely interpretations where schema terms are partially
+ contained in the value terms (e.g.
+ dataset values include schema term 'block').
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\color blue
+
+\backslash
+vspace{-0.4cm}
 \end_layout
 
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
-
-\lang british
-DAS service mappings contain regular expressions (regexp) that describe
- the input
-\emph on
- 
-\emph default
-values accepted by services.
- As some of regexp's could be loosely defined, this can result in false
- positives, thus, the regexp matches are scored lower than others, distinguishin
-g multiple levels of regexp's accuracy.
- 
-\end_layout
-
-\begin_layout Standard
-
-\lang british
-For some fields, a list of possible values is available.
- Different cases are distinguished: full match, partial match, and matches
- containing wildcards.
- If a value matches a regexp, but is not contained in the known values list
- and the field is considered to be changing not often, this likely false
- match is excluded\SpecialChar \@.
-
-\end_layout
-
-\begin_layout Itemize
-
-\color blue
-\lang british
-down-rank rare use-cases: prevent schema terms to be mapped to values with
- high score, as this is unlikely (e.g.
- dataset names include 'dataset')
 \end_layout
 
 \begin_layout Paragraph*
@@ -1991,33 +1985,47 @@ Matching the schema terms
 \begin_layout Standard
 
 \lang british
+\begin_inset Marginal
+status open
+
+\begin_layout Plain Layout
+
+\series bold
+\lang british
+is this needed at all?!
+\end_layout
+
+\end_inset
+
 We found that basic string similarity metrics, such as the 
 \emph on
 Levenshtein
 \emph default
  edit-distance (where inserts, edits, and mutations are equal), introduced
- too many false-positives (e.g.
- 'file' for 'site' with high score).
- Instead, we use a combination of more trustful metrics: full, lemma, stem
- matches, and a stem match within a small edit distance.
- 
-\end_layout
+ quite many false-positives
+\begin_inset Note Note
+status open
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 \lang british
-\begin_inset Formula $\tiny sim(A,B)=\begin{cases}
-1, & if\, A=B\\
-0.9, & if\, lemma(A)=lemma(B)\\
-0.7, & if\, stem(A)=stem(B)\\
-0.6\cdot dist(stem(A),stem(B)), & otherwise
-\end{cases}$
-\end_inset
-
-
+ (e.g.
+ 'file' for 'site' with high score)
 \end_layout
 
-\begin_layout Standard
+\end_inset
+
+.
+ Instead, we use a combination of more trustful metrics: full, lemma, stem
+ matches, and 
+\color red
+optionally
+\color inherit
+ a stem match within a small string edit distance.
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
 
 \lang british
 Above 
@@ -2027,6 +2035,25 @@ Above
  is a tight string distance function (e.g.
  max 1-3 characters differing in beginning or end, max 1 mutation/transposion).
  
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang british
+\begin_inset Formula $\tiny sim(A,B)=\begin{cases}
+1, & if\, A=B\\
+0.9, & if\, lemma(A)=lemma(B)\\
+0.7, & if\, stem(A)=stem(B)\\
+0.6\cdot edit\textunderscore dist(stem(A),stem(B)), & otherwise
+\end{cases}$
+\end_inset
+
+
 \end_layout
 
 \begin_layout Paragraph
@@ -2039,11 +2066,9 @@ Matching names of fields in service outputs
 \begin_layout Standard
 
 \lang british
-We also need to identify multi-word chunks of keywords corresponding to
- names of fields in service results: many of them are unclean, machine-readable
- field-names, with irrelevant and frequent terms (as obtained from JSON
- or XML responses).
- 
+We also need to identify multi-word keyword chunks corresponding to names
+ of fields in service results: many of them are unclean, technical names,
+ with irrelevant and common terms (as obtained directly from JSON/XML responses).
 \begin_inset Note Note
 status collapsed
 
@@ -2084,11 +2109,17 @@ l information
 
 
 \color inherit
- Thus, we employed an existing information retrieval library 
+ Thus, we employ the 
 \emph on
 whoosh
 \emph default
 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\lang british
 \begin_inset Foot
 status collapsed
 
@@ -2110,11 +2141,16 @@ whoosh,
 
 \end_inset
 
-, where for each 
+
+\end_layout
+
+\end_inset
+
+ information retrieval library, where for each
 \color blue
-outputs field
+ field
 \color inherit
- we create a 
+ in service outputs we create a 
 \begin_inset Quotes eld
 \end_inset
 
@@ -2122,8 +2158,10 @@ fake multi-fielded document
 \begin_inset Quotes erd
 \end_inset
 
- containing:
-\end_layout
+ containing its technical name, its parent, its name, and human readable
+ name if exists.
+\begin_inset Note Note
+status collapsed
 
 \begin_layout Itemize
 
@@ -2188,19 +2226,32 @@ Creation time
 , or it does not exist)
 \end_layout
 
-\begin_layout Standard
+\end_inset
+
+ To find the matches, we enumerate chunks of k-nearby keywords (we use 
+\begin_inset Formula $k\leq4$
+\end_inset
+
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
 
 \lang british
-To find the matches, we query the IR library, both for phrase and single
- term matches of up to k-nearby keywords (we use maximum of 4, which both
- provides sufficient context, and is short enough to be computationally
- inexpensive).
- The ranker uses BM25F scoring function (
+, which both provides sufficient context, and is short enough to be computationa
+lly inexpensive
+\end_layout
+
+\end_inset
+
+) and query the IR library for phrase and single term matches.
+ The ranker uses BM25F scoring function
 \color blue
-fields are assigned different weights and full phrase matches are also scored
- higer
+, where fields are assigned different weights and full phrase matches are
+ also scored higer
 \color inherit
-).
+.
 \begin_inset Note Note
 status collapsed
 
@@ -2214,9 +2265,17 @@ status collapsed
 
 \end_inset
 
- Currently we directly use the IR score normalized between [0..1]
-\begin_inset Marginal
+ Currently we directly use the IR score normalized between [0..1].
+ This could be potentially improved in future, e.g.
+ by customizing the scoring function...
+\begin_inset Note Note
 status collapsed
+
+\begin_layout Plain Layout
+
+\lang british
+\begin_inset Marginal
+status open
 
 \begin_layout Plain Layout
 
@@ -2227,12 +2286,11 @@ normalization: threshold based on weights signifying a good score + (maybe
 
 \end_inset
 
-.
- 
-\color blue
-The scoring could be improved tuning the scoring function, but in our case
- it works already not so bad.
-\color inherit
+
+\end_layout
+
+\end_inset
+
 
 \begin_inset Note Note
 status collapsed
@@ -2272,10 +2330,22 @@ name "sub:Ranking-function"
 \lang british
 In this stage, different combinations of the entry points are explored and
  ranked.
- The final score is obtained combining the scores of individual keywords.
+ The final score is obtained combining the scores of individual keywords
+\lang english
+, 
+\begin_inset Formula $score_{tag_{i}|kw_{i}}$
+\end_inset
+
+
+\lang british
+ and heuristic contextualization rules 
+\begin_inset Formula $h_{j}(tag_{i,i-1,..,1})$
+\end_inset
+
+.
 
 \lang english
- We experimented with two scoring functions: 1) averaging the scores, as
+ We experimented with two scoring functions: a) the average of scores, as
  used in 
 \emph on
 Keymantic
@@ -2287,8 +2357,7 @@ key "keymantic10"
 
 \end_inset
 
-, and 2) summing the log-likelihoods (scores are rough estimations of likelihood
-).
+, and b) the sum of log-likelihoods (scores are rough estimations of likelihood).
  
 \color blue
 At first the two methods
@@ -2311,7 +2380,7 @@ averaging
 \color inherit
 .
 \begin_inset Note Note
-status open
+status collapsed
 
 \begin_layout Subsection
 
@@ -2361,11 +2430,8 @@ packages, tool-kits: uncertainties, nltk, wordnet,mongodb
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
 \begin_inset Note Note
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Float figure
@@ -2473,6 +2539,104 @@ Scoring formulas
 \end_inset
 
 
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Formula $score_{tag_{i}|kw_{i}}$
+\end_inset
+
+ -
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ likelihood of matching an individual keyword 
+\begin_inset Formula $kw_{i}$
+\end_inset
+
+ as 
+\begin_inset Formula $tag_{i}$
+\end_inset
+
+ (entry point)
+\end_layout
+
+\end_inset
+
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\begin_inset Formula $h_{j}(tag_{i,i-1,..,1})$
+\end_inset
+
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+-
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ score boost returned by contextualization heuristic 
+\begin_inset Formula $h_{j}$
+\end_inset
+
+ given earlier tags.
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -2500,50 +2664,27 @@ vspace{-1cm}
 \end_inset
 
 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vspace{-0.5cm}
 \end_layout
 
-\begin_layout Standard
-
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-Above, 
-\begin_inset Formula $score_{tag_{i}|kw_{i}}$
 \end_inset
 
- - likelihood of matching an individual keyword 
-\begin_inset Formula $kw_{i}$
-\end_inset
 
- as 
-\begin_inset Formula $tag_{i}$
-\end_inset
-
- (entry point); 
-\begin_inset Formula $h_{j}(tag_{i,i-1,..,1})$
-\end_inset
-
- - score boost returned by contextualization heuristic 
-\begin_inset Formula $h_{j}$
-\end_inset
-
- given earlier tags.
 \end_layout
 
 \begin_layout Paragraph*
 
-\color red
-Heuristics and contextual rules in ranking
-\color inherit
-:
+\lang british
+Contextualization rules
+\lang english
+ used:
 \begin_inset Note Note
 status collapsed
 
@@ -2588,14 +2729,15 @@ only stop-words are distinguished now; '(tell|show|display|find) me?' filtered
 
 \end_layout
 
-\begin_layout Itemize
+\begin_layout Standard
 
 \color blue
 \lang british
-if nearby keywords refer to related schema terms (e.g.
+a) promote interpretations where the nearby keywords refer to related schema
+ terms (e.g.
  entity name and it's value)
 \begin_inset Marginal
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -2607,12 +2749,9 @@ do we use it?
 \end_inset
 
 
-\end_layout
-
-\begin_layout Itemize
-
-\lang british
-minor score-boost if retrieving entity by it's 
+\color inherit
+ b) promote common use-cases, e.g.
+ retrieving entity by it's 
 \begin_inset Quotes eld
 \end_inset
 
