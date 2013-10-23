@@ -15,7 +15,7 @@
     % TO hide margin notes in the final:
      
      \renewcommand\marginpar[1]{{\oldmarginpar[#1]{\color{red}\tiny{#1}}}}
-     %\renewcommand\marginpar[1]{}
+     \renewcommand\marginpar[1]{}
 }
 \end_preamble
 \use_default_options true
@@ -138,7 +138,7 @@ status open
 
 
 \backslash
-address{on  behalf of CMS Collaboration}
+address{on  behalf of the CMS Collaboration}
 \end_layout
 
 \end_inset
@@ -318,12 +318,12 @@ Virtual Data Integration
 \lang british
  is a lightweight
 \begin_inset Foot
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
 \lang british
-i.e.
+c.f.
  publish-subscribe is not applicable to proprietary (reluctant to change)
  systems, data-warehousing is too complex when large portions of data are
  volatile or when only limited interfaces are provided by services.
@@ -333,26 +333,13 @@ i.e.
 
  approach to 
 \lang english
-integrating heterogeneous data sources
+integrate heterogeneous data sources
 \lang british
  where data physically stays at its origin, and is requested only on demand.
  Queries are interpreted and sent to relevant services, those responses
  are consolidated eliminating inconsistencies in data formats and entity
  namings, and finally combined.
- 
-\begin_inset Marginal
-status open
-
-\begin_layout Plain Layout
-
-\color blue
-\lang british
-still/Unfortunately
-\end_layout
-
-\end_inset
-
-Still, this forces the users 
+ However, this forces the users 
 \lang english
 to learn the query language and to get acquainted with data organization
 \begin_inset Note Note
@@ -731,9 +718,9 @@ based on the entity requested and the conditions on service inputs, DAS
 
  demanding users to be aware of it (motivated by large amounts of data the
  services manage).
- 
+ Keyword search relaxes this need of knowing the internals
 \color blue
-Keyword search relaxes the need of knowing the internals
+
 \begin_inset Note Note
 status open
 
@@ -1894,7 +1881,7 @@ vspace{-0.8cm}
 \end_layout
 
 \begin_layout Section
-Components of Keyword Search
+The components of our keyword search system
 \end_layout
 
 \begin_layout Subsection
@@ -2173,11 +2160,7 @@ field in service outputs we create a
 \begin_inset Quotes eld
 \end_inset
 
-
-\color red
-fake
-\color inherit
- multi-fielded document
+multi-fielded document
 \begin_inset Quotes erd
 \end_inset
 
@@ -2395,9 +2378,7 @@ key "keymantic10"
 \end_inset
 
 , and b) the sum of log-likelihoods (scores are rough estimations of likelihood).
- 
-\color blue
-At first the two methods
+ At first the two methods
 \series bold
  
 \series default
@@ -2405,14 +2386,9 @@ seemed to perform almost equally well
 \series bold
 ,
 \series default
- with the probabilistic approach being more sensitive to 
-\series bold
-inaccuracies
-\series default
- in entry point scoring, but it became clearly better when the accuracy
- entry point generation was improved
-\color inherit
-.
+ with the probabilistic approach being more sensitive to inaccuracies in
+ entry point scoring, but it became clearly better when the accuracy of
+ entry point generation was improved.
 \begin_inset Note Note
 status collapsed
 
@@ -2765,20 +2741,21 @@ only stop-words are distinguished now; '(tell|show|display|find) me?' filtered
 
 \begin_layout Standard
 
-\color blue
 \lang british
 a) promote interpretations where the nearby keywords refer to related schema
  terms.
  e.g.
  entity name and it's value
+\color blue
+
 \begin_inset Marginal
-status collapsed
+status open
 
 \begin_layout Plain Layout
 
 \color blue
 \lang british
-do we use it?
+more details?
 \end_layout
 
 \end_inset
@@ -2990,11 +2967,23 @@ not yet implemented
 \end_deeper
 \end_inset
 
- There exist more complex alternatives, but the current one allows early
- pruning, unlimited contextualization and listing multiple optimal results.
- 
+ There exist more complex alternatives, but this one is the simplest one
+ that allows early pruning, unlimited contextualization and listing multiple
+ optimal results.
+\color blue
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
 \color blue
 See next sections for details.
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
@@ -3148,7 +3137,7 @@ i.e.
  
 \color red
 To cope with contextualization some internal steps of Munkres algorithm
- have been modified, this change is discussed in the following sections.
+ have been modified, this change is discussed in the following section.
 
 \color inherit
  
@@ -3602,7 +3591,8 @@ key "bergamaschi2011hidden"
 \begin_layout Standard
 
 \lang british
-Finally, 
+Finally, Guerrisi et al.
+ 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "nl_to_dataservices_guerrisi2012natural"
@@ -3784,6 +3774,12 @@ key "ethz2012"
 
 \begin_layout Section
 Discussion
+\end_layout
+
+\begin_layout Standard
+- we found that using log-likelihoods instead of just summing the scores
+ (as used in Keymantic) gives better ranking, especially if the entry point
+ scores are good approximations of corresponding likelihoods.
 \end_layout
 
 \begin_layout Paragraph*
@@ -4024,9 +4020,24 @@ TODO: Global usefulness.
 \series default
 \color inherit
 We have presented an implementation of keyword search over virtual data-service
- integration requiring minimal resources in addition to those available
- at the integration system, discussing the particularities of our specific
- domain.
+ integration
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\lang british
+ requiring only minimal resources in addition to those available at the
+ integration system
+\end_layout
+
+\end_inset
+
+, adapted to particularities of our specific domain.
+ The early users feedback has shown that, in data integration that provide
+ only limited access to explore the data, the interactive auto-completion
+ can be a successful ingredient in helping the users to compose the semi-structu
+red queries.
 \begin_inset Note Note
 status collapsed
 
@@ -4070,9 +4081,9 @@ Also we have opened up a couple of issues for further discussion.
 \begin_layout Standard
 
 \lang british
-The availability of public, corporate services and data sources is increasing
- as well as the popularity of data service repositories and tools for integratin
-g them (such as the 
+The public availability of corporate, governmental and other data services
+ (and data sources in general) is increasing as well as the popularity of
+ data service repositories and tools for integrating them (such as the 
 \emph on
 YQL, 
 \emph default
@@ -4088,21 +4099,16 @@ Google Fusion Tables
 \begin_inset Quotes erd
 \end_inset
 
- focusing on
-\series bold
- regular users instead of developers
-\series default
-).
- Whereas, the lack of user-friendly interfaces is also becoming an increasingly
+ focusing on regular users instead of developers).
+ Whereas, availability of user-friendly interfaces is becoming an increasingly
  important issue.
  
 \color blue
-Additional challenges may include answering the queries over much larger
- number of data tables or data services and answering the queries more complex
+Future challenges may include answering the queries over much larger number
+ of data tables or data services and answering the more complex queries
  than considered by us.
-
 \color inherit
- 
+
 \begin_inset Note Note
 status collapsed
 
