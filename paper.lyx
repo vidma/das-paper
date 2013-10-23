@@ -1897,7 +1897,7 @@ Tokenization (stage 1)
 \begin_layout Standard
 
 \lang british
-At the first stage, the keyword query is standardized (e.g.
+At first, the keyword query is standardized (e.g.
  removing extra spaces, normalizing date formats, and recognizing simple
  unambiguous expressions in
 \color red
