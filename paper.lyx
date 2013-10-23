@@ -3777,10 +3777,16 @@ Discussion
 \end_layout
 
 \begin_layout Standard
+
+\lang british
+\begin_inset Note Greyedout
+status open
+
+\begin_layout Plain Layout
 ....
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 We also found that using log-likelihoods instead of just summing the scores
  (as used in Keymantic) gives better ranking, especially if the entry point
  scores are good approximations of the respective likelihoods.
@@ -3792,12 +3798,15 @@ We also found that using log-likelihoods instead of just summing the scores
 On weighted bipartite matching extended with contextualizations
 \end_layout
 
-\begin_layout Standard
+\end_inset
+
 
 \series bold
 \color red
+\lang english
+
 \begin_inset Note Note
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -4141,7 +4150,7 @@ CMS Experiment, CERN
 \emph default
 .
  The first author is thankful to Robert Gwadera who supervised the project
- for valuable advice.
+ for his valuable advice.
 \end_layout
 
 \begin_layout Section*
