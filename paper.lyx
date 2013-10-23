@@ -3134,10 +3134,10 @@ i.e.
 \end_inset
 
 .
- 
+ To cope with contextualization some internal steps of Munkres algorithm
+ have been modified, 
 \color red
-To cope with contextualization some internal steps of Munkres algorithm
- have been modified, this change is discussed in the following section.
+this change is discussed in the following section.
 
 \color inherit
  
@@ -3777,9 +3777,13 @@ Discussion
 \end_layout
 
 \begin_layout Standard
-- we found that using log-likelihoods instead of just summing the scores
+....
+\end_layout
+
+\begin_layout Standard
+We also found that using log-likelihoods instead of just summing the scores
  (as used in Keymantic) gives better ranking, especially if the entry point
- scores are good approximations of corresponding likelihoods.
+ scores are good approximations of the respective likelihoods.
 \end_layout
 
 \begin_layout Paragraph*
@@ -4102,13 +4106,9 @@ Google Fusion Tables
  focusing on regular users instead of developers).
  Whereas, availability of user-friendly interfaces is becoming an increasingly
  important issue.
- 
-\color blue
-Future challenges may include answering the queries over much larger number
+ Future challenges may include answering the queries over much larger number
  of data tables or data services and answering the more complex queries
  than considered by us.
-\color inherit
-
 \begin_inset Note Note
 status collapsed
 
@@ -4140,7 +4140,8 @@ Part of this work was conducted as a master thesis project between
 CMS Experiment, CERN
 \emph default
 .
- The main author is thankful to his supervisors for their valuable support.
+ The first author is thankful to Robert Gwadera who supervised the project
+ for valuable advice.
 \end_layout
 
 \begin_layout Section*
