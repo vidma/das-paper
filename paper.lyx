@@ -1905,14 +1905,36 @@ At the first stage, the keyword query is standardized (e.g.
 \color inherit
 natural language).
  This is accomplished using a number of regular expression replacement patterns.
- Then it is tokenized, recognizing the explicit phrases in quotes and operator
- expressions (such as (e.g.
- 
+\end_layout
+
+\begin_layout Standard
+
+\lang british
+Then, it is tokenized, recognizing the phrases in quotes and the operator
+ expressions (e.g.
 \family typewriter
-nevent > 1, `number of events'=100, `number of events>=100
+\size footnotesize
+\emph on
+
+\begin_inset space ~
+\end_inset
+
+nevent
+\begin_inset space ~
+\end_inset
+
+>
+\begin_inset space ~
+\end_inset
+
+1, `number of events'=100, `number of events>=100
 \family default
-'); this is accomplished by splitting the query on a regular-expression
- pattern enumerating these cases.
+'
+\size default
+\emph default
+).
+ This is accomplished by splitting the query on a regular-expression pattern
+ defining all these cases.
 \end_layout
 
 \begin_layout Subsection
