@@ -6,9 +6,15 @@
 \begin_preamble
 %\renewcommand{\maketitle}{}
 \newcommand{\maketitle}{}
+\newcommand{\newblock}{}
+
 % 
 %\usepackage{showframe}
 \usepackage{subfigure}
+\usepackage{hyperref}
+\usepackage[square,numbers,sort&compress]{natbib}
+
+
 \AtBeginDocument{
       
        \let\oldmarginpar\marginpar
@@ -1226,7 +1232,7 @@ entry points
 \emph default
  are evaluated and ranked by combining the scores of individual keywords
 \begin_inset Note Note
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -1882,6 +1888,31 @@ vspace{-0.8cm}
 
 \begin_layout Section
 The components of our keyword search system
+\end_layout
+
+\begin_layout Subsection
+Tokenization (stage 1)
+\end_layout
+
+\begin_layout Standard
+
+\lang british
+At the first stage, the keyword query is standardized (e.g.
+ removing extra spaces, normalizing date formats, and recognizing simple
+ unambiguous expressions in
+\color red
+ 
+\color inherit
+natural language).
+ This is accomplished using a number of regular expression replacement patterns.
+ Then it is tokenized, recognizing the explicit phrases in quotes and operator
+ expressions (such as (e.g.
+ 
+\family typewriter
+nevent > 1, `number of events'=100, `number of events>=100
+\family default
+'); this is accomplished by splitting the query on a regular-expression
+ pattern enumerating these cases.
 \end_layout
 
 \begin_layout Subsection
@@ -2786,6 +2817,13 @@ Currently the ranker is implemented as exhaustive search with early pruning
 \emph on
 cython
 \emph default
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "cython2011_behnel"
+
+\end_inset
+
 , already gives sufficient performance, often dominated by the entry points
  stage.
 \lang british
@@ -4153,17 +4191,37 @@ CMS Experiment, CERN
  for his valuable advice.
 \end_layout
 
-\begin_layout Section*
-References
-\end_layout
-
 \begin_layout Standard
 
 \lang british
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+{
+\backslash
+scriptsize
+\end_layout
+
+\end_inset
+
+
 \begin_inset CommandInset bibtex
 LatexCommand bibtex
 bibfiles "refs"
-options "iopart-num"
+options "abbrvnat"
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
 
 \end_inset
 
