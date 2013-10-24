@@ -14,6 +14,14 @@
 \usepackage{hyperref}
 \usepackage[square,numbers,sort&compress]{natbib}
 
+\usepackage{longtable}
+%\usepackage{algpseudocode}
+\usepackage{tablefootnote}
+\usepackage{mdwlist}
+
+%\usepackage[T1]{fontenc}
+%\usepackage[utf8]{inputenc}
+
 
 \AtBeginDocument{
       
@@ -28,7 +36,7 @@
 \maintain_unincluded_children false
 \language english
 \language_package babel
-\inputencoding auto
+\inputencoding utf8
 \fontencoding global
 \font_roman default
 \font_sans default
@@ -3194,12 +3202,6 @@ i.e.
 \end_inset
 
 .
- To cope with contextualization some internal steps of Munkres algorithm
- have been modified, 
-\color red
-this change is discussed in the following section.
-
-\color inherit
  
 \begin_inset Note Note
 status collapsed
@@ -3837,232 +3839,274 @@ Discussion
 \end_layout
 
 \begin_layout Standard
+First, we found that using log-likelihoods instead of just summing the scores
+ (as used in Keymantic) gives better ranking, especially if the entry point
+ scores are good approximations of the respective likelihoods (see section
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Ranking-function"
 
-\lang british
-\begin_inset Note Greyedout
+\end_inset
+
+).
+ 
+\begin_inset Note Note
 status open
 
 \begin_layout Plain Layout
-....
-\end_layout
-
-\begin_layout Plain Layout
-We also found that using log-likelihoods instead of just summing the scores
- (as used in Keymantic) gives better ranking, especially if the entry point
- scores are good approximations of the respective likelihoods.
-\end_layout
-
-\begin_layout Paragraph*
-
-\lang british
-On weighted bipartite matching extended with contextualizations
+The log-likelihoods could be used within Munkres.
 \end_layout
 
 \end_inset
 
 
-\series bold
-\color red
-\lang english
-
-\begin_inset Note Note
-status collapsed
-
-\begin_layout Plain Layout
-
-\series bold
-\color red
-TODO: 
-\series default
-Discuss differneses from our implementation
 \end_layout
 
-\begin_layout Plain Layout
-Keymantic which is the closest work
-\end_layout
-
-\begin_layout Paragraph*
-
-\lang british
-HMM and what's modelled
-\end_layout
-
-\begin_layout Paragraph*
+\begin_layout Subsection
 
 \lang british
 On weighted bipartite matching extended with contextualizations
 \end_layout
 
+\begin_layout Standard
+\begin_inset Note Note
+status collapsed
+
 \begin_layout Plain Layout
 
-\lang british
-blah blah
+\emph on
+Contextualization
+\series medium
+\emph default
+ adds additional interdependencies between the weights, e.g.
+ the 
+\begin_inset Formula $tag_{j}$
+\end_inset
+
+ of a keyword 
+\begin_inset Formula $kw_{i}$
+\end_inset
+
+ is more likely if it's nearby a related 
+\begin_inset Formula $tag_{y}$
+\end_inset
+
+, or in case of assigning people to jobs, the person A would agree to perform
+ the job X cheaper, if person be is assigned job Y (e.g.
+ as he wants to be nearby).
 \end_layout
 
-\begin_layout Plain Layout
+\end_inset
 
+Given N keywords and M tags, 
+\begin_inset Formula $N\leqslant M$
+\end_inset
+
+, and a NxM matrix of weights
+\emph on
 \lang british
-Our proposed algorithm?
-\end_layout
-
-\begin_layout Plain Layout
-
-\lang british
-possible improvements:
-\end_layout
-
-\begin_layout Plain Layout
-
-\lang british
-multi-work chunk matching e.g.
- by customizing the scoring function...
-\end_layout
-
-\begin_layout Plain Layout
-
-\lang british
-interiesting to explore:
-\end_layout
-
-\begin_layout Plain Layout
-
-\size small
-\color blue
-A combination of the two approaches would be interesting to look at in open-doma
-in setup.
-\begin_inset Marginal
+, 
+\emph default
+the
+\emph on
+ Weighted Bipartite Matching
+\series bold
+\emph default
+\lang english
+ 
+\series default
+asks
+\series bold
+ 
+\series default
+to maximize the sum of chosen weights such that each keyword is assigned
+ to 
+\emph on
+one
+\emph default
+ tag, and each tag is chosen no more than once.
+ This can be efficiently solved by well-known Munkres algorithm
+\begin_inset Foot
 status open
 
 \begin_layout Plain Layout
 
-\color blue
-( too ambitious/not-mature; open domain, real natural language questions)
+\emph on
+Munkres
+\emph default
+ splits the assignment problem into two easier ones: 1) maintaining a set
+ of constraints that restrict the currently allowed matches (edges) to be
+ cheap enough, and 2) solving 
+\begin_inset Formula $N$
+\end_inset
+
+ unweighted bipartite assignments: starting with an empty matching, find
+ an augmenting path to increase the size of matching - new edges are selected
+ or existing deselected along the path; if no augmenting path exist, loosen
+ the constraints on the weights.
 \end_layout
 
+\end_inset
+
+ in 
+\begin_inset Formula $\Theta(n^{2}m)$
 \end_inset
 
 .
-\size default
-\color inherit
-\lang british
-
-\begin_inset Marginal
-status collapsed
-
-\begin_layout Plain Layout
-
-\series bold
-\lang british
-also mention: NL querying over services
-\end_layout
-
-\end_inset
-
-
-\begin_inset Note Note
-status collapsed
-
-\begin_layout Paragraph*
-
-\lang british
-\begin_inset Marginal
-status open
-
-\begin_layout Plain Layout
-
-\series bold
-\color red
-\lang british
-remove this?!
-\end_layout
-
-\end_inset
-
-Keyword queries
-\end_layout
-
-\begin_layout Plain Layout
-
-\lang british
-are 
-\lang english
-ambiguous
-\lang british
- and often underspecified
+ It is out of scope to describe this in more details, see 
 \begin_inset CommandInset citation
 LatexCommand cite
-key "keymantic_kws_metadata_bergamaschi2011"
+key "combinatorial_papadimitriou1998,munkres_cern_rect,munkres_dynamic"
 
 \end_inset
 
+.
+ 
+\end_layout
 
-\lang english
-, thus the standard approach is to produce a ranked list of most-likely
- structured query suggestions
+\begin_layout Standard
+In 
+\lang british
+Keymantic 
 \begin_inset CommandInset citation
 LatexCommand citep
-key "ethz2012,keymantic10,bergamaschi2011hidden"
+key "keymantic_kws_metadata_bergamaschi2011,keymantic10"
 
 \end_inset
 
+, to cope support contextualization some internal steps of Munkres algorithm
+ have been modified, 
+\color red
+and we 
+\series bold
+worry that
+\series default
+ this change may impact either optimality of results or even correctness
+ of the algorithm.
+ Once the size of the matching is increased (i.e.
+ once the augmenting path is found), new cells are matched or existing unmatched
+, thus some weights are contextualized and some are uncontextualized.
+ The problem is that this unmatching 
+\begin_inset Note Note
+status open
 
-\lang british
-.
+\begin_layout Plain Layout
 
 \color red
- Second, even if keyword queries have no clear syntactic structure, keywords
- referring to related concepts usually come close to each other 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "characterization_search_behaviour_kumar2009,Kws_metadata_2011"
-
-\end_inset
-
-, this can be used to improve the ranking.
- 
+\lang british
+up to N-1
 \end_layout
 
 \end_inset
 
+ of earlier selected cells (edges in graph formulation), may lead to uncontextua
+lization of some cells earlier selected as matches, and qualifying them
+ as not admissible anymore [because it's weight has decreased/cost increased],
+ consequently leading to violation of some of the algorithm's assumptions,
+ that 1) once the cell becomes admissible it stays so, and 2) that each
+ iteration increases the size of matching by at least one.
+\end_layout
 
-\color red
+\begin_layout Standard
+
+\lang british
+We are not aware of any method allowing to efficiently compute optimal top-k
+ solutions to this extended problem.
+ But, at least, we able to propose a method to efficiently compute the top-k
+ optimal solutions 
+\emph on
+if the number of all contextualization permutations is low.
+ 
+\emph default
+Because this is out of scope of this work, only a brief idea is presented:
+\end_layout
+
+\begin_layout Standard
+
+\size scriptsize
+1) enumerate over all contextualization possibilities (exploring contextualizaio
+ns in depth-first order allow the cost-matrix modifications to be reused)
+\end_layout
+
+\begin_layout Standard
+
+\size scriptsize
+2) then use Murty's
+\size footnotesize
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "murty_ranked"
+
+\end_inset
+
+
+\size scriptsize
+ algorithm
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+
+\size scriptsize
+to get each additional result, call Munkres to solve 
+\begin_inset Formula $n-1$
+\end_inset
+
+ smaller assignments of sizes 
+\begin_inset Formula $2..n-1$
+\end_inset
+
 
 \begin_inset Note Note
 status collapsed
 
 \begin_layout Plain Layout
+: ordering sub-assignments to solve smaller or more likely first...
+\end_layout
 
-\lang british
-Lastly, the average query length continues to increase, which shows that
- users are moving towards preference of expressing their information need
- in natural languages than just typing keywords.
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\size footnotesize
  
+\size scriptsize
+to get top-k results over contextualized cost-matrix.
+ Solve the sub-problems reusing older sub-solutions via 
 \begin_inset Quotes eld
 \end_inset
 
-
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-
-\lang british
-http://searchuserinterfaces.com/book/sui_ch12_emerging.html
-\end_layout
-
+Dynamic Munkres
+\begin_inset Quotes erd
 \end_inset
 
 
-\end_layout
+\begin_inset CommandInset citation
+LatexCommand cite
+key "munkres_dynamic"
 
 \end_inset
 
+ costing only 
+\begin_inset Formula $\Theta(nm)$
+\end_inset
 
-\end_layout
+ per modified matrix line.
+ It is known that of heuristics such as ordering sun-solutions, can further
+ greatly improve expected run time of Murthy's algorithm
+\begin_inset CommandInset citation
+LatexCommand cite
+key "murty_optimizing"
 
 \end_inset
 
-
+.
 \end_layout
 
 \begin_layout Section
@@ -4155,8 +4199,8 @@ Also we have opened up a couple of issues for further discussion.
 
 \lang british
 The public availability of corporate, governmental and other data services
- (and data sources in general) is increasing as well as the popularity of
- data service repositories and tools for integrating them (such as the 
+ (including data tables) is increasing as well as the popularity of data
+ service repositories and tools for integrating them (such as the 
 \emph on
 YQL, 
 \emph default
@@ -4211,6 +4255,861 @@ CMS Experiment, CERN
 .
  The first author is thankful to Robert Gwadera who supervised the project
  for his valuable advice.
+\lang british
+
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+
+\lang british
+\begin_inset Newpage clearpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+section*{Appendix: On weighted bipartite matching problem and contextualizations
+}
+\backslash
+appendix
+\backslash
+setcounter{section}{1} 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Known approaches and their combinations
+\end_layout
+
+\begin_layout Plain Layout
+
+\size small
+\emph on
+Notation:
+\emph default
+ 
+\begin_inset Formula $n$
+\end_inset
+
+ keywords; 
+\begin_inset Formula $m$
+\end_inset
+
+ is total number of possible tags; 
+\begin_inset Formula $\widetilde{m}$
+\end_inset
+
+ is the average # of possible tags; 
+\begin_inset Formula $k$
+\end_inset
+
+ - # of top-k results to return.
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Float table
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="7" columns="3">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top" width="42text%">
+<column alignment="left" valignment="top" width="26text%">
+<column alignment="left" valignment="top" width="28text%">
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+\size scriptsize
+Method
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+\size scriptsize
+Advantages
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+\size scriptsize
+Disadvantages
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+\emph on
+Exhaustive search
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+\SpecialChar \menuseparator
+easy pruning and contextualization
+\end_layout
+
+\begin_layout Plain Layout
+
+\size scriptsize
+\SpecialChar \menuseparator
+optimal answers
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+\size scriptsize
+slow
+\series default
+, 
+\begin_inset Formula $O(\widetilde{m}^{n})$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+\emph on
+Munkres
+\emph default
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "munkres_cern_rect"
+
+\end_inset
+
+ gives one best solution in 
+\begin_inset Formula $\Theta(n^{2}m)$
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+\SpecialChar \menuseparator
+quite fast
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+\SpecialChar \menuseparator
+no contextualization
+\end_layout
+
+\begin_layout Plain Layout
+
+\size scriptsize
+\SpecialChar \menuseparator
+only one best result
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+\emph on
+Keymantic
+\emph default
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "keymantic_kws_metadata_bergamaschi2011"
+
+\end_inset
+
+ - Munkres modified for contextualizations, 
+\begin_inset Formula $\Theta(n^{3}m^{2})$
+\end_inset
+
+.
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\size scriptsize
+recursively evaluate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+tablefootnote{recursively solve multiple weighted matchings with Munkres
+ (modifying the matrices to force or prevent specific matches)}
+\end_layout
+
+\end_inset
+
+ all mappings pruning on the cost.
+ do contextualization inside Munkres
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+\SpecialChar \menuseparator
+quite fast
+\end_layout
+
+\begin_layout Plain Layout
+
+\size scriptsize
+\SpecialChar \menuseparator
+some contextualization
+\end_layout
+
+\begin_layout Plain Layout
+
+\size scriptsize
+\SpecialChar \menuseparator
+some of top-k answers
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+\SpecialChar \menuseparator
+
+\series bold
+approximate -
+\series default
+ 
+\series bold
+not global top-k
+\end_layout
+
+\begin_layout Plain Layout
+
+\series bold
+\size scriptsize
+\SpecialChar \menuseparator
+correctness unproven 
+\end_layout
+
+\begin_layout Plain Layout
+
+\size scriptsize
+\SpecialChar \menuseparator
+no guarantee of all contextualizations
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+\emph on
+Murty
+\emph default
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "murty_ranked"
+
+\end_inset
+
+
+\series bold
+ + 
+\series default
+\emph on
+Munkres - 
+\emph default
+top-k matchings in 
+\begin_inset Formula $\Theta(n^{3}m)$
+\end_inset
+
+.
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\size scriptsize
+to get each additional result, call Munkres to solve 
+\begin_inset Formula $n-1$
+\end_inset
+
+ smaller assignments of sizes 
+\begin_inset Formula $2..n-1$
+\end_inset
+
+.
+ Heuristics can greatly improve expected run time
+\begin_inset CommandInset citation
+LatexCommand cite
+key "murty_optimizing"
+
+\end_inset
+
+
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+: ordering sub-assignments to solve smaller or more likely first...
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+\SpecialChar \menuseparator
+
+\emph on
+top-k optimal
+\emph default
+ solutions
+\end_layout
+
+\begin_layout Plain Layout
+
+\size scriptsize
+\SpecialChar \menuseparator
+quite fast
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+\SpecialChar \menuseparator
+no early pruning (partial matching may change a lot)
+\end_layout
+
+\begin_layout Plain Layout
+
+\size scriptsize
+\SpecialChar \menuseparator
+
+\series bold
+no contextualization
+\series default
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+tablefootnote{could do same unproven contextualization within Munkres as
+ in Keymantic; would at least guarantee top-k with limited contextualization}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+\emph on
+HMM
+\emph default
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "bergamaschi2011hidden"
+
+\end_inset
+
+
+\series bold
+ + 
+\series default
+\emph on
+List Viterbi
+\emph default
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "list_viterbi_1994"
+
+\end_inset
+
+ 
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+ 
+\series default
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\size footnotesize
+or some related conditional models such as CRF
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\size scriptsize
+can start with estimated HMM params: transition probs from contextualizations,
+ output probs from cost matrix
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+\SpecialChar \menuseparator
+
+\emph on
+top-k optimal
+\emph default
+ solutions
+\end_layout
+
+\begin_layout Plain Layout
+
+\size scriptsize
+\SpecialChar \menuseparator
+contextualization of 
+\emph on
+limited length
+\end_layout
+
+\begin_layout Plain Layout
+
+\size scriptsize
+\SpecialChar \menuseparator
+quite fast
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+\SpecialChar \menuseparator
+no pruning
+\end_layout
+
+\begin_layout Plain Layout
+
+\size scriptsize
+\SpecialChar \menuseparator
+
+\series bold
+a tag may get selected many times
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+\emph on
+Murty + Dynamic Munkres
+\series bold
+\emph default
+ 
+\series default
+\emph on
+on contextualized cost-matrix
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\size scriptsize
+1) enumerate over all contextualization possibilities
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+tablefootnote{exploring contextualizaions in depth-first order cost-matrix
+ modifications can be reused}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\size scriptsize
+2) use Murty's to get top-k results over contextualized cost-matrix reusing
+ older sub-solutions
+\begin_inset CommandInset citation
+LatexCommand cite
+key "munkres_dynamic"
+
+\end_inset
+
+ costing only 
+\begin_inset Formula $\Theta(nm)$
+\end_inset
+
+ per modified 
+\begin_inset Quotes eld
+\end_inset
+
+line
+\begin_inset Quotes erd
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+\SpecialChar \menuseparator
+
+\series bold
+top-k optimal results
+\end_layout
+
+\begin_layout Plain Layout
+
+\size scriptsize
+\SpecialChar \menuseparator
+
+\series bold
+fast
+\series default
+ 
+\series bold
+if # dependencies is small
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+\SpecialChar \menuseparator
+exponential for complex contextualizations
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+comparison of different methods
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Note Note
+status open
+
+\begin_layout Section
+The proposed algorithm
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Float algorithm
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{algorithmic}[1]
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+Procedure{Matching}{$M, ctx, k$}
+\backslash
+Comment{M is cost matrix; ctx - contextualizations} 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+State $sol0
+\backslash
+gets Munkres(M)$ 
+\backslash
+Comment{solve without contextualizations} 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+While{$c$ IN $permute(ctx)$}
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+State $M_ = M with c applied$
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+State $sol
+\backslash
+gets = Murty(M_, k)$
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+State 
+\backslash
+textbf{yield} $sol$
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+EndWhile
+\backslash
+label{euclidendwhile} 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+EndProcedure 
+\backslash
+end{algorithmic}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+top-K bipartite matchings (with low number of contextualizations)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+Can we further improve over this?
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -4223,7 +5122,7 @@ status open
 
 {
 \backslash
-scriptsize
+tiny
 \end_layout
 
 \end_inset
