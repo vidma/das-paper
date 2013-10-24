@@ -3565,6 +3565,19 @@ Finally, the resulting labelings are interpreted as SQL queries and presented
 
 \color red
  
+\color inherit
+\lang english
+We noticed that using log-likelihoods instead of just summing the scores
+ (as used in Keymantic) gives better ranking quality, especially if the
+ entry point scores are good approximations of the respective likelihoods
+ (see section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Ranking-function"
+
+\end_inset
+
+).
 \end_layout
 
 \begin_layout Standard
@@ -3850,31 +3863,6 @@ key "ethz2012"
 Discussion
 \end_layout
 
-\begin_layout Standard
-We found that using log-likelihoods instead of just summing the scores (as
- used in Keymantic) gives better ranking, especially if the entry point
- scores are good approximations of the respective likelihoods (see section
- 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sub:Ranking-function"
-
-\end_inset
-
-).
- 
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-The log-likelihoods could be used within Munkres.
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
 \begin_layout Subsection
 
 \lang british
@@ -3928,7 +3916,11 @@ the
 \lang english
  
 \series default
-asks
+(
+\lang british
+the Assignment Problem)
+\lang english
+ asks
 \series bold
  
 \series default
@@ -3940,7 +3932,7 @@ one
  tag, and each tag is chosen no more than once.
  This can be efficiently solved by well-known Munkres algorithm
 \begin_inset Foot
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -3966,7 +3958,17 @@ Munkres
 \end_inset
 
 .
- It is out of scope to describe this in more details, see 
+ 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+It is out of scope to describe this in
+\end_layout
+
+\end_inset
+
+For more details, see 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "combinatorial_papadimitriou1998,munkres_cern_rect,munkres_dynamic"
@@ -3987,7 +3989,7 @@ key "keymantic_kws_metadata_bergamaschi2011,keymantic10"
 
 \end_inset
 
-, to cope support contextualization some internal steps of Munkres algorithm
+, to support the contextualization some internal steps of Munkres algorithm
  have been modified, 
 \color red
 and we 
@@ -4024,45 +4026,35 @@ lization of some cells earlier selected as matches, and qualifying them
 
 \lang british
 We are not aware of any method allowing to efficiently compute optimal top-k
- solutions to this extended problem.
+ solutions to exactly this problem extended with contextualizations.
  But, at least, we able to propose a method to efficiently compute the top-k
  optimal solutions 
 \emph on
 if the number of all contextualization permutations is low.
  
 \emph default
-Because this is out of scope of this work, only a brief idea is presented:
+As this is out of scope of this work, only the brief idea is presented:
 \end_layout
 
 \begin_layout Standard
 
-\size scriptsize
-1) enumerate over all contextualization possibilities (exploring contextualizaio
-ns in depth-first order allow the cost-matrix modifications to be reused)
-\end_layout
-
-\begin_layout Standard
-
-\size scriptsize
-2) then use Murty's
 \size footnotesize
+1) enumerate over all contextualization possibilities (in depth-first order
+ to reuse matrix modifications)
+\end_layout
 
+\begin_layout Standard
+
+\size footnotesize
+2) then use Murty's
 \begin_inset CommandInset citation
 LatexCommand cite
 key "murty_ranked"
 
 \end_inset
 
-
-\size scriptsize
- algorithm
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-
-\size scriptsize
-to get each additional result, call Munkres to solve 
+ algorithm to get top-k results over contextualized cost-matrix.
+ In Murty's, to get each additional best result, call Munkres to solve 
 \begin_inset Formula $n-1$
 \end_inset
 
@@ -4070,7 +4062,7 @@ to get each additional result, call Munkres to solve
 \begin_inset Formula $2..n-1$
 \end_inset
 
-
+.
 \begin_inset Note Note
 status collapsed
 
@@ -4080,17 +4072,7 @@ status collapsed
 
 \end_inset
 
-
-\end_layout
-
-\end_inset
-
-
-\size footnotesize
- 
-\size scriptsize
-to get top-k results over contextualized cost-matrix.
- Solve the sub-problems reusing older sub-solutions via 
+ Using 
 \begin_inset Quotes eld
 \end_inset
 
@@ -4105,12 +4087,13 @@ key "munkres_dynamic"
 
 \end_inset
 
- costing only 
+, the sub-problems can be solved reusing older sub-solutions, costing only
+ 
 \begin_inset Formula $\Theta(nm)$
 \end_inset
 
  per modified matrix line.
- It is known that of heuristics such as ordering sun-solutions, can further
+ Further, it is known that heuristics such as ordering sub-solutions, can
  greatly improve expected run time of Murthy's algorithm
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -4119,6 +4102,13 @@ key "murty_optimizing"
 \end_inset
 
 .
+ 
+\end_layout
+
+\begin_layout Standard
+
+\size footnotesize
+3) Merge the top-k solutions found in step 2 over each of the contextualizations
 \end_layout
 
 \begin_layout Section
