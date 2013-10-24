@@ -3899,11 +3899,27 @@ Contextualization
 
 \end_inset
 
-Given N keywords and M tags, 
-\begin_inset Formula $N\leqslant M$
+Given 
+\begin_inset Formula $n$
 \end_inset
 
-, and a NxM matrix of weights
+ keywords and 
+\begin_inset Formula $m$
+\end_inset
+
+ tags, 
+\begin_inset Formula $n\leqslant m$
+\end_inset
+
+, and a 
+\begin_inset Formula $n$
+\end_inset
+
+x
+\begin_inset Formula $m$
+\end_inset
+
+ matrix of weights
 \emph on
 \lang british
 , 
@@ -3925,11 +3941,7 @@ the Assignment Problem)
  
 \series default
 to maximize the sum of chosen weights such that each keyword is assigned
- to 
-\emph on
-one
-\emph default
- tag, and each tag is chosen no more than once.
+ to one tag, and each tag is chosen no more than once.
  This can be efficiently solved by well-known Munkres algorithm
 \begin_inset Foot
 status collapsed
@@ -4010,7 +4022,7 @@ up to N-1
 
 \end_inset
 
- a earlier selected cell, may lead to uncontextualization of some cells
+ a cell selected earlier, may lead to uncontextualization of some cells
  earlier selected as matches, and qualifying them as not admissible anymore
  (because of uncontextualization, their weight has decreased).
  This may consequently lead to violation of some of algorithm's assumptions,
@@ -4211,7 +4223,7 @@ key "keymantic10"
 \end_inset
 
  
-\color red
+\color blue
 Also we have opened up a couple of issues for further discussion.
 \end_layout
 
