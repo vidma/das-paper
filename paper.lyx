@@ -109,7 +109,7 @@ $^1$
 
 \end_inset
 
- and Valentin Y Kuznetsov
+ and Valentin Kuznetsov
 \begin_inset ERT
 status open
 
@@ -1552,8 +1552,20 @@ dataset.size
 
 \end_inset
 
-The final results obtained in step 3, where entry point scores are combined,
- are displayed in figure 
+
+\end_layout
+
+\begin_layout Standard
+
+\lang british
+Lastly, a ranked list of query suggestions is obtained (see section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Ranking-function"
+
+\end_inset
+
+) as shown in figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:query-results"
