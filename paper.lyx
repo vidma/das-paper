@@ -3839,8 +3839,8 @@ Discussion
 \end_layout
 
 \begin_layout Standard
-First, we found that using log-likelihoods instead of just summing the scores
- (as used in Keymantic) gives better ranking, especially if the entry point
+We found that using log-likelihoods instead of just summing the scores (as
+ used in Keymantic) gives better ranking, especially if the entry point
  scores are good approximations of the respective likelihoods (see section
  
 \begin_inset CommandInset ref
