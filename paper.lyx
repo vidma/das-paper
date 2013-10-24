@@ -3980,6 +3980,8 @@ key "combinatorial_papadimitriou1998,munkres_cern_rect,munkres_dynamic"
 \end_layout
 
 \begin_layout Standard
+
+\color blue
 In 
 \lang british
 Keymantic 
@@ -3990,14 +3992,8 @@ key "keymantic_kws_metadata_bergamaschi2011,keymantic10"
 \end_inset
 
 , to support the contextualization some internal steps of Munkres algorithm
- have been modified, 
-\color red
-and we 
-\series bold
-worry that
-\series default
- this change may impact either optimality of results or even correctness
- of the algorithm.
+ have been modified, and we worry that this change may impact either optimality
+ of results or even correctness of the algorithm.
  Once the size of the matching is increased (i.e.
  once the augmenting path is found), new cells are matched or existing unmatched
 , thus some weights are contextualized and some are uncontextualized.
@@ -4125,7 +4121,7 @@ key "murty_optimizing"
 \size footnotesize
 3) Merge all of top-k solutions found in step 2.1.
  
-\color red
+\color blue
 Complexity: 
 \begin_inset Formula $\Theta(n^{2}m)+C*k*(n-1)*\Theta(nm)=\Theta(Ck*n^{2}m)$
 \end_inset
