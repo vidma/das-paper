@@ -4001,7 +4001,7 @@ worry that
  Once the size of the matching is increased (i.e.
  once the augmenting path is found), new cells are matched or existing unmatched
 , thus some weights are contextualized and some are uncontextualized.
- The problem is that this unmatching 
+ The problem is that unmatching 
 \begin_inset Note Note
 status open
 
@@ -4014,12 +4014,13 @@ up to N-1
 
 \end_inset
 
- of earlier selected cells (edges in graph formulation), may lead to uncontextua
-lization of some cells earlier selected as matches, and qualifying them
- as not admissible anymore [because it's weight has decreased/cost increased],
- consequently leading to violation of some of the algorithm's assumptions,
+ a earlier selected cell, may lead to uncontextualization of some cells
+ earlier selected as matches, and qualifying them as not admissible anymore
+ (because of uncontextualization, their weight has decreased).
+ This may consequently lead to violation of some of algorithm's assumptions,
  that 1) once the cell becomes admissible it stays so, and 2) that each
  iteration increases the size of matching by at least one.
+ Thus, we suggest more investigation is needed.
 \end_layout
 
 \begin_layout Standard
@@ -4033,20 +4034,35 @@ We are not aware of any method allowing to efficiently compute optimal top-k
 if the number of all contextualization permutations is low.
  
 \emph default
-As this is out of scope of this work, only the brief idea is presented:
+As this is out of scope of this work, only the brief idea is provided:
 \end_layout
 
 \begin_layout Standard
 
 \size footnotesize
-1) enumerate over all contextualization possibilities (in depth-first order
- to reuse matrix modifications)
+1) solve once the problem without contextualizations, 
+\begin_inset Formula $\Theta(n^{2}m)$
+\end_inset
+
+.
+ The result will be used in later steps.
 \end_layout
 
 \begin_layout Standard
 
 \size footnotesize
-2) then use Murty's
+2) enumerate over all of 
+\begin_inset Formula $C$
+\end_inset
+
+ contextualization possibilities (in depth-first order to reuse matrix modificat
+ions)
+\end_layout
+
+\begin_layout Standard
+
+\size footnotesize
+2.1) then use Murty's
 \begin_inset CommandInset citation
 LatexCommand cite
 key "murty_ranked"
@@ -4054,7 +4070,7 @@ key "murty_ranked"
 \end_inset
 
  algorithm to get top-k results over contextualized cost-matrix.
- In Murty's, to get each additional best result, call Munkres to solve 
+ To get each of top-k results, it calls Munkres to solve 
 \begin_inset Formula $n-1$
 \end_inset
 
@@ -4087,14 +4103,13 @@ key "munkres_dynamic"
 
 \end_inset
 
-, the sub-problems can be solved reusing older sub-solutions, costing only
- 
+, these sub-problems can reuse older solutions, costing only 
 \begin_inset Formula $\Theta(nm)$
 \end_inset
 
  per modified matrix line.
- Further, it is known that heuristics such as ordering sub-solutions, can
- greatly improve expected run time of Murthy's algorithm
+ Further, it is known that heuristics such as ordering of sub-solutions,
+ can greatly improve the expected run time of Murthy's algorithm
 \begin_inset CommandInset citation
 LatexCommand cite
 key "murty_optimizing"
@@ -4108,7 +4123,14 @@ key "murty_optimizing"
 \begin_layout Standard
 
 \size footnotesize
-3) Merge the top-k solutions found in step 2 over each of the contextualizations
+3) Merge all of top-k solutions found in step 2.1.
+ 
+\color red
+Complexity: 
+\begin_inset Formula $\Theta(n^{2}m)+C*k*(n-1)*\Theta(nm)=\Theta(Ck*n^{2}m)$
+\end_inset
+
+ 
 \end_layout
 
 \begin_layout Section
