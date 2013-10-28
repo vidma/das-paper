@@ -166,7 +166,6 @@ $^3$
 \end_layout
 
 \begin_layout Standard
-
 \begin_inset ERT
 status open
 
@@ -179,8 +178,6 @@ vspace{-0.1cm}
 
 \end_inset
 
-
-\lang english
 
 \begin_inset ERT
 status open
@@ -195,7 +192,6 @@ address{on  behalf of the CMS Collaboration}
 \end_inset
 
 
-
 \begin_inset ERT
 status open
 
@@ -208,8 +204,6 @@ vspace{0.1cm}
 
 \end_inset
 
-
-\lang english
 
 \begin_inset ERT
 status open
@@ -1469,8 +1463,6 @@ status open
 
 \begin_layout Plain Layout
 
-\family typewriter
-\size scriptsize
 
 \backslash
 vspace{0.2cm}
@@ -4041,7 +4033,7 @@ Discussion:
 \begin_layout Subsection
 
 \lang british
-The basic Assignment Problem
+The standard Assignment Problem
 \end_layout
 
 \begin_layout Standard
@@ -4151,7 +4143,17 @@ solve
  unweighted bipartite assignments: starting with an empty matching, find
  an augmenting path to increase the size of matching - new edges are selected
  or existing deselected along the path; if no augmenting path exist, loosen
- the constraints on the weights
+ the constraints on the weights 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Mention Murty: To list top-k best solutions ...
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -4174,11 +4176,31 @@ vspace{-0.5cm}
 
 \lang british
 Supporting the Contextualizations
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\lang british
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$^2$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
-
-\color blue
 In 
 \lang british
 Keymantic 
@@ -4189,11 +4211,34 @@ key "keymantic_kws_metadata_bergamaschi2011,keymantic10"
 \end_inset
 
 , to support the contextualizations, some internal steps of Munkres algorithm
- have been modified, and we worry that this change may impact either optimality
- of results or even correctness of the algorithm.
- Once the size of the matching is increased (i.e.
+ have been modified.
+ When the size of the matching is increased (i.e.
+ an augmenting path is found), the newly matched cells are contextualized,
+ while the newly unmatched are uncontextualized.
+ The (un)contextualization updates weights of the dependent cells.
+\end_layout
+
+\begin_layout Standard
+
+\color blue
+\lang british
+However, we worry that this change may impact either optimality of results
+ or even correctness of the algorithm.
+ 
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+
+\color blue
+\lang british
+Once the size of the matching is increased (i.e.
  once the augmenting path is found), new cells are matched or existing unmatched
-, thus some weights are contextualized and some are uncontextualized.
+, thus some weights are contextualized and some are uncontextualized
+\end_layout
+
+\end_inset
+
  The problem is that unmatching
 \begin_inset Note Note
 status open
@@ -4208,30 +4253,48 @@ up to N-1
 \end_inset
 
  a currently matched cell, may lead to uncontextualization of some other
- cells currently matched cells, possibly making them not admissible anymore
- (because of uncontextualization, their weight has decreased).
+ currently matched cells, possibly making them not admissible anymore (because
+ of uncontextualization, their weight has decreased).
  Consequently, this may lead to violation of some of algorithm's assumptions,
  such as (i) once the cell becomes admissible it stays so, or (ii) that
  each iteration increases the size of matching by at least one.
- Thus, we suggest more investigation is needed.
+ Thus, we suggest that more investigation is needed.
+\begin_inset Marginal
+status open
+
+\begin_layout Plain Layout
+
+\series bold
+\color blue
+\lang british
+add references???
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
 
 \lang british
 We are not aware of any method allowing to efficiently compute optimal top-k
- solutions to this problem extended with contextualizations.
- But, at least, we are able to propose a method to efficiently compute the
- top-k optimal solutions 
-\emph on
-if the number of all contextualization permutations is 
-\emph default
-low.
- As this is out of scope of this work, only a brief idea is provided.
- This is based on simple observation that similarities between the contextualize
-d cost matrices allow to reuse earlier sub-solutions instead of recomputing
- each of the assignments from scratch.
+ solutions to this extended problem.
+ But, 
+\color red
+the task is easier
+\color inherit
  
+\emph on
+if the number of all contextualization possibilities is low
+\emph default
+.
+ One could simply enumerate over all of the possibilities, and combine the
+ solutions to the standard assignment problem.
+ Still, it is worth observing that in this special case there exist large
+ similarities between the contextualized cost matrices, and the sub-solutions
+ to the shared parts can be reused.
+ As this is out of scope of this work, only a brief idea is provided:
 \end_layout
 
 \begin_layout Standard
@@ -4254,8 +4317,8 @@ d cost matrices allow to reuse earlier sub-solutions instead of recomputing
 \begin_inset Formula $C$
 \end_inset
 
- contextualization possibilities (in depth-first order to reuse matrix modificat
-ions)
+ contextualization possibilities (in depth-first order, to reuse matrix
+ modifications)
 \end_layout
 
 \begin_layout Standard
@@ -4336,7 +4399,7 @@ Complexity:
 \begin_inset Formula $C*k*(n-1)*\Theta(n^{2}m)=\Theta(Ck*n^{3}m)$
 \end_inset
 
- if running Murty's over each possible contextualization.
+ if simply running Murty's over each possible contextualization.
 \end_layout
 
 \begin_layout Section
