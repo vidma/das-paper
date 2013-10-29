@@ -1781,7 +1781,7 @@ The components of our keyword search system
 \end_layout
 
 \begin_layout Subsection
-Tokenization (stage 1)
+Tokenization (step 1)
 \end_layout
 
 \begin_layout Standard
@@ -1817,9 +1817,9 @@ nevent
 \end_layout
 
 \begin_layout Subsection
-Scoring individual keywords
+Entry point generation: scoring individual keywords
 \lang british
- (stage 2)
+ (step 2)
 \begin_inset CommandInset label
 LatexCommand label
 name "sub:Matching-keywords"
@@ -2060,16 +2060,16 @@ multi-fielded document
 \begin_inset Quotes erd
 \end_inset
 
- containing: field's technical name, its parent, its base-name, and human
- readable form if exists.
- To find the matches, we query the IR library for each chunk of k-nearby
+ containing: field's technical name, its parent, its base-name, and its
+ title if one exists.
+ To find the matches, the IR engine is queried for each chunk of k-nearby
  keywords (using 
 \begin_inset Formula $k\leq4$
 \end_inset
 
 
 \begin_inset Note Note
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -2089,8 +2089,8 @@ document fields
 \begin_inset Quotes erd
 \end_inset
 
- are assigned different weights and full phrase matches are scored higher.
- Finally, the IR score is used directly as a score for the generated match.
+ are assigned different weights and phrase matches are scored higher.
+ Finally, the IR score is directly used as a score for the generated match.
 \begin_inset Note Note
 status collapsed
 
@@ -2145,13 +2145,13 @@ name "sub:Ranking-function"
 
 \end_inset
 
- (stage 3)
+ (step 3)
 \end_layout
 
 \begin_layout Standard
 
 \lang british
-At this stage, different combinations of the entry points are explored and
+At this step, different combinations of the entry points are explored and
  ranked.
  The final score is obtained by combining the scores of individual keywords
 \lang english
@@ -2584,7 +2584,7 @@ Implementation details
 
 \begin_layout Standard
 Currently the ranker is implemented as exhaustive search with early pruning
- to remove the suggestions not supported by the services.
+ of suggestions not supported by the services.
  Being implemented in 
 \emph on
 cython
@@ -2740,16 +2740,10 @@ key "keymantic_kws_metadata_bergamaschi2011,keymantic10"
  answers keyword queries over relational databases with limited access to
  the data instances.
  First, individual keyword matches are scored as entry points using similar
- techniques as we did
-\begin_inset Marginal
-status open
-
-\begin_layout Plain Layout
-
-\series bold
-\lang british
-as used by us?!
-\end_layout
+ techniques as presented in section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Matching-keywords"
 
 \end_inset
 
@@ -2758,15 +2752,8 @@ as used by us?!
 \series bold
 , 
 \series default
-they consider the problem of 
-\begin_inset Quotes eld
-\end_inset
-
-weighted bipartite matching
-\begin_inset Quotes erd
-\end_inset
-
- (of keywords into their tags) extended with weight contextualization
+they consider the assignment problem (assigning tags to keywords) extended
+ with weight contextualization
 \begin_inset Foot
 status open
 
@@ -2780,9 +2767,15 @@ i.e.
 
 \end_inset
 
+, which is discussed in section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Discussion:-Assignment-Problem"
+
+\end_inset
+
 .
- Finally, the resulting labels are interpreted as SQL queries and presented
- to users.
+ The resulting labels are interpreted as SQL queries and presented to users.
 
 \color red
  
@@ -2811,8 +2804,8 @@ key "bergamaschi2011hidden"
 
 \end_inset
 
- took a different approach to the problem of Keymantic, with the goal to
- incorporate users feedback.
+ took a different approach to the earlier problem, with the goal to incorporate
+ users feedback.
  It uses a sequence tagger based on Hidden Markov Model (HMM)
 \begin_inset CommandInset nomenclature
 LatexCommand nomenclature
@@ -3385,7 +3378,14 @@ it seems it was summing the scores (no log()!) Weighted-bipartite matching
 \begin_layout Section
 Discussion:
 \lang british
- Assignment Problem extended with Contextualizations
+ Assignment problem with contextualizations
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Discussion:-Assignment-Problem"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
@@ -3428,7 +3428,11 @@ x
 \lang british
 , 
 \emph default
-the Assignment Problem 
+the 
+\emph on
+assignment problem,
+\emph default
+ reformulated for keyword search, 
 \lang english
 asks to find a maximum
 \emph on
@@ -3441,13 +3445,13 @@ asks to find a maximum
 \lang english
  
 \series default
-to maximize the sum of chosen weights such that each keyword is assigned
- to one tag, and each tag is chosen no more than once.
+to maximize the sum of weights such that each keyword is assigned to one
+ tag, and each tag is chosen no more than once.
  This can be efficiently solved in 
 \begin_inset Formula $\Theta(n^{2}m)$
 \end_inset
 
- by well-known Munkres algorithm.
+ by Munkres algorithm.
  In short, it splits the assignment problem into two easier ones (see 
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -3843,6 +3847,9 @@ key "murty_optimizing"
 \begin_inset Newline newline
 \end_inset
 
+
+\size default
+\color inherit
 Assuming that each tag assignment impacts weights in at most one line, we
  get complexity of 
 \begin_inset Formula $\Theta(n^{2}m)+C*k*(n-1)*\Theta(nm)=\Theta(Ck*n^{2}m)$
@@ -3853,7 +3860,7 @@ ties:
 \begin_inset Formula $C*k*(n-1)*\Theta(n^{2}m)=\Theta(Ck*n^{3}m)$
 \end_inset
 
- 
+.
 \end_layout
 
 \begin_layout Section
@@ -3989,7 +3996,7 @@ Google Fusion Tables
  Whereas, availability of user-friendly interfaces is becoming an increasingly
  important issue.
  Future challenges may include answering the queries over much larger number
- of data tables or data services and answering the more complex queries
+ of data tables and data services, and answering the more complex queries
  than considered by us.
 \begin_inset Note Note
 status collapsed
