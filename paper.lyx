@@ -1606,15 +1606,15 @@ reference "fig:Autocompletion-prototype"
 \end_inset
 
 ).
- This is implemented on top of CodeMirror's javascript-based 
-\begin_inset Quotes eld
+ This is implemented on top of CodeMirror
+\begin_inset CommandInset citation
+LatexCommand cite
+key "codemirror"
+
 \end_inset
 
-source-code editor
-\begin_inset Quotes erd
-\end_inset
-
- library implementing a custom parser and autocompletion routines.
+, a JavaScript-based versatile text-editor, implementing a custom parser
+ and autocompletion routines.
 \end_layout
 
 \begin_layout Standard
@@ -2041,6 +2041,13 @@ We also need to identify multi-word keyword chunks corresponding to names
 \emph on
 whoosh
 \emph default
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "whoosh"
+
+\end_inset
+
 , an Information Retrieval (IR) library, where for each
 \color blue
  
