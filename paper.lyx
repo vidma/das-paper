@@ -3534,7 +3534,8 @@ key "murty_ranked"
 \begin_inset Formula $\Theta(kn^{3}m)$
 \end_inset
 
-: for each additional result, which involves solving 
+.
+ To get each additional result, it involves solving 
 \begin_inset Formula $n-1$
 \end_inset
 
