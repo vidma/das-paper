@@ -109,7 +109,7 @@ $^1$
 
 \end_inset
 
- and Valentin Kuznetsov
+, Valentin Kuznetsov
 \begin_inset ERT
 status open
 
@@ -120,23 +120,13 @@ $^2$
 
 \end_inset
 
- 
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-and Robert Gwadera
+ and Robert Gwadera
 \begin_inset ERT
 status open
 
 \begin_layout Plain Layout
 
 $^3$
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \end_inset
@@ -232,10 +222,6 @@ address{$^2$Cornell University, USA}
 \end_inset
 
 
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
 \begin_inset ERT
 status open
 
@@ -244,11 +230,6 @@ status open
 
 \backslash
 address{$^3$École Polytechnique Fédérale de Lausanne, Switzerland}
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \end_inset
@@ -2680,12 +2661,20 @@ See next sections for details.
 
 \begin_layout Section
 Related works
-\end_layout
+\lang british
 
-\begin_layout Subsection
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
 
 \lang british
 Keyword search over data-services
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -3561,25 +3550,40 @@ Contextualization
 \begin_inset Formula $kw_{i}$
 \end_inset
 
- is more likely if it is nearby a related 
+ is more likely if its nearby keyword has a related 
 \begin_inset Formula $tag_{y}$
 \end_inset
 
 .
 
 \series default
- In 
+ 
+\end_layout
+
+\begin_layout Standard
+
 \lang british
-Keymantic 
+To support this in Keymantic
 \begin_inset CommandInset citation
 LatexCommand citep
 key "keymantic_kws_metadata_bergamaschi2011,keymantic10"
 
 \end_inset
 
-, to support the contextualization, some internal steps of Munkres algorithm
- have been modified.
- When the size of the matching is increased
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\lang british
+ the contextualization
+\end_layout
+
+\end_inset
+
+, some internal steps of Munkres algorithm were modified.
+ When size of the matching is increased
 \begin_inset Note Note
 status collapsed
 
@@ -3592,13 +3596,12 @@ status collapsed
 
 \end_inset
 
-, the newly matched cells are contextualized, while the newly unmatched
- are uncontextualized; both triggering weight updates of the dependent cells.
+, the newly matched cells are contextualized, while the unmatched ones are
+ uncontextualized; this trigger weight updates in the dependent cells.
 \end_layout
 
 \begin_layout Standard
 
-\color blue
 \lang british
 However, we worry that this change may impact either optimality of results
  or even correctness of the algorithm.
@@ -3606,7 +3609,7 @@ However, we worry that this change may impact either optimality of results
 alization of some other currently matched cells, possibly making them not
  admissible anymore (because of uncontextualization, their weight has decreased).
  Consequently, this may lead to violation of some of algorithm's assumptions,
- such as (i) once the cell becomes admissible it stays so, or (ii) that
+ such as: (i) once the cell becomes admissible it stays so, or (ii) that
  each iteration increases the size of matching by at least one.
  Thus, we suggest that more investigation is needed.
 \begin_inset Marginal
@@ -3615,7 +3618,6 @@ status open
 \begin_layout Plain Layout
 
 \series bold
-\color blue
 \lang british
 add references???
 \end_layout
@@ -3787,16 +3789,21 @@ key "murty_optimizing"
  Merge all of the top-k solutions found in step 2.1.
  
 \color blue
-Complexity: 
+
+\begin_inset Newline newline
+\end_inset
+
+Assuming that each tag assignment impacts weights in at most one line, we
+ get complexity of 
 \begin_inset Formula $\Theta(n^{2}m)+C*k*(n-1)*\Theta(nm)=\Theta(Ck*n^{2}m)$
 \end_inset
 
- cf.
- 
+, which is better than simply running Murty over all contextualization possibili
+ties: 
 \begin_inset Formula $C*k*(n-1)*\Theta(n^{2}m)=\Theta(Ck*n^{3}m)$
 \end_inset
 
- if simply running Murty's over each possible contextualization.
+ 
 \end_layout
 
 \begin_layout Section
@@ -3880,9 +3887,20 @@ key "keymantic10"
 
 \end_inset
 
- 
-\color blue
-Also we have opened up a couple of issues for further discussion.
+ Also we have opened up a couple of issues for further discussion.
+\begin_inset Marginal
+status open
+
+\begin_layout Plain Layout
+
+\series bold
+\lang british
+improve?
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -3938,13 +3956,14 @@ Further, if compared to the other fields such as searching the relational
 \end_inset
 
 
-\end_layout
+\begin_inset Note Note
+status collapsed
 
 \begin_layout Section*
 Acknowledgments
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 Part of this work was conducted as a master thesis project between 
 \emph on
 École Polytechnique Fédérale de Lausanne
@@ -3954,7 +3973,7 @@ Part of this work was conducted as a master thesis project between
 CMS Experiment, CERN
 \emph default
 .
- The first author is thankful to Robert Gwadera who supervised the project
+ The first author is thankful to Robert Gwadera, who supervised the project,
  for his valuable advice.
 \lang british
 
@@ -4801,6 +4820,11 @@ top-K bipartite matchings (with low number of contextualizations)
 \end_inset
 
 Can we further improve over this?
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
