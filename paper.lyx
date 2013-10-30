@@ -1817,7 +1817,7 @@ nevent
 \end_layout
 
 \begin_layout Subsection
-Entry point generation: scoring individual keywords
+Entry point generation
 \lang british
  (step 2)
 \begin_inset CommandInset label
@@ -1827,12 +1827,22 @@ name "sub:Matching-keywords"
 \end_inset
 
 
+\begin_inset Note Note
+status open
+
+\begin_layout Subsection
+: scoring individual keywords-- add description?
 \end_layout
 
-\begin_layout Paragraph*
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
 
 \lang british
-Matching the value terms 
+Matching value terms 
 \end_layout
 
 \begin_layout Standard
@@ -1881,10 +1891,10 @@ vspace{-0.4cm}
 
 \end_layout
 
-\begin_layout Paragraph*
+\begin_layout Subsubsection
 
 \lang british
-Matching the schema terms
+Matching schema terms
 \end_layout
 
 \begin_layout Standard
@@ -1920,7 +1930,7 @@ status open
 
 \end_inset
 
-we use a combination of these
+We use a combination of these
 \begin_inset Note Note
 status open
 
@@ -2024,7 +2034,7 @@ vspace{-0.3cm}
 
 \end_layout
 
-\begin_layout Paragraph
+\begin_layout Subsubsection
 
 \lang british
 Matching names of fields in service outputs
@@ -3682,11 +3692,39 @@ add references???
 
 \end_layout
 
+\begin_layout Subsection
+
+\lang british
+Solution for low number of contextualizations
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\lang british
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$^2$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Standard
 
 \lang british
 We are not aware of any method allowing to compute the top-k optimal solutions
- efficiently.
+ efficiently to the earlier problem.
  Fortunately, the problem is simpler 
 \emph on
 if the number of all contextualization possibilities is low
