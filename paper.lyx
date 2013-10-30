@@ -336,7 +336,7 @@ Virtual data integration provides a coherent interface for querying heterogeneou
 s data sources (e.g., web services, proprietary systems) with minimum upfront
  effort.
  Still, this requires its users to learn the query language and to get acquainte
-d with data organization, which may pose problems even to proficient users.
+d with data organization which may pose problems even to proficient users.
  We present a keyword search system, which proposes a ranked list of structured
  queries along with their explanations.
  It operates mainly on the metadata, such as the constraints on inputs accepted
@@ -379,9 +379,20 @@ status collapsed
 
 \lang british
 c.f.
- publish-subscribe is not applicable to proprietary (reluctant to change)
- systems, data-warehousing is too complex when large portions of data are
- volatile or when only limited interfaces are provided by services.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+Publish--subscribe
+\end_layout
+
+\end_inset
+
+ is not applicable to proprietary (reluctant to change) systems; data-warehousin
+g is too complex when large portions of data are volatile or when only limited
+ interfaces are provided by services.
 \end_layout
 
 \end_inset
@@ -390,19 +401,19 @@ c.f.
 \lang english
 integrate heterogeneous data sources
 \lang british
- where data physically stays at its origin, and is requested only on demand.
+ where data physically stays at its origin and is requested only on demand.
  It works as follows: (i) queries are interpreted and sent to relevant services;
  (ii) the corresponding responses are consolidated eliminating inconsistencies
  in data formats and entity naming, and (iii) the responses are finally
  combined.
  However, this approach forces the users 
 \lang english
-to learn the query language and to get familiarized with data organization,
+to learn the query language and to get familiar with data organization,
  which is often not straightforward
 \color blue
 , 
 \color inherit
-especially without direct access to the data at the services.
+especially without a direct access to the data at the services.
 \color red
 \lang british
 
@@ -454,12 +465,12 @@ off-line
 \begin_inset Quotes erd
 \end_inset
 
- using metadata such as constraints on inputs accepted by services.
+ using metadata, such as constraints on inputs accepted by services.
  It was developed at the 
 \emph on
 CMS Experiment, CERN,
 \emph default
- where it makes part of a data integration tool called 
+ where it a makes part of a data integration tool called 
 \emph on
 Data Aggregation System (DAS
 \begin_inset CommandInset nomenclature
@@ -494,13 +505,13 @@ and covers some specific use-cases
 \end_layout
 
 \begin_layout Section
-DAS - a tool for virtual data integration
+Data Aggregation System: a tool for virtual data integration
 \end_layout
 
 \begin_layout Standard
 
 \lang british
-DAS integrates several services, where the largest stores 700GB of relational
+DAS integrates several services, where the largest stores 700 GB of relational
  data.
  DAS has no predefined schema, thus only minimal service mappings are needed
  to describe differences among the services.
@@ -508,9 +519,9 @@ DAS integrates several services, where the largest stores 700GB of relational
 \emph on
  
 \emph default
-uses simple structured queries formed of an entity to be retrieved and some
- selection criteria.
- Optionally, the results can be further filtered, sorted or aggregated.
+uses simple structured queries, formed of an entity to be retrieved, and
+ some selection criteria.
+ Optionally, the results can be further filtered, sorted, or aggregated.
 \end_layout
 
 \begin_layout Standard
@@ -582,9 +593,9 @@ vspace{-0.5cm}
 
 \size scriptsize
 \lang british
-a DAS query: 
+A DAS query: 
 \emph on
-get average size of datasets matching *RelVal* with more than 1000 events
+get an average size of datasets matching *RelVal* with more than 1000 events
 \size default
 
 \begin_inset CommandInset label
@@ -621,7 +632,7 @@ vspace{-0.5cm}
 
 \end_inset
 
-As seen in Figure 
+As be seen in Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:DAS-query-example"
@@ -630,7 +641,7 @@ reference "fig:DAS-query-example"
 
 , DAS queries closely match the physical execution flow demanding users
  to be aware of it (motivated by large amounts of data the services manage).
- Keyword search relaxes this need of knowing the internals.
+ The keyword search relaxes this need of knowing the internals.
 \end_layout
 
 \begin_layout Section
@@ -727,7 +738,7 @@ description "keyword query\\\\"
 \begin_inset Formula $kwq=\left(kw_{1},kw_{2},..,kw_{n}\right)$
 \end_inset
 
-, we are interested in translating it into a ranked list of best matching
+, we are interested in translating it into a ranked list of the best-matching
  structured queries.
  We are given the following metadata:
 \end_layout
@@ -779,7 +790,7 @@ description "values of entity attributes (that could be input parameters of data
 
 \end_inset
 
-: for some fields a list of values; but for most, only 
+: for some fields a list of values; but for the most only the 
 \emph on
 
 \begin_inset Note Note
@@ -937,7 +948,7 @@ joins
 \begin_layout Section
 
 \lang british
-Overview of our solution
+Overview of Our Solution
 \end_layout
 
 \begin_layout Subsection
@@ -1074,14 +1085,14 @@ reference "fig:query-translation-steps"
 
 \end_inset
 
-In the first step, the query is cleaned up and tokenized identifying any
+In the first step the query is cleaned up and tokenized identifying any
  quoted tokens or other structural patterns.
 \end_layout
 
 \begin_layout Standard
 
 \lang british
-In the second step, employing a number of entity matching techniques, the
+In the second step by employing a number of entity matching techniques the
  
 \begin_inset Quotes eld
 \end_inset
@@ -1096,7 +1107,7 @@ entry points
 
  are identified: for each keyword
 \begin_inset Note Note
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -1106,24 +1117,23 @@ status open
 
 \end_inset
 
-, we obtain a list of schema and value
+ we obtain a list of schema and value
 \series bold
  
 \series default
-terms it may correspond to and a rough estimate of the likelihood.
- 
+terms and a rough estimate of the likelihood.
 \end_layout
 
 \begin_layout Standard
 
 \lang british
-In the third step, different permutations of 
+In the third step different permutations of 
 \emph on
 entry points
 \emph default
  are 
 \begin_inset Note Note
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -1135,7 +1145,7 @@ evaluated and
 
  ranked by
 \begin_inset Marginal
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -1171,11 +1181,8 @@ query interpretations
 \end_inset
 
 .
- In the same step, the 
-\emph on
-interpretations
-\emph default
- not compatible with the data integration system are pruned out.
+ In the same step, interpretations that are not compatible with the data
+ integration system are pruned out.
 \end_layout
 
 \begin_layout Standard
@@ -1457,7 +1464,7 @@ vspace{-1cm}
 
 \end_inset
 
-Notice that in the token matchings above, 
+Notice that in the token matchings above 
 \family typewriter
 \size footnotesize
 \emph on
@@ -1474,7 +1481,7 @@ RelVal
 \size default
 \emph default
  are ambiguous.
- Lastly, a ranked list of query suggestions is obtained (see section 
+ Lastly, a ranked list of query suggestions is obtained (see Section 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sub:Ranking-function"
@@ -1554,7 +1561,7 @@ vspace{-0.5cm}
 \begin_layout Plain Layout
 
 \lang british
-Results of keyword search: structured query suggestions
+Results of a keyword search: structured query suggestions
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:query-results"
@@ -1597,8 +1604,8 @@ Helping users to type queries: autocompletion prototype
 \end_layout
 
 \begin_layout Standard
-To aid users in typing the queries, live context-dependent suggestions are
- shown, and query coloring is provided (see Figure 
+To aid users in typing the queries live context-dependent suggestions are
+ shown and a query coloring is provided (see Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Autocompletion-prototype"
@@ -1606,15 +1613,14 @@ reference "fig:Autocompletion-prototype"
 \end_inset
 
 ).
- This is implemented on top of CodeMirror
+ The autocompletion is based on CodeMirror
 \begin_inset CommandInset citation
 LatexCommand cite
 key "codemirror"
 
 \end_inset
 
-, a JavaScript-based versatile text-editor, implementing a custom parser
- and autocompletion routines.
+, a JavaScript-based versatile text-editor.
 \end_layout
 
 \begin_layout Standard
@@ -1777,7 +1783,7 @@ vspace{-0.8cm}
 \end_layout
 
 \begin_layout Section
-The components of our keyword search system
+The Components of Our Keyword Search System
 \end_layout
 
 \begin_layout Subsection
@@ -1789,7 +1795,7 @@ Tokenization (step 1)
 \lang british
 At first, the keyword query is standardized (e.g., removing extra spaces,
  standardizing date formats).
- Next, the query is tokenized, recognizing phrases in quotes and operator
+ Next, the query is tokenized recognizing phrases in quotes and operator
  expressions (e.g.
 \family typewriter
 \size footnotesize
@@ -1812,8 +1818,8 @@ nevent
 \size default
 \emph default
 ).
- This is accomplished by splitting the query on a regular-expression pattern
- defining all such cases.
+ This is accomplished by splitting the query based on a regular-expression
+ pattern.
 \end_layout
 
 \begin_layout Subsection
@@ -1865,17 +1871,17 @@ In this stage possible keyword interpretations are identified and assigned
 \end_inset
 
 For some fields, a list of possible values is available.
- If so, several cases are distinguished: full match, partial match, and
- matches containing wildcards.
- Otherwise, regular expressions describing inputs accepted by services are
- used, distinguishing multiple levels of accuracy among them.
+ If so, several cases are distinguished: a full match, a partial match,
+ and a match containing wildcards.
+ Otherwise, regular expressions constraining inputs, accepted by services,
+ are used; these are divided into multiple levels of accuracy.
 
 \color blue
  
 \color inherit
 Also, we down-rank the unlikely interpretations, where entity names are
- matched as values (e.g., entity name 'block' is contained within values of
- dataset).
+ matched as values (e.g., an entity name `block' is contained within values
+ of dataset).
 \begin_inset ERT
 status open
 
@@ -1954,7 +1960,7 @@ quite trustful
 
 \end_inset
 
- metrics: full, lemma, and stem matches; and a stem match within a small
+ metrics: full, lemma, and stem matches, and a stem match within a small
  string edit-distance (in order of decreasing weights).
 \begin_inset Note Note
 status collapsed
@@ -2043,11 +2049,23 @@ Matching names of fields in service outputs
 \begin_layout Standard
 
 \lang british
-We also need to identify multi-word keyword chunks corresponding to names
- of fields in query results: many of these field names are unclean, technical
- names, with irrelevant and common terms, as they are obtained directly
- from service responses in JSON/XML.
- Thus, we employ 
+We need to identify multiword keyword chunks corresponding to names of the
+ fields in query results: many of these field names are unclean, technical
+ names, with irrelevant and common terms as they are obtained directly from
+ service responses in JSON/XML.
+ Thus
+\begin_inset Marginal
+status collapsed
+
+\begin_layout Plain Layout
+
+\series bold
+thus->therefore?
+\end_layout
+
+\end_inset
+
+, we employ 
 \emph on
 whoosh
 \emph default
@@ -2066,11 +2084,11 @@ field in service outputs we create a
 \begin_inset Quotes eld
 \end_inset
 
-multi-fielded document
+multifielded document
 \begin_inset Quotes erd
 \end_inset
 
- containing: field's technical name, its parent, its base-name, and its
+ which contains field's technical name, its parent, its base-name, and its
  title if one exists.
  To find the matches, the IR engine is queried for each chunk of k-nearby
  keywords (using 
@@ -2161,7 +2179,7 @@ name "sub:Ranking-function"
 \begin_layout Standard
 
 \lang british
-At this step, different combinations of the entry points are explored and
+In this step different combinations of the entry points are explored and
  ranked.
  The final score is obtained by combining the scores of individual keywords
 \lang english
@@ -2178,8 +2196,8 @@ At this step, different combinations of the entry points are explored and
 .
 
 \lang english
- We experimented with two scoring functions: (i) the average of scores as
- used in 
+ We experimented with two scoring functions: (i) the average of scores,
+ as used in 
 \emph on
 Keymantic
 \emph default
@@ -2196,13 +2214,9 @@ d).
 \series bold
  
 \series default
-seemed to perform almost equally well
-\series bold
-,
-\series default
- with the probabilistic approach being more sensitive to inaccuracies in
- entry point scoring, but it became clearly better when the accuracy of
- entry point generation was improved.
+seemed to perform almost equally well: the probabilistic approach seemed
+ more sensitive to inaccuracies in entry point scoring, but it became clearly
+ better when the accuracy of entry point generation was improved.
 \begin_inset Note Note
 status collapsed
 
@@ -2557,8 +2571,7 @@ only stop-words are distinguished now; '(tell|show|display|find) me?' filtered
 
 \lang british
 (i) promote interpretations where the nearby keywords refer to related schema
- terms, e.g.
- entity name and its value
+ terms, e.g., entity name and its value
 \color blue
 
 \begin_inset Marginal
@@ -2575,8 +2588,7 @@ more details?
 
 
 \color inherit
-, and (ii) promote common use-cases, e.g.
- retrieving entity by its 
+, and (ii) promote common use-cases, e.g., retrieving entity by its 
 \begin_inset Quotes eld
 \end_inset
 
@@ -2584,8 +2596,19 @@ primary key
 \begin_inset Quotes erd
 \end_inset
 
-, e.g.
- dataset dataset=*Zmm*
+
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+
+\lang british
+, e.g., dataset dataset=*Zmm*
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsubsection
@@ -2593,8 +2616,8 @@ Implementation details
 \end_layout
 
 \begin_layout Standard
-Currently the ranker is implemented as exhaustive search with early pruning
- of suggestions not supported by the services.
+Currently the ranker is implemented as an exhaustive search with early pruning
+ of suggestions that are not supported by the services.
  Being implemented in 
 \emph on
 cython
@@ -2606,10 +2629,10 @@ key "cython2011_behnel"
 
 \end_inset
 
-, this already gives sufficient performance, often dominated by the entry
+, this already gives a sufficient performance: often dominated by the entry
  points stage.
- There exist more complex alternatives, but this one is the simplest one
- that allows early pruning, unlimited contextualization and listing multiple
+ There exist more complex alternatives, but this one is the simplest that
+ allows early pruning, unlimited contextualization, and listing multiple
  optimal results.
 \begin_inset Note Note
 status collapsed
@@ -2740,7 +2763,7 @@ Keyword search over data-services
 \begin_layout Standard
 
 \lang british
-Keymantic 
+The Keymantic 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "keymantic_kws_metadata_bergamaschi2011,keymantic10"
@@ -2749,21 +2772,21 @@ key "keymantic_kws_metadata_bergamaschi2011,keymantic10"
 
  answers keyword queries over relational databases with limited access to
  the data instances.
- First, individual keyword matches are scored as entry points using similar
- techniques as presented in section 
+ First, individual keyword matches are generated using similar techniques
+ as presented in Section 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sub:Matching-keywords"
 
 \end_inset
 
-, but focusing on less concrete domain than ours.
- Then, to obtain the global ranking
+, but focusing on less specific domain than ours.
+ Second, to obtain the global ranking
 \series bold
-, 
+,
 \series default
-they consider the assignment problem (assigning tags to keywords) extended
- with weight contextualization
+ the assignment problem (assigning tags to keywords) extended with weight
+ contextualization
 \begin_inset Foot
 status open
 
@@ -2777,14 +2800,14 @@ i.e.
 
 \end_inset
 
-, which is discussed in section 
+, which is discussed in Section 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:Discussion:-Assignment-Problem"
 
 \end_inset
 
-.
+, is considered.
  The resulting labels are interpreted as SQL queries and presented to users.
 
 \color red
@@ -2792,9 +2815,9 @@ reference "sec:Discussion:-Assignment-Problem"
 \color inherit
 \lang english
 We noticed that using log-likelihoods instead of just summing the scores
- (as used in Keymantic) gives better ranking quality, especially if the
+ (as used in Keymantic) gives a better ranking quality, especially, if the
  entry point scores are good approximations of the respective likelihoods
- (see section 
+ (see Section 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sub:Ranking-function"
@@ -2807,14 +2830,14 @@ reference "sub:Ranking-function"
 \begin_layout Standard
 
 \lang british
-KEYRY 
+The KEYRY 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "bergamaschi2011hidden"
 
 \end_inset
 
- took a different approach to the earlier problem, with the goal to incorporate
+ took a different approach to the earlier problem allowing to incorporate
  users feedback.
  It uses a sequence tagger based on Hidden Markov Model (HMM)
 \begin_inset CommandInset nomenclature
@@ -2825,7 +2848,7 @@ description "HIdden Markov Model"
 \end_inset
 
 .
- At first, the HMM parameters can be estimated through heuristic rules (e.g.
+ At first, the HMM parameters can be estimated through heuristic rules (e.g.,
  promoting related tags).
  To produce the results, the List-Viterbi 
 \begin_inset CommandInset citation
@@ -2837,7 +2860,7 @@ key "list_viterbi_1994"
  is used to obtain top-k most probable keyword taggings, which are later
  interpreted as SQL queries.
  Once sufficient amount of logs or users' feedback is collected, the HMM
- can be improved through supervised or unsupervised training
+ can be improved through the supervised or unsupervised training
 \begin_inset CommandInset citation
 LatexCommand citep
 key "keymantic_list_viterbi_training_rota2011"
@@ -2845,7 +2868,7 @@ key "keymantic_list_viterbi_training_rota2011"
 \end_inset
 
 .
- The accuracy of this method was comparable to that of Keymantic
+ The accuracy of this method was comparable to that of the Keymantic
 \begin_inset CommandInset citation
 LatexCommand citep
 key "bergamaschi2011hidden"
@@ -2871,10 +2894,13 @@ key "nl_to_dataservices_guerrisi2012natural"
 \lang english
  
 \series default
-focused on answering full-sentence open-domain queries over web-services
+focused on answering full-sentence open-domain queries over the web-services
  using techniques of natural language processing.
- Instead, we focus on closed-domain queries, having fewer linguistic resources,
- and not restricting the input to full-sentences only.
+ Instead, we focus on closed-domain queries without restricting the input
+ to full sentences 
+\series bold
+as little linguistic resources are available.
+\series default
 \color blue
 
 \begin_inset Note Note
@@ -3388,7 +3414,7 @@ it seems it was summing the scores (no log()!) Weighted-bipartite matching
 \begin_layout Section
 Discussion:
 \lang british
- Assignment problem with contextualizations
+ Assignment Problem with contextualizations
 \begin_inset CommandInset label
 LatexCommand label
 name "sec:Discussion:-Assignment-Problem"
@@ -3449,8 +3475,7 @@ asks to find a maximum
 \lang british
  weighted bipartite matching
 \emph default
-, i.e.
-
+, i.e.,
 \series bold
 \lang english
  
@@ -3475,7 +3500,7 @@ key "combinatorial_papadimitriou1998,munkres_cern_rect,munkres_dynamic"
 \begin_layout Enumerate
 
 \size footnotesize
-maintain a set of constraints that restrict the currently admissible matches
+Maintain a set of constraints that restrict the currently admissible matches
 \begin_inset Note Note
 status open
 
@@ -3502,14 +3527,15 @@ cheap enough
 \begin_layout Enumerate
 
 \size footnotesize
-solve 
+Solve 
 \begin_inset Formula $N$
 \end_inset
 
- unweighted bipartite assignments: starting with an empty matching, find
- an augmenting path to increase the size of matching - along the path, the
- state of edges is flipped matching new ones or deselecting the matched
- ones; if no augmenting path exists, loosen the constraints on the weights
+ unweighted bipartite assignments: start with an empty matching, find an
+ augmenting path to increase the size of matching.
+ Along the path, the state of edges is flipped matching new ones or deselecting
+ the matched ones; if no augmenting path exists, loosen the constraints
+ on the weights
 \end_layout
 
 \begin_layout Standard
@@ -3529,11 +3555,11 @@ vspace{-0.2cm}
 \end_layout
 
 \begin_layout Standard
-To list 
+To efficiently list 
 \emph on
 k
 \emph default
- best results efficiently, one can use Murty's
+ best results one can use Murty's
 \begin_inset CommandInset citation
 LatexCommand cite
 key "murty_ranked"
@@ -3604,10 +3630,9 @@ $^2$
 \end_layout
 
 \begin_layout Standard
-Contextualization
+The contextualization
 \series medium
- adds additional interdependencies between the assignments, e.g.
- the 
+ adds additional interdependencies between the assignments, e.g., the 
 \begin_inset Formula $tag_{j}$
 \end_inset
 
@@ -3620,15 +3645,12 @@ Contextualization
 \end_inset
 
 .
-
-\series default
- 
 \end_layout
 
 \begin_layout Standard
 
 \lang british
-To support this in Keymantic
+To support this in the Keymantic
 \begin_inset CommandInset citation
 LatexCommand citep
 key "keymantic_kws_metadata_bergamaschi2011,keymantic10"
@@ -3647,8 +3669,8 @@ status open
 
 \end_inset
 
-, some internal steps of Munkres algorithm were modified.
- When size of the matching is increased
+ some internal steps of Munkres algorithm were modified.
+ When the size of the matching is increased
 \begin_inset Note Note
 status collapsed
 
@@ -3662,21 +3684,21 @@ status collapsed
 \end_inset
 
 , the newly matched cells are contextualized, while the unmatched ones are
- uncontextualized; this trigger weight updates in the dependent cells.
+ uncontextualized: this triggers weight updates in the dependent cells.
 \end_layout
 
 \begin_layout Standard
 
 \lang british
-However, we worry that this change may impact either optimality of results
- or even correctness of the algorithm.
- The problem is that unmatching a currently matched cell, may lead to uncontextu
-alization of some other currently matched cells, possibly making them not
+However, we worry that this change may impact either optimality of its results
+ or correctness of the algorithm.
+ The problem is that unmatching a currently matched cell may lead to uncontextua
+lization of some other currently matched cells, possibly making them not
  admissible anymore (because of uncontextualization, their weight has decreased).
- Consequently, this may lead to violation of some of algorithm's assumptions,
- such as: (i) once the cell becomes admissible it stays so, or (ii) that
- each iteration increases the size of matching by at least one.
- Thus, we suggest that more investigation is needed.
+ Consequently, this may lead to a violation of some of algorithm's assumptions,
+ such as (i) once the cell becomes admissible, it stays so, or (ii) each
+ iteration increases the size of matching by at least one.
+ As a result, we suggest that further investigations are needed.
 \begin_inset Marginal
 status open
 
@@ -3729,35 +3751,35 @@ We are not aware of any method allowing to compute the top-k optimal solutions
 \emph on
 if the number of all contextualization possibilities is low
 \emph default
- - one could simply enumerate over all of the possibilities, and combine
- the solutions to the standard assignment problem.
+: one could simply enumerate all of the possibilities and combine the solutions
+ to the standard assignment problem.
  Still, it is worth observing that, in this special case, there exist large
- similarities between the contextualized cost matrices, and the sub-solutions
+ similarities between the contextualized cost matrices, and the subsolutions
  to the shared parts can be reused.
- As this is out of scope of this work, only a brief idea is provided:
+ As this is out of the scope of this work, only a brief idea is provided:
 \end_layout
 
 \begin_layout Standard
 
 \size footnotesize
 1.
- solve once the problem without contextualizations, 
+ Solve once the problem without contextualizations, 
 \begin_inset Formula $\Theta(n^{2}m)$
 \end_inset
 
 .
- The result will be used in later steps.
+ The result will be used in the later steps.
 \end_layout
 
 \begin_layout Standard
 
 \size footnotesize
 2.
- enumerate over all of 
+ Enumerate all 
 \begin_inset Formula $C$
 \end_inset
 
- contextualization possibilities (in depth-first order, to reuse matrix
+ contextualization possibilities (in the depth-first order, to reuse matrix
  modifications)
 \end_layout
 
@@ -3765,7 +3787,7 @@ if the number of all contextualization possibilities is low
 
 \size footnotesize
 2.1.
- use Murty's
+ Use Murty's
 \begin_inset CommandInset citation
 LatexCommand cite
 key "murty_ranked"
@@ -3863,7 +3885,7 @@ key "munkres_dynamic"
 \begin_inset space ~
 \end_inset
 
-- further, the expected run time of Murthy's algorithm can be considerably
+- further, the expected runtime of Murthy's algorithm can be considerably
  improved
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -3889,8 +3911,8 @@ key "murty_optimizing"
 
 \size default
 \color inherit
-Assuming that each tag assignment impacts weights in at most one line, we
- get complexity of 
+Assuming that each tag assignment may change at most one line in the weight
+ matrix, we get complexity of 
 \begin_inset Formula $\Theta(n^{2}m)+C*k*(n-1)*\Theta(nm)=\Theta(Ck*n^{2}m)$
 \end_inset
 
@@ -3929,10 +3951,10 @@ TODO: Global usefulness.
 
 \series default
 \color inherit
-We have presented an implementation of keyword search over virtual data-service
- integration
+We have presented an implementation of a keyword search over a virtual data-serv
+ice integration
 \begin_inset Note Note
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -3943,11 +3965,14 @@ status open
 
 \end_inset
 
-, adapted to particularities of our specific domain.
- The early users feedback has shown that, in data integration that provide
- only limited access to explore the data, the interactive auto-completion
- can be a successful ingredient in helping the users to compose the semi-structu
-red queries.
+, adapted to the specifics of the 
+\emph on
+CMS
+\emph default
+ domain.
+ The users' feedback has shown that in data integration, which provides
+ only a limited access to explore the data, an interactive autocompletion
+ can be a successful in helping the users to compose semistructured queries.
 \begin_inset Note Note
 status collapsed
 
@@ -3983,7 +4008,14 @@ key "keymantic10"
 
 \end_inset
 
- Also we have opened up a couple of issues for further discussion.
+
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+
+\lang british
+Also we have opened up a couple of issues for further discussion.
 \begin_inset Marginal
 status open
 
@@ -3992,6 +4024,11 @@ status open
 \series bold
 \lang british
 improve?
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -4014,8 +4051,15 @@ status open
 
 \end_inset
 
- is increasing as well as the popularity of data service repositories and
- tools for integrating them (such as the 
+ is increasing as well as the popularity of repositories and tools for integrati
+ng them
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+
+\lang british
+such as the 
 \emph on
 YQL, 
 \emph default
@@ -4031,12 +4075,17 @@ Google Fusion Tables
 \begin_inset Quotes erd
 \end_inset
 
- focusing on regular users instead of developers).
- Whereas, availability of user-friendly interfaces is becoming an increasingly
- important issue.
- Future challenges may include answering the queries over much larger number
+ focusing on regular users instead of developers
+\end_layout
+
+\end_inset
+
+.
+ Whereas, the availability of user-friendly interfaces is becoming an increasing
+ly important issue.
+ Future challenges may include answering the queries over much larger numbers
  of data tables and data services, and answering the more complex queries
- than considered by us.
+ than considered here.
 \begin_inset Note Note
 status collapsed
 
