@@ -22,6 +22,7 @@
 
 %\usepackage[T1]{fontenc}
 %\usepackage[utf8]{inputenc}
+\definecolor{note_grey}{rgb}{0.5, 0.5, 0.5}
 
 
 \AtBeginDocument{
@@ -556,8 +557,8 @@ and covers some specific use-cases
 
 \end_inset
 
- integrates several services, where the largest stores 700 GB of relational
- data.
+ integrates several services at the CMS Experiment, where the largest stores
+ 700 GB of relational data.
  DAS has no predefined schema, thus only minimal service mappings are needed
  to describe differences among the services.
  It
@@ -1665,7 +1666,7 @@ key "codemirror"
 
 \end_inset
 
-, a JavaScript-based versatile text-editor.
+, a versatile JavaScript-based text-editor.
 \end_layout
 
 \begin_layout Standard
@@ -2025,6 +2026,49 @@ status open
 
 \end_inset
 
+In the order of decreasing scores we identify: 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\lang british
+A combination of 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\lang british
+matching
+\end_layout
+
+\end_inset
+
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\lang british
+simple
+\end_layout
+
+\end_inset
+
+ matchers is used:
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\lang british
 We use a combination of these
 \begin_inset Note Note
 status open
@@ -2049,8 +2093,13 @@ quite trustful
 
 \end_inset
 
- metrics: full, lemma, and stem matches, and a stem match within a small
- string edit-distance (in order of decreasing weights).
+ metrics:
+\end_layout
+
+\end_inset
+
+ full, lemma, and stem matches, and a stem match within a small string edit-dist
+ance.
 \begin_inset Note Note
 status collapsed
 
@@ -2139,9 +2188,9 @@ Matching names of fields in service outputs
 
 \lang british
 We need to identify multiword keyword chunks corresponding to names of the
- fields in structured query results: many of these names are unclean, containing
- technical, irrelevant and common terms as they are obtained directly from
- service responses in JSON or XML formats.
+ fields in structured query results: many of these are unclean technical
+ names containing irrelevant or common terms as they are obtained directly
+ from service responses in JSON or XML formats.
  Thus
 \begin_inset Marginal
 status collapsed
@@ -3040,7 +3089,7 @@ key "nl_to_dataservices_guerrisi2012natural"
  
 \series default
 focused on answering full-sentence open-domain queries over the web-services
- using techniques of natural language processing.
+ by using techniques of natural language processing.
  Instead, we focus on closed-domain queries without restricting the input
  to full sentences
 \begin_inset Note Note
@@ -3682,14 +3731,14 @@ cheap enough
 
 \size small
 Solve 
-\begin_inset Formula $N$
+\begin_inset Formula $n$
 \end_inset
 
  unweighted bipartite assignments: start with an empty matching, find an
  augmenting path to increase the size of matching.
- Along the path, the state of edges is flipped matching new ones or deselecting
- the matched ones; if no augmenting path exists, loosen the constraints
- on the weights
+ Along this path, flip the state of edges: match new ones or deselect the
+ matched ones; if no augmenting path exists, loosen the constraints on the
+ weights
 \end_layout
 
 \begin_layout Standard
@@ -3786,16 +3835,29 @@ $^2$
 \begin_layout Standard
 The contextualization
 \series medium
- adds additional interdependencies between the assignments, e.g., the 
-\begin_inset Formula $tag_{j}$
+ adds 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\series medium
+additional
+\end_layout
+
 \end_inset
 
- of a keyword 
+ interdependencies between the assignments, e.g., say keyword 
 \begin_inset Formula $kw_{i}$
 \end_inset
 
- is more likely if its nearby keyword has a related 
-\begin_inset Formula $tag_{y}$
+ was assigned 
+\begin_inset Formula $tag_{i}$
+\end_inset
+
+, then the nearby keywords become more likely to get the tags related to
+ 
+\begin_inset Formula $tag_{i}$
 \end_inset
 
 .
@@ -3990,7 +4052,8 @@ if the number of all contextualization possibilities is low
 : one could simply enumerate all of the possibilities and combine the solutions
  to the standard assignment problem.
  Still, it is worth observing that, in this special case, there exist large
- similarities between the contextualized cost matrices, which may be reused.
+ similarities between the contextualized cost matrices, thus parts of sub-soluti
+ons can be reused.
 \begin_inset Note Note
 status collapsed
 
@@ -4040,7 +4103,7 @@ status open
 
 \size footnotesize
 1.
- Solve once the problem without contextualizations, 
+ Solve the problem without contextualizations once, 
 \begin_inset Formula $\Theta(n^{2}m)$
 \end_inset
 
@@ -4056,8 +4119,32 @@ status open
 \begin_inset Formula $C$
 \end_inset
 
- contextualization possibilities (in the depth-first order, to reuse matrix
- modifications)
+ contextualization possibilities:
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+{
+\backslash
+color{note_grey}(in the depth-first order, to reuse matrix modifications)}
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Plain Layout
