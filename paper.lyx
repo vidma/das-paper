@@ -470,7 +470,15 @@ off-line
 \emph on
 CMS Experiment, CERN,
 \emph default
- where it a makes part of a data integration tool called 
+ where it makes a part of a data integration tool presented in the next
+ section.
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\lang british
+called 
 \emph on
 Data Aggregation System (DAS
 \begin_inset CommandInset nomenclature
@@ -504,6 +512,11 @@ and covers some specific use-cases
 .
 \end_layout
 
+\end_inset
+
+
+\end_layout
+
 \begin_layout Section
 Data Aggregation System: a tool for virtual data integration
 \end_layout
@@ -511,7 +524,38 @@ Data Aggregation System: a tool for virtual data integration
 \begin_layout Standard
 
 \lang british
-DAS integrates several services, where the largest stores 700 GB of relational
+The 
+\emph on
+Data Aggregation System (DAS
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+symbol "DAS"
+description "CMS Data Aggregation System - The EII system used at CMS"
+
+\end_inset
+
+
+\emph default
+)
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Kuznetsov2010,Kuznetsov2011"
+
+\end_inset
+
+
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+
+\lang british
+and covers some specific use-cases
+\end_layout
+
+\end_inset
+
+ integrates several services, where the largest stores 700 GB of relational
  data.
  DAS has no predefined schema, thus only minimal service mappings are needed
  to describe differences among the services.
@@ -532,7 +576,7 @@ lines 0
 placement o
 overhang 0in
 width "45col%"
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -1818,8 +1862,31 @@ nevent
 \size default
 \emph default
 ).
- This is accomplished by splitting the query based on a regular-expression
- pattern.
+ This is accomplished  by splitting the query 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\lang british
+based on
+\end_layout
+
+\end_inset
+
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\lang british
+by
+\end_layout
+
+\end_inset
+
+ using a regular-expression pattern.
 \end_layout
 
 \begin_layout Subsection
@@ -2201,22 +2268,60 @@ In this step different combinations of the entry points are explored and
 \emph on
 Keymantic
 \emph default
-
+ 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "keymantic10"
 
 \end_inset
 
-, and (ii) the sum of log-likelihoods (scores are rough estimations of likelihoo
-d).
- At first the two methods
+, and (ii) the sum of log-likelihoods
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+ (scores are rough estimations of likelihood)
+\end_layout
+
+\end_inset
+
+.
+ At first 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+the two methods
 \series bold
  
 \series default
-seemed to perform almost equally well: the probabilistic approach seemed
- more sensitive to inaccuracies in entry point scoring, but it became clearly
- better when the accuracy of entry point generation was improved.
+seemed to perform almost equally well:
+\end_layout
+
+\end_inset
+
+ the probabilistic approach seemed to be more sensitive to inaccuracies
+ in entry point scoring, but when this 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+accuracy
+\end_layout
+
+\end_inset
+
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+of entry point generation 
+\end_layout
+
+\end_inset
+
+was improved, it became clearly better than the averaging approach.
 \begin_inset Note Note
 status collapsed
 
@@ -2608,7 +2713,7 @@ status collapsed
 
 \end_inset
 
-
+.
 \end_layout
 
 \begin_layout Subsubsection
@@ -2743,7 +2848,7 @@ See next sections for details.
 \end_layout
 
 \begin_layout Section
-Related works
+Related work
 \lang british
 
 \begin_inset Note Note
@@ -2860,7 +2965,7 @@ key "list_viterbi_1994"
  is used to obtain top-k most probable keyword taggings, which are later
  interpreted as SQL queries.
  Once sufficient amount of logs or users' feedback is collected, the HMM
- can be improved through the supervised or unsupervised training
+ can be improved through the supervised or unsupervised training 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "keymantic_list_viterbi_training_rota2011"
@@ -2868,7 +2973,7 @@ key "keymantic_list_viterbi_training_rota2011"
 \end_inset
 
 .
- The accuracy of this method was comparable to that of the Keymantic
+ The accuracy of this method is comparable to that of the Keymantic 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "bergamaschi2011hidden"
@@ -2897,10 +3002,19 @@ key "nl_to_dataservices_guerrisi2012natural"
 focused on answering full-sentence open-domain queries over the web-services
  using techniques of natural language processing.
  Instead, we focus on closed-domain queries without restricting the input
- to full sentences 
+ to full sentences
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+ 
 \series bold
-as little linguistic resources are available.
-\series default
+as little linguistic resources are available
+\end_layout
+
+\end_inset
+
+.
 \color blue
 
 \begin_inset Note Note
@@ -3559,14 +3673,14 @@ To efficiently list
 \emph on
 k
 \emph default
- best results one can use Murty's
+ best results one can use Murty's algorithm 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "murty_ranked"
 
 \end_inset
 
- algorithm running in in 
+ running in in 
 \begin_inset Formula $\Theta(kn^{3}m)$
 \end_inset
 
@@ -3650,7 +3764,7 @@ The contextualization
 \begin_layout Standard
 
 \lang british
-To support this in the Keymantic
+To support this in Keymantic
 \begin_inset CommandInset citation
 LatexCommand citep
 key "keymantic_kws_metadata_bergamaschi2011,keymantic10"
@@ -3695,9 +3809,9 @@ However, we worry that this change may impact either optimality of its results
  The problem is that unmatching a currently matched cell may lead to uncontextua
 lization of some other currently matched cells, possibly making them not
  admissible anymore (because of uncontextualization, their weight has decreased).
- Consequently, this may lead to a violation of some of algorithm's assumptions,
- such as (i) once the cell becomes admissible, it stays so, or (ii) each
- iteration increases the size of matching by at least one.
+ Consequently, this may lead to a violation of some of the assumptions of
+ the algorithm, such as (i) once the cell becomes admissible, it stays so,
+ or (ii) each iteration increases the size of matching by at least one.
  As a result, we suggest that further investigations are needed.
 \begin_inset Marginal
 status open
@@ -3787,14 +3901,14 @@ if the number of all contextualization possibilities is low
 
 \size footnotesize
 2.1.
- Use Murty's
+ Use Murty's algorithm 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "murty_ranked"
 
 \end_inset
 
- algorithm to get top-k results over contextualized cost-matrix.
+ to get top-k results over contextualized cost-matrix.
 \begin_inset Note Note
 status collapsed
 
@@ -3853,7 +3967,7 @@ Dynamic Munkres
 \begin_inset Quotes erd
 \end_inset
 
-
+ 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "munkres_dynamic"
@@ -3886,7 +4000,7 @@ key "munkres_dynamic"
 \end_inset
 
 - further, the expected runtime of Murthy's algorithm can be considerably
- improved
+ improved 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "murty_optimizing"
