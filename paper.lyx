@@ -2754,8 +2754,12 @@ Implementation details
 \end_layout
 
 \begin_layout Standard
-Currently the ranker is implemented as an exhaustive search with early pruning
+Currently the ranker is performing an exhaustive search with early pruning
  of suggestions that are not supported by the services.
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
  Being implemented in 
 \emph on
 cython
@@ -2769,9 +2773,13 @@ key "cython2011_behnel"
 
 , this already gives a sufficient performance: often dominated by the entry
  points stage.
+\end_layout
+
+\end_inset
+
  There exist more complex alternatives, but this one is the simplest that
  allows early pruning, unlimited contextualization, and listing multiple
- optimal results.
+  results.
 \begin_inset Note Note
 status collapsed
 
@@ -2952,10 +2960,9 @@ reference "sec:Discussion:-Assignment-Problem"
  
 \color inherit
 \lang english
-We noticed that using log-likelihoods instead of just summing the scores
- (as used in Keymantic) gives a better ranking quality, especially, if the
- entry point scores are good approximations of the respective likelihoods
- (see Section 
+We noticed that summing the log-scores instead of plain scores as used in
+ Keymantic, gives a better ranking quality, especially, if these scores
+ are good approximations of the respective likelihoods (see Section 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sub:Ranking-function"
