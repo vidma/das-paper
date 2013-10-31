@@ -2779,7 +2779,7 @@ key "cython2011_behnel"
 
  There exist more complex alternatives, but this one is the simplest that
  allows early pruning, unlimited contextualization, and listing multiple
-  results.
+ results.
 \begin_inset Note Note
 status collapsed
 
@@ -3653,7 +3653,7 @@ key "combinatorial_papadimitriou1998,munkres_cern_rect,munkres_dynamic"
 
 \begin_layout Enumerate
 
-\size footnotesize
+\size small
 Maintain a set of constraints that restrict the currently admissible matches
 \begin_inset Note Note
 status open
@@ -3680,7 +3680,7 @@ cheap enough
 
 \begin_layout Enumerate
 
-\size footnotesize
+\size small
 Solve 
 \begin_inset Formula $N$
 \end_inset
@@ -3700,7 +3700,7 @@ status open
 
 
 \backslash
-vspace{-0.2cm}
+vspace{-0.0cm}
 \end_layout
 
 \end_inset
@@ -3745,7 +3745,7 @@ status open
 
 \begin_layout Plain Layout
 
-
+%
 \backslash
 vspace{-0.4cm}
 \end_layout
@@ -3844,11 +3844,35 @@ status collapsed
 \begin_layout Standard
 
 \lang british
-However, we worry that this change may impact either optimality of its results
- or correctness of the algorithm.
- The problem is that unmatching a currently matched cell may lead to uncontextua
-lization of some other currently matched cells, possibly making them not
- admissible anymore (because of uncontextualization, their weight has decreased).
+However, 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\lang british
+we worry that this change may impact either optimality of its results or
+ correctness of the algorithm.
+ The
+\end_layout
+
+\end_inset
+
+ the problem with this modification is that unmatching a currently matched
+ cell may lead to weight updates in some other currently matched cells,
+ possibly making them not admissible anymore
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\lang british
+ (as weight has decreased)
+\end_layout
+
+\end_inset
+
+.
  Consequently, this may lead to a violation of some of the assumptions of
  the algorithm, e.g, that 
 \begin_inset Note Note
@@ -3892,13 +3916,33 @@ status collapsed
 .
  As a result, we suggest that further investigations are needed.
 \begin_inset Marginal
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
 \series bold
 \lang british
 add references???
+\end_layout
+
+\end_inset
+
+
+\begin_inset Newpage clearpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vspace*{-1.2cm}
 \end_layout
 
 \end_inset
@@ -3946,12 +3990,53 @@ if the number of all contextualization possibilities is low
 : one could simply enumerate all of the possibilities and combine the solutions
  to the standard assignment problem.
  Still, it is worth observing that, in this special case, there exist large
- similarities between the contextualized cost matrices, and the subsolutions
- to the shared parts can be reused.
- As this is out of the scope of this work, only a brief idea is provided:
+ similarities between the contextualized cost matrices, which may be reused.
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+
+\lang british
+ and the subsolutions to the shared parts can be reused, 
+\end_layout
+
+\end_inset
+
+ As this is out of the scope of this work, only a brief idea is provided
+ in Algorithm 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "alg:Assignment-with-low"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
+Assuming that each tag assignment may change at most one line in the weight
+ matrix, we get complexity of 
+\begin_inset Formula $\Theta(n^{2}m)+C*k*(n-1)*\Theta(nm)=\Theta(Ck*n^{2}m)$
+\end_inset
+
+, which is better than simply running Murty over all contextualization possibili
+ties: 
+\begin_inset Formula $C*k*(n-1)*\Theta(n^{2}m)=\Theta(Ck*n^{3}m)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+
+\size footnotesize
+\begin_inset Float algorithm
+placement t
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
 
 \size footnotesize
 1.
@@ -3963,7 +4048,7 @@ if the number of all contextualization possibilities is low
  The result will be used in the later steps.
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 \size footnotesize
 2.
@@ -3975,7 +4060,7 @@ if the number of all contextualization possibilities is low
  modifications)
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 \size footnotesize
 2.1.
@@ -4019,7 +4104,7 @@ status collapsed
 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 \size footnotesize
 \begin_inset space ~
@@ -4059,7 +4144,7 @@ key "munkres_dynamic"
  per modified matrix line.
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 \size footnotesize
 \begin_inset space ~
@@ -4089,31 +4174,40 @@ key "murty_optimizing"
  
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 \size footnotesize
 3.
  Merge all of the top-k solutions found in step 2.1.
  
-\color blue
+\end_layout
 
-\begin_inset Newline newline
+\begin_layout Plain Layout
+
+\size footnotesize
+\begin_inset Caption
+
+\begin_layout Plain Layout
+
+\size footnotesize
+top-k assignments with limited contextualization (sketch)
+\begin_inset CommandInset label
+LatexCommand label
+name "alg:Assignment-with-low"
+
 \end_inset
 
 
-\size default
-\color inherit
-Assuming that each tag assignment may change at most one line in the weight
- matrix, we get complexity of 
-\begin_inset Formula $\Theta(n^{2}m)+C*k*(n-1)*\Theta(nm)=\Theta(Ck*n^{2}m)$
+\end_layout
+
 \end_inset
 
-, which is better than simply running Murty over all contextualization possibili
-ties: 
-\begin_inset Formula $C*k*(n-1)*\Theta(n^{2}m)=\Theta(Ck*n^{3}m)$
+
+\end_layout
+
 \end_inset
 
-.
+
 \end_layout
 
 \begin_layout Section
