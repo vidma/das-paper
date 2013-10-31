@@ -12,7 +12,8 @@
 %\usepackage{showframe}
 \usepackage{subfigure}
 \usepackage{hyperref}
-\usepackage[square,numbers,sort&compress]{natbib}
+%&compress, sort, 
+\usepackage[square,numbers,compress]{natbib}
 
 \usepackage{longtable}
 %\usepackage{algpseudocode}
@@ -2138,9 +2139,9 @@ Matching names of fields in service outputs
 
 \lang british
 We need to identify multiword keyword chunks corresponding to names of the
- fields in query results: many of these field names are unclean, technical
- names, with irrelevant and common terms as they are obtained directly from
- service responses in JSON/XML.
+ fields in structured query results: many of these names are unclean, containing
+ technical, irrelevant and common terms as they are obtained directly from
+ service responses in JSON or XML formats.
  Thus
 \begin_inset Marginal
 status collapsed
@@ -2150,6 +2151,13 @@ status collapsed
 \series bold
 thus->therefore?
 \end_layout
+
+\end_inset
+
+, inspired by 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "xml_retrieval"
 
 \end_inset
 
@@ -2633,7 +2641,7 @@ status open
 
 \begin_layout Plain Layout
 
-
+%
 \backslash
 vspace{-0.5cm}
 \end_layout
@@ -2643,12 +2651,12 @@ vspace{-0.5cm}
 
 \end_layout
 
-\begin_layout Paragraph*
+\begin_layout Standard
 
 \lang british
-Contextualization rules
+The following contextualization rules
 \lang english
- used:
+ were used:
 \begin_inset Note Note
 status collapsed
 
@@ -2691,13 +2699,9 @@ only stop-words are distinguished now; '(tell|show|display|find) me?' filtered
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
-
 \lang british
-(i) promote interpretations where the nearby keywords refer to related schema
- terms, e.g., entity name and its value
+ (i) promote interpretations where the nearby keywords refer to related
+ schema terms, e.g., entity name and its value
 \color blue
 
 \begin_inset Marginal
@@ -2735,10 +2739,18 @@ status collapsed
 \end_inset
 
 .
+\lang english
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Implementation details
 \end_layout
 
-\begin_layout Subsubsection
-Implementation details
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -2974,7 +2986,7 @@ description "HIdden Markov Model"
 \end_inset
 
 .
- At first, the HMM parameters can be estimated through heuristic rules (e.g.,
+ The initial HMM parameters can be estimated through heuristic rules (e.g.,
  promoting related tags).
  To produce the results, the List-Viterbi 
 \begin_inset CommandInset citation
@@ -4140,12 +4152,24 @@ status collapsed
 
 , adapted to the specifics of the 
 \emph on
-CMS
+CMS Experiment
 \emph default
- domain.
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\lang british
+domain
+\end_layout
+
+\end_inset
+
+.
  The users' feedback has shown that in data integration, which provides
  only a limited access to explore the data, an interactive autocompletion
- can be a successful in helping the users to compose semistructured queries.
+ can be successful in helping the users to compose semistructured queries.
 \begin_inset Note Note
 status collapsed
 
