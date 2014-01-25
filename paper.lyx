@@ -31,7 +31,7 @@
     % TO hide margin notes in the final:
      
      \renewcommand\marginpar[1]{{\oldmarginpar[#1]{\color{red}\tiny{#1}}}}
-     \renewcommand\marginpar[1]{}
+     %\renewcommand\marginpar[1]{}
 }
 \end_preamble
 \use_default_options true
@@ -87,6 +87,7 @@
 \html_math_output 0
 \html_css_as_file 0
 \html_be_strict false
+\author -438528902 "vidma,,," 
 \end_header
 
 \begin_body
@@ -334,11 +335,12 @@ vspace{-0.4cm}
 \end_layout
 
 \begin_layout Abstract
-Virtual data integration provides a coherent interface for querying heterogeneou
+Virtual Data Integration provides a coherent interface for querying heterogeneou
 s data sources (e.g., web services, proprietary systems) with minimum upfront
  effort.
- Still, this requires its users to learn the query language and to get acquainte
-d with data organization which may pose problems even to proficient users.
+ Still, this requires its users to learn a new query language and to get
+ acquainted with data organization which may pose problems even to proficient
+ users.
  We present a keyword search system, which proposes a ranked list of structured
  queries along with their explanations.
  It operates mainly on the metadata, such as the constraints on inputs accepted
@@ -374,6 +376,12 @@ Virtual Data Integration (VDI)
 \emph default
 \lang british
  is a lightweight
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\lang british
 \begin_inset Foot
 status collapsed
 
@@ -387,14 +395,19 @@ status open
 
 \begin_layout Plain Layout
 
-Publish--subscribe
+publish--subscribe
 \end_layout
 
 \end_inset
 
- is not applicable to proprietary (reluctant to change) systems; data-warehousin
-g is too complex when large portions of data are volatile or when only limited
- interfaces are provided by services.
+ (hard to apply to proprietary systems reluctant to change), or to data-warehous
+ing (complex when large portions of data are volatile or when only limited
+ interfaces are provided by services).
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -403,10 +416,18 @@ g is too complex when large portions of data are volatile or when only limited
 \lang english
 integrate heterogeneous data sources
 \lang british
- where data physically stays at its origin and is requested only on demand.
+ where data physically stays at its origin and is requested only on demand
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "principles_data_integration"
+
+\end_inset
+
+.
  It works as follows: (i) queries are interpreted and sent to relevant services;
- (ii) the corresponding responses are consolidated eliminating inconsistencies
- in data formats and entity naming, and (iii) the responses are finally
+ (ii) the corresponding responses are consolidated with the removal of inconsist
+encies in data formats and entity naming, and (iii) the responses are finally
  combined.
  However, this approach forces the users 
 \lang english
@@ -446,19 +467,7 @@ key "nl_to_dataservices_guerrisi2012natural"
 
 \lang british
 In this work, we present a keyword search system which simplifies the interactio
-n with VDI by proposing a ranked list of structured queries
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-
-\lang british
- with their explanations
-\end_layout
-
-\end_inset
-
-.
+n with VDI by proposing a ranked list of structured queries.
  The system operates 
 \begin_inset Quotes eld
 \end_inset
@@ -468,50 +477,39 @@ off-line
 \end_inset
 
  using metadata, such as constraints on inputs accepted by services.
- It was developed at the 
-\emph on
-CMS Experiment, CERN,
-\emph default
- where it makes a part of a data integration tool presented in the next
- section.
+ It was developed at CMS, the Compact Muon Solenoid experiment at CERN,
+ where it makes a part of a 
 \begin_inset Note Note
 status open
 
 \begin_layout Plain Layout
 
 \lang british
-called 
-\emph on
-Data Aggregation System (DAS
-\begin_inset CommandInset nomenclature
-LatexCommand nomenclature
-symbol "DAS"
-description "CMS Data Aggregation System - The EII system used at CMS"
+data integration
+\end_layout
 
 \end_inset
 
-
-\emph default
-)
-\begin_inset CommandInset citation
-LatexCommand citep
-key "Kuznetsov2010,Kuznetsov2011"
-
-\end_inset
-
-
-\begin_inset Note Note
-status collapsed
+VDI tool presented next
+\begin_inset Marginal
+status open
 
 \begin_layout Plain Layout
 
 \lang british
-and covers some specific use-cases
+presented next OK?
 \end_layout
 
 \end_inset
 
 .
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\lang british
+in the next section.
 \end_layout
 
 \end_inset
@@ -526,7 +524,7 @@ Data Aggregation System: a tool for virtual data integration
 \begin_layout Standard
 
 \lang british
-The 
+At the CMS experiment at CERN, the 
 \emph on
 Data Aggregation System (DAS
 \begin_inset CommandInset nomenclature
@@ -557,16 +555,16 @@ and covers some specific use-cases
 
 \end_inset
 
- integrates several services at the CMS Experiment, where the largest stores
- 700 GB of relational data.
+ integrates several services, where the largest stores 700 GB of relational
+ data.
  DAS has no predefined schema, thus only minimal service mappings are needed
  to describe differences among the services.
  It
 \emph on
  
 \emph default
-uses simple structured queries, formed of an entity to be retrieved, and
- some selection criteria.
+uses simple structured queries which consist of an entity to be retrieved,
+ and some selection criteria.
  Optionally, the results can be further filtered, sorted, or aggregated.
 \end_layout
 
@@ -687,11 +685,11 @@ reference "fig:DAS-query-example"
 
 , DAS queries closely match the physical execution flow demanding users
  to be aware of it (motivated by large amounts of data the services manage).
- The keyword search relaxes this need of knowing the internals.
+ The proposed keyword search approach relaxes this need of knowing the internals.
 \end_layout
 
 \begin_layout Section
-Problem definition
+Problem definition and overview of the proposed solution
 \end_layout
 
 \begin_layout Standard
@@ -785,8 +783,7 @@ description "keyword query\\\\"
 \end_inset
 
 , we are interested in translating it into a ranked list of the best-matching
- structured queries.
- We are given the following metadata:
+ structured queries composed of:
 \end_layout
 
 \begin_layout Itemize
@@ -819,7 +816,7 @@ inputs
 \emph on
 output
 \emph default
- fields)
+ fields).
 \end_layout
 
 \begin_layout Itemize
@@ -836,7 +833,7 @@ description "values of entity attributes (that could be input parameters of data
 
 \end_inset
 
-: for some fields a list of values; but for the most only the 
+: for some fields a list of values exist; but for the most only the 
 \emph on
 
 \begin_inset Note Note
@@ -858,8 +855,8 @@ the
 
 constraints
 \emph default
- on data-service inputs (mandatory inputs, regular expressions defining
- values accepted).
+ on data-service inputs are available, e.g.
+ regular expressions defining values accepted.
 \begin_inset Note Note
 status collapsed
 
@@ -991,14 +988,65 @@ joins
 
 \end_layout
 
-\begin_layout Section
+\begin_layout Standard
+\begin_inset ERT
+status open
 
-\lang british
-Overview of Our Solution
+\begin_layout Plain Layout
+
+
+\backslash
+vspace{-0.2cm}
 \end_layout
 
-\begin_layout Subsection
-From keywords to structured query suggestions
+\end_inset
+
+
+\lang british
+For example, in Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:query-results"
+
+\end_inset
+
+, 
+\family typewriter
+\size footnotesize
+`dataset'
+\family default
+\size default
+ can be both an entity or input name, 
+\family typewriter
+\size footnotesize
+`dataset.nevents'
+\family default
+\size default
+ is an output field, whereas 
+\family typewriter
+\size footnotesize
+`RelVal'
+\family default
+\size default
+ can be an input value of 
+\family typewriter
+\size footnotesize
+dataset
+\family default
+\size default
+, 
+\family typewriter
+\size footnotesize
+primary_dataset
+\family default
+\size default
+, 
+\family typewriter
+\size footnotesize
+and group
+\family default
+\size default
+ fields.
 \end_layout
 
 \begin_layout Standard
@@ -1021,7 +1069,7 @@ status open
 
 
 \backslash
-vspace{-2cm}
+vspace{-0.5cm}
 \end_layout
 
 \end_inset
@@ -1101,7 +1149,7 @@ status open
 
 
 \backslash
-vspace{0cm}
+vspace{-0.5cm}
 \end_layout
 
 \end_inset
@@ -1131,43 +1179,41 @@ reference "fig:query-translation-steps"
 
 \end_inset
 
-In the first step the query is cleaned up and tokenized identifying any
- quoted tokens or other structural patterns.
+The keyword search works as follows.
+ In the first step the keyword query is cleaned up and tokenized identifying
+ any quoted tokens or other structural patterns.
 \end_layout
 
 \begin_layout Standard
 
 \lang british
-In the second step by employing a number of entity matching techniques the
- 
-\begin_inset Quotes eld
-\end_inset
-
-
+In the second step 
+\change_inserted -438528902 1390572369
+each token is assigned with a list of its interpretations and a rough estimate
+ of each interpretation's likelihood (called 
 \emph on
-entry points
+entry point
 \emph default
+).
+ By using
+\change_unchanged
+ a 
+\change_inserted -438528902 1390486292
+mixture
+\change_unchanged
+ of entity matching techniques
+\change_inserted -438528902 1390572402
+ each token is considered individually and interpreted as either 
+\emph on
+schema
+\emph default
+ or 
+\emph on
+value term
+\emph default
+.
+\change_unchanged
 
-\begin_inset Quotes erd
-\end_inset
-
- are identified: for each keyword
-\begin_inset Note Note
-status collapsed
-
-\begin_layout Plain Layout
-
-\lang british
- (or their combination)
-\end_layout
-
-\end_inset
-
- we obtain a list of schema and value
-\series bold
- 
-\series default
-terms and a rough estimate of the likelihood.
 \end_layout
 
 \begin_layout Standard
@@ -1229,6 +1275,14 @@ query interpretations
 .
  In the same step, interpretations that are not compatible with the data
  integration system are pruned out.
+ This gives a ranked list of query suggestions as shown in Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:query-results"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
@@ -1241,7 +1295,6 @@ Example.
 Consider the following keyword query: 
 \family typewriter
 \size footnotesize
-\emph on
 RelVal
 \begin_inset space ~
 \end_inset
@@ -1250,9 +1303,7 @@ RelVal
 \begin_inset space ~
 \end_inset
 
-100
-\emph default
-.
+100.
 
 \family default
 \size default
@@ -1260,10 +1311,11 @@ RelVal
 \family typewriter
 \size footnotesize
 \emph on
-`RelVal'; `number of events>100'
+`
+\emph default
+RelVal'; `number of events>100'
 \family default
 \size default
-\emph default
 .
  
 \begin_inset Note Note
@@ -1378,177 +1430,41 @@ file.nevents>100
 \end_inset
 
 
-\begin_inset Note Note
-status collapsed
-
-\begin_layout Plain Layout
-
-\family typewriter
-\size scriptsize
-\lang british
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-definecolor{grey_dark}{rgb}{0.7, 0.7, 0.7}{
-\backslash
-color{grey_dark}and more with lower scores...}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
 \family default
 \size default
-
-\begin_inset Note Note
-status collapsed
-
-\begin_layout Plain Layout
-
-\lang british
-\begin_inset Wrap figure
-lines 0
-placement r
-overhang 0in
-width "100text%"
-status open
-
-\begin_layout Plain Layout
-
-\lang british
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-vspace{-0.0cm}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-
-\series bold
-\lang british
-\begin_inset Graphics
-	filename figures/ui_larger.png
-	lyxscale 40
-	width 45text%
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-
-\lang british
-\begin_inset ERT
-status collapsed
-
-\begin_layout Plain Layout
-
-
-\backslash
-vspace{-10pt}
-\end_layout
-
-\end_inset
-
-
-\begin_inset Caption
-
-\begin_layout Plain Layout
-
-\lang british
-The query suggestions
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:query-results-1"
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-vspace{-1cm}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
 Notice that in the token matchings above 
 \family typewriter
 \size footnotesize
-\emph on
 RelVal
 \family default
 \size default
-\emph default
  and 
 \family typewriter
 \size footnotesize
-\emph on
 `number of events'
 \family default
 \size default
-\emph default
  are ambiguous.
- Lastly, a ranked list of query suggestions is obtained (see Section 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sub:Ranking-function"
+\begin_inset Marginal
+status open
+
+\begin_layout Plain Layout
+
+\lang british
+lol?
+\end_layout
 
 \end_inset
 
-) as shown in Figure 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:query-results"
 
-\end_inset
+\end_layout
 
-.
-\lang english
-
+\begin_layout Standard
 \begin_inset Float figure
 placement H
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -1632,7 +1548,7 @@ status open
 
 
 \backslash
-vspace{-0.8cm}
+vspace{-0.3cm}
 \end_layout
 
 \end_inset
@@ -1643,15 +1559,12 @@ vspace{-0.8cm}
 \end_inset
 
 
-\end_layout
-
-\begin_layout Subsection
-Helping users to type queries: autocompletion prototype
 \end_layout
 
 \begin_layout Standard
 To aid users in typing the queries live context-dependent suggestions are
- shown and a query coloring is provided (see Figure 
+ shown and the different parts of a query are colored by their semantic
+ role (see Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Autocompletion-prototype"
@@ -1684,7 +1597,7 @@ status open
 
 
 \backslash
-vspace{-0.5cm}
+vspace{-0.6cm}
 \end_layout
 
 \end_inset
@@ -1829,7 +1742,7 @@ vspace{-0.8cm}
 \end_layout
 
 \begin_layout Section
-The Components of Our Keyword Search System
+Detailed description of the keyword search system
 \end_layout
 
 \begin_layout Subsection
@@ -1914,7 +1827,26 @@ status open
 
 \end_layout
 
-\begin_layout Subsubsection
+\begin_layout Standard
+
+\lang british
+This step tries to match each token (or a combination of nearby tokens as
+ a one) into a 
+\emph on
+schema or value term
+\emph default
+.
+ For each token a list of its interpretations is obtained, each having a
+ 
+\emph on
+score
+\emph default
+ assigned which is a rough estimation of the interpretation's likelihood
+ if taken individually, without considering the nearby interpretations.
+ The following matching techniques are used:
+\end_layout
+
+\begin_layout Subsubsection*
 
 \lang british
 Matching value terms 
@@ -1960,8 +1892,8 @@ possible
 \color blue
  
 \color inherit
-Also, we down-rank the unlikely interpretations, where entity names are
- matched as values (e.g., an entity name 
+Also, we down-rank unlikely interpretations, where entity names are matched
+ as values (e.g., an entity name 
 \size small
 \emph on
 `block'
@@ -1987,7 +1919,7 @@ vspace{-0.4cm}
 
 \end_layout
 
-\begin_layout Subsubsection
+\begin_layout Subsubsection*
 
 \lang british
 Matching schema terms
@@ -2178,19 +2110,19 @@ vspace{-0.3cm}
 
 \end_layout
 
-\begin_layout Subsubsection
+\begin_layout Subsubsection*
 
 \lang british
-Matching names of fields in service outputs
+Matching fields in service outputs
 \end_layout
 
 \begin_layout Standard
 
 \lang british
-We need to identify multiword keyword chunks corresponding to names of the
- fields in structured query results: many of these are unclean technical
- names containing irrelevant or common terms as they are obtained directly
- from service responses in JSON or XML formats.
+We need to identify multiword keyword chunks corresponding to field names
+ in structured query results: many of these are unclean technical names
+ containing irrelevant or common terms as they are obtained directly from
+ service responses in JSON or XML formats.
  Thus
 \begin_inset Marginal
 status collapsed
@@ -2254,7 +2186,7 @@ lly inexpensive
 \end_inset
 
 ).
- The IR ranker uses BM25F scoring function, where 
+ The IR ranker uses the BM25F scoring function, where 
 \begin_inset Quotes eld
 \end_inset
 
@@ -2311,7 +2243,7 @@ Finally, the same functionality could be also achieved through retrieving
 \begin_layout Subsection
 
 \lang british
-The ranker and scoring functions
+Ranking the query suggestions
 \begin_inset CommandInset label
 LatexCommand label
 name "sub:Ranking-function"
@@ -2341,19 +2273,23 @@ In this step different combinations of the entry points are explored and
 .
 
 \lang english
- We experimented with two scoring functions: (i) the average of scores,
+ We experimented with two scoring functions: (1) the average of scores,
  as used in 
 \emph on
 Keymantic
 \emph default
  
+\lang british
+
 \begin_inset CommandInset citation
 LatexCommand citep
-key "keymantic10"
+key "keymantic_kws_metadata_bergamaschi2011,keymantic10"
 
 \end_inset
 
-, and (ii) the sum of log-likelihoods
+
+\lang english
+, and (2) the sum of log-likelihoods
 \begin_inset Note Note
 status collapsed
 
@@ -2661,7 +2597,11 @@ status collapsed
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula $\scriptsize averaging\; score(tags):=\frac{{\displaystyle \sum_{kw_{i}\subset kwq}{\displaystyle \left(score_{tag_{i}|kw_{i}}+{\displaystyle \sum_{h_{j}\in H}h_{j}(tag_{i,i-1,..,1})}\right)}}}{\#\; non\; stopword\; keywords}$
+\begin_inset Formula 
+\begin{equation}
+\scriptsize averaging\; score(tags):=\frac{{\displaystyle \sum_{kw_{i}\subset kwq}{\displaystyle \left(score_{tag_{i}|kw_{i}}+{\displaystyle \sum_{h_{j}\in H}h_{j}(tag_{i,i-1,..,1})}\right)}}}{\#\; non\; stopword\; keywords}
+\end{equation}
+
 \end_inset
 
 
@@ -2681,7 +2621,11 @@ vspace{-1cm}
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula $\tiny{\displaystyle likelihood\; score(tags):=\sum_{kw_{i}\subset kwq}{\displaystyle \left({\displaystyle {\displaystyle \log}\left(score_{tag_{i}|kw_{i}}\right)}+{\displaystyle \sum_{h_{j}\in H}h_{j}(tag_{i,i-1,..,1})}\right)}}$
+\begin_inset Formula 
+\begin{equation}
+\scriptsize{\displaystyle likelihood\; score(tags):=\sum_{kw_{i}\subset kwq}{\displaystyle \left({\displaystyle {\displaystyle \log}\left(score_{tag_{i}|kw_{i}}\right)}+{\displaystyle \sum_{h_{j}\in H}h_{j}(tag_{i,i-1,..,1})}\right)}}
+\end{equation}
+
 \end_inset
 
 
@@ -2767,7 +2711,8 @@ more details?
 
 
 \color inherit
-, and (ii) promote common use-cases, e.g., retrieving entity by its 
+, and (ii) promote common use-cases, e.g.
+ retrieving entity by its 
 \begin_inset Quotes eld
 \end_inset
 
@@ -2802,33 +2747,32 @@ Implementation details
 
 \end_layout
 
-\begin_layout Standard
-Currently the ranker is performing an exhaustive search with early pruning
- of suggestions that are not supported by the services.
-\begin_inset Note Note
-status collapsed
+\begin_layout Subsection
+Implementation details
+\end_layout
 
-\begin_layout Plain Layout
- Being implemented in 
+\begin_layout Standard
+The keyword search module is implemented in Python as well as the whole
+ DAS data integration system.
+ The ranker (i.e.
+ step 3) simply performs an exhaustive search (enumeration of all the possibilit
+ies) with early pruning of suggestions that are not supported by the services.
+ There exist more complex alternatives, but this one is the simplest that
+ allows early pruning, unlimited contextualization, and listing multiple
+ results.
+ The ranker is implemented in 
 \emph on
 cython
 \emph default
-
+ 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "cython2011_behnel"
 
 \end_inset
 
-, this already gives a sufficient performance: often dominated by the entry
- points stage.
-\end_layout
-
-\end_inset
-
- There exist more complex alternatives, but this one is the simplest that
- allows early pruning, unlimited contextualization, and listing multiple
- results.
+ which, by compiling the critical parts of the code into bare C code, allow
+ to easily obtain sufficient performance even if exhaustive search is performed.
 \begin_inset Note Note
 status collapsed
 
@@ -2941,6 +2885,13 @@ See next sections for details.
 Related work
 \lang british
 
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Related-work"
+
+\end_inset
+
+
 \begin_inset Note Note
 status open
 
@@ -2958,7 +2909,7 @@ Keyword search over data-services
 \begin_layout Standard
 
 \lang british
-The Keymantic 
+Keymantic 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "keymantic_kws_metadata_bergamaschi2011,keymantic10"
@@ -3044,7 +2995,7 @@ description "HIdden Markov Model"
 .
  The initial HMM parameters can be estimated through heuristic rules (e.g.,
  promoting related tags).
- To produce the results, the List-Viterbi 
+ To produce the results, the List Viterbi algorithm 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "list_viterbi_1994"
@@ -3054,7 +3005,7 @@ key "list_viterbi_1994"
  is used to obtain top-k most probable keyword taggings, which are later
  interpreted as SQL queries.
  Once sufficient amount of logs or users' feedback is collected, the HMM
- can be improved through the supervised or unsupervised training 
+ can be improved through supervised or unsupervised training 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "keymantic_list_viterbi_training_rota2011"
@@ -3062,7 +3013,7 @@ key "keymantic_list_viterbi_training_rota2011"
 \end_inset
 
 .
- The accuracy of this method is comparable to that of the Keymantic 
+ The accuracy of this method is comparable to that of Keymantic 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "bergamaschi2011hidden"
@@ -3627,6 +3578,24 @@ name "sec:Discussion:-Assignment-Problem"
 
 \end_layout
 
+\begin_layout Standard
+
+\family typewriter
+\color red
+\lang british
+In this section, going further from our actual implementation, we will discuss
+ the Assignment Problem extended with Contextualizations which was briefly
+ introduced in Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Related-work"
+
+\end_inset
+
+.
+ raising some open questions, and proposing a solution for limited usecase.
+\end_layout
+
 \begin_layout Subsection
 
 \lang british
@@ -3990,10 +3959,6 @@ add references???
 \end_inset
 
 
-\begin_inset Newpage clearpage
-\end_inset
-
-
 \end_layout
 
 \begin_layout Standard
@@ -4005,6 +3970,8 @@ status open
 
 \backslash
 vspace*{-1.2cm}
+\backslash
+vspace*{0.8cm}
 \end_layout
 
 \end_inset
@@ -4338,11 +4305,7 @@ status collapsed
 
 \end_inset
 
-, adapted to the specifics of the 
-\emph on
-CMS Experiment
-\emph default
-
+, adapted to the specifics of the CMS Experiment
 \begin_inset Note Note
 status open
 
@@ -4444,11 +4407,23 @@ status open
 \begin_layout Plain Layout
 
 \lang british
-such as the 
+e.g.
+ 
 \emph on
-YQL, 
+YQL
+\begin_inset CommandInset citation
+LatexCommand cite
+key "yql_link"
+
+\end_inset
+
+ 
 \emph default
-or the 
+for developers
+\emph on
+, 
+\emph default
+or 
 \begin_inset Quotes eld
 \end_inset
 
@@ -4460,7 +4435,43 @@ Google Fusion Tables
 \begin_inset Quotes erd
 \end_inset
 
- focusing on regular users instead of developers
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "fusion_tables10"
+
+\end_inset
+
+ and 
+\begin_inset Quotes eld
+\end_inset
+
+
+\emph on
+Yahoo Pipes
+\emph default
+
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "ypipes_link"
+
+\end_inset
+
+ that focus on regular users
+\end_layout
+
+\end_inset
+
+
+\begin_inset Marginal
+status open
+
+\begin_layout Plain Layout
+regular users?
 \end_layout
 
 \end_inset
@@ -4469,8 +4480,8 @@ Google Fusion Tables
  Whereas, the availability of user-friendly interfaces is becoming an increasing
 ly important issue.
  Future challenges may include answering the queries over much larger numbers
- of data tables and data services, and answering the more complex queries
- than considered here.
+ of data tables and data services, and answering the queries more complex
+ than the ones considered in this work.
 \begin_inset Note Note
 status collapsed
 
@@ -4481,885 +4492,6 @@ Further, if compared to the other fields such as searching the relational
  databases, the keyword search over data service integration is still lacking
  attention from the research community.
  
-\end_layout
-
-\end_inset
-
-
-\begin_inset Note Note
-status collapsed
-
-\begin_layout Section*
-Acknowledgments
-\end_layout
-
-\begin_layout Plain Layout
-Part of this work was conducted as a master thesis project between 
-\emph on
-École Polytechnique Fédérale de Lausanne
-\emph default
- and 
-\emph on
-CMS Experiment, CERN
-\emph default
-.
- The first author is thankful to Robert Gwadera, who supervised the project,
- for his valuable advice.
-\lang british
-
-\begin_inset Note Note
-status collapsed
-
-\begin_layout Plain Layout
-
-\lang british
-\begin_inset Newpage clearpage
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-section*{Appendix: On weighted bipartite matching problem and contextualizations
-}
-\backslash
-appendix
-\backslash
-setcounter{section}{1} 
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsection*
-Known approaches and their combinations
-\end_layout
-
-\begin_layout Plain Layout
-
-\size small
-\emph on
-Notation:
-\emph default
- 
-\begin_inset Formula $n$
-\end_inset
-
- keywords; 
-\begin_inset Formula $m$
-\end_inset
-
- is total number of possible tags; 
-\begin_inset Formula $\widetilde{m}$
-\end_inset
-
- is the average # of possible tags; 
-\begin_inset Formula $k$
-\end_inset
-
- - # of top-k results to return.
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Float table
-placement H
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\begin_inset Tabular
-<lyxtabular version="3" rows="7" columns="3">
-<features tabularvalignment="middle">
-<column alignment="left" valignment="top" width="42text%">
-<column alignment="left" valignment="top" width="26text%">
-<column alignment="left" valignment="top" width="28text%">
-<row>
-<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\series bold
-\size scriptsize
-Method
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\series bold
-\size scriptsize
-Advantages
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\series bold
-\size scriptsize
-Disadvantages
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\size scriptsize
-\emph on
-Exhaustive search
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\size scriptsize
-\SpecialChar \menuseparator
-easy pruning and contextualization
-\end_layout
-
-\begin_layout Plain Layout
-
-\size scriptsize
-\SpecialChar \menuseparator
-optimal answers
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\series bold
-\size scriptsize
-slow
-\series default
-, 
-\begin_inset Formula $O(\widetilde{m}^{n})$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\size scriptsize
-\emph on
-Munkres
-\emph default
-
-\begin_inset CommandInset citation
-LatexCommand cite
-key "munkres_cern_rect"
-
-\end_inset
-
- gives one best solution in 
-\begin_inset Formula $\Theta(n^{2}m)$
-\end_inset
-
-.
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\size scriptsize
-\SpecialChar \menuseparator
-quite fast
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\size scriptsize
-\SpecialChar \menuseparator
-no contextualization
-\end_layout
-
-\begin_layout Plain Layout
-
-\size scriptsize
-\SpecialChar \menuseparator
-only one best result
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\size scriptsize
-\emph on
-Keymantic
-\emph default
-
-\begin_inset CommandInset citation
-LatexCommand cite
-key "keymantic_kws_metadata_bergamaschi2011"
-
-\end_inset
-
- - Munkres modified for contextualizations, 
-\begin_inset Formula $\Theta(n^{3}m^{2})$
-\end_inset
-
-.
-\begin_inset Newline newline
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-
-\size scriptsize
-recursively evaluate
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-tablefootnote{recursively solve multiple weighted matchings with Munkres
- (modifying the matrices to force or prevent specific matches)}
-\end_layout
-
-\end_inset
-
- all mappings pruning on the cost.
- do contextualization inside Munkres
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\size scriptsize
-\SpecialChar \menuseparator
-quite fast
-\end_layout
-
-\begin_layout Plain Layout
-
-\size scriptsize
-\SpecialChar \menuseparator
-some contextualization
-\end_layout
-
-\begin_layout Plain Layout
-
-\size scriptsize
-\SpecialChar \menuseparator
-some of top-k answers
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\size scriptsize
-\SpecialChar \menuseparator
-
-\series bold
-approximate -
-\series default
- 
-\series bold
-not global top-k
-\end_layout
-
-\begin_layout Plain Layout
-
-\series bold
-\size scriptsize
-\SpecialChar \menuseparator
-correctness unproven 
-\end_layout
-
-\begin_layout Plain Layout
-
-\size scriptsize
-\SpecialChar \menuseparator
-no guarantee of all contextualizations
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\size scriptsize
-\emph on
-Murty
-\emph default
-
-\begin_inset CommandInset citation
-LatexCommand cite
-key "murty_ranked"
-
-\end_inset
-
-
-\series bold
- + 
-\series default
-\emph on
-Munkres - 
-\emph default
-top-k matchings in 
-\begin_inset Formula $\Theta(n^{3}m)$
-\end_inset
-
-.
-\begin_inset Newline newline
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-
-\size scriptsize
-to get each additional result, call Munkres to solve 
-\begin_inset Formula $n-1$
-\end_inset
-
- smaller assignments of sizes 
-\begin_inset Formula $2..n-1$
-\end_inset
-
-.
- Heuristics can greatly improve expected run time
-\begin_inset CommandInset citation
-LatexCommand cite
-key "murty_optimizing"
-
-\end_inset
-
-
-\begin_inset Note Note
-status collapsed
-
-\begin_layout Plain Layout
-: ordering sub-assignments to solve smaller or more likely first...
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\size scriptsize
-\SpecialChar \menuseparator
-
-\emph on
-top-k optimal
-\emph default
- solutions
-\end_layout
-
-\begin_layout Plain Layout
-
-\size scriptsize
-\SpecialChar \menuseparator
-quite fast
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\size scriptsize
-\SpecialChar \menuseparator
-no early pruning (partial matching may change a lot)
-\end_layout
-
-\begin_layout Plain Layout
-
-\size scriptsize
-\SpecialChar \menuseparator
-
-\series bold
-no contextualization
-\series default
- 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-tablefootnote{could do same unproven contextualization within Munkres as
- in Keymantic; would at least guarantee top-k with limited contextualization}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\size scriptsize
-\emph on
-HMM
-\emph default
-
-\begin_inset CommandInset citation
-LatexCommand cite
-key "bergamaschi2011hidden"
-
-\end_inset
-
-
-\series bold
- + 
-\series default
-\emph on
-List Viterbi
-\emph default
-
-\begin_inset CommandInset citation
-LatexCommand cite
-key "list_viterbi_1994"
-
-\end_inset
-
- 
-\begin_inset Newline newline
-\end_inset
-
-
-\series bold
- 
-\series default
-
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-
-\size footnotesize
-or some related conditional models such as CRF
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-
-\size scriptsize
-can start with estimated HMM params: transition probs from contextualizations,
- output probs from cost matrix
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\size scriptsize
-\SpecialChar \menuseparator
-
-\emph on
-top-k optimal
-\emph default
- solutions
-\end_layout
-
-\begin_layout Plain Layout
-
-\size scriptsize
-\SpecialChar \menuseparator
-contextualization of 
-\emph on
-limited length
-\end_layout
-
-\begin_layout Plain Layout
-
-\size scriptsize
-\SpecialChar \menuseparator
-quite fast
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\size scriptsize
-\SpecialChar \menuseparator
-no pruning
-\end_layout
-
-\begin_layout Plain Layout
-
-\size scriptsize
-\SpecialChar \menuseparator
-
-\series bold
-a tag may get selected many times
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\size scriptsize
-\emph on
-Murty + Dynamic Munkres
-\series bold
-\emph default
- 
-\series default
-\emph on
-on contextualized cost-matrix
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-
-\size scriptsize
-1) enumerate over all contextualization possibilities
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-tablefootnote{exploring contextualizaions in depth-first order cost-matrix
- modifications can be reused}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-
-\size scriptsize
-2) use Murty's to get top-k results over contextualized cost-matrix reusing
- older sub-solutions
-\begin_inset CommandInset citation
-LatexCommand cite
-key "munkres_dynamic"
-
-\end_inset
-
- costing only 
-\begin_inset Formula $\Theta(nm)$
-\end_inset
-
- per modified 
-\begin_inset Quotes eld
-\end_inset
-
-line
-\begin_inset Quotes erd
-\end_inset
-
-.
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\size scriptsize
-\SpecialChar \menuseparator
-
-\series bold
-top-k optimal results
-\end_layout
-
-\begin_layout Plain Layout
-
-\size scriptsize
-\SpecialChar \menuseparator
-
-\series bold
-fast
-\series default
- 
-\series bold
-if # dependencies is small
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\size scriptsize
-\SpecialChar \menuseparator
-exponential for complex contextualizations
-\end_layout
-
-\end_inset
-</cell>
-</row>
-</lyxtabular>
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption
-
-\begin_layout Plain Layout
-comparison of different methods
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Note Note
-status open
-
-\begin_layout Section
-The proposed algorithm
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Float algorithm
-placement H
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{algorithmic}[1]
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-Procedure{Matching}{$M, ctx, k$}
-\backslash
-Comment{M is cost matrix; ctx - contextualizations} 
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-State $sol0
-\backslash
-gets Munkres(M)$ 
-\backslash
-Comment{solve without contextualizations} 
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-While{$c$ IN $permute(ctx)$}
-\end_layout
-
-\begin_layout Plain Layout
-
-  
-\backslash
-State $M_ = M with c applied$
-\end_layout
-
-\begin_layout Plain Layout
-
-  
-\backslash
-State $sol
-\backslash
-gets = Murty(M_, k)$
-\end_layout
-
-\begin_layout Plain Layout
-
-  
-\end_layout
-
-\begin_layout Plain Layout
-
-  
-\backslash
-State 
-\backslash
-textbf{yield} $sol$
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-EndWhile
-\backslash
-label{euclidendwhile} 
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-EndProcedure 
-\backslash
-end{algorithmic}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption
-
-\begin_layout Plain Layout
-top-K bipartite matchings (with low number of contextualizations)
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-Can we further improve over this?
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \end_inset
@@ -5376,8 +4508,6 @@ status open
 \begin_layout Plain Layout
 
 {
-\backslash
-tiny
 \end_layout
 
 \end_inset
@@ -5387,6 +4517,18 @@ tiny
 LatexCommand bibtex
 bibfiles "refs"
 options "abbrvnat"
+
+\end_inset
+
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\lang british
+abbrvnat
+\end_layout
 
 \end_inset
 
