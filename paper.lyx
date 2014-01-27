@@ -376,19 +376,13 @@ Virtual Data Integration (VDI)
 \emph default
 \lang british
  is a lightweight
-\begin_inset Note Note
+\begin_inset Foot
 status open
 
 \begin_layout Plain Layout
 
 \lang british
-\begin_inset Foot
-status collapsed
-
-\begin_layout Plain Layout
-
-\lang british
-c.f.
+cf.
  
 \begin_inset ERT
 status open
@@ -400,14 +394,9 @@ publish--subscribe
 
 \end_inset
 
- (hard to apply to proprietary systems reluctant to change), or to data-warehous
-ing (complex when large portions of data are volatile or when only limited
+ (hard to apply to proprietary systems reluctant to change) and data-warehousing
+ (problematic when large portions of data are volatile or when only limited
  interfaces are provided by services).
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \end_inset
@@ -1149,7 +1138,7 @@ status open
 
 
 \backslash
-vspace{-0.5cm}
+vspace{-0.1cm}
 \end_layout
 
 \end_inset
@@ -1219,15 +1208,24 @@ value term
 \begin_layout Standard
 
 \lang british
-In the third step different permutations of 
+In the third step the permutations of 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\lang british
+items within
+\end_layout
+
+\end_inset
+
+ 
 \emph on
 entry points
 \emph default
- 
-\color red
-(which represent the final result - structured query suggestions)
-\color inherit
- are 
+, representing a matching of keywords into their interpreted meanings, are
+ enumerated and 
 \begin_inset Note Note
 status collapsed
 
@@ -1277,9 +1275,21 @@ query interpretations
 \end_inset
 
 .
- In the same step, interpretations that are not compatible with the data
+ 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\lang british
+In the same step, interpretations that are not compatible with the data
  integration system are pruned out.
  
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -1798,18 +1808,6 @@ name "sec:Description-of-KWS"
 \end_inset
 
 
-\begin_inset Marginal
-status open
-
-\begin_layout Plain Layout
-
-\series bold
-TODO: fix
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Subsection
@@ -1819,8 +1817,19 @@ Tokenization (step 1)
 \begin_layout Standard
 
 \lang british
-At first, the keyword query is standardized (e.g., removing extra spaces,
- standardizing date formats).
+At first, the 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\lang british
+keyword
+\end_layout
+
+\end_inset
+
+ query is standardized (e.g., removing extra spaces, standardizing date formats).
  Next, the query is tokenized recognizing phrases in quotes and operator
  expressions (e.g.
 \family typewriter
@@ -1830,6 +1839,8 @@ At first, the keyword query is standardized (e.g., removing extra spaces,
 \begin_inset space ~
 \end_inset
 
+
+\emph default
 nevent
 \begin_inset space ~
 \end_inset
@@ -1842,9 +1853,14 @@ nevent
 \family default
 '
 \size default
-\emph default
-).
- This is accomplished  by splitting the query 
+)
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\lang british
+ by splitting it 
 \begin_inset Note Note
 status open
 
@@ -1868,7 +1884,40 @@ by
 
 \end_inset
 
- using a regular-expression pattern.
+ on a regular-expression
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\lang british
+pattern
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+.
+ Stop words (e.g.
+ a, which, when) are identified and given less importance in the later processin
+g steps.
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vspace{-0.4cm}
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
@@ -1897,134 +1946,93 @@ status open
 \begin_layout Standard
 
 \lang british
-This step tries to match each token (or a combination of nearby tokens as
- a one) into a 
-\emph on
-schema or value term
-\emph default
-.
- For each token a list of its interpretations is obtained, including a 
-\emph on
-score
-\emph default
- which is a rough estimation of interpretation's likelihood if considered
- individually ignoring the nearby interpretations.
- The following matching techniques are used:
-\end_layout
-
-\begin_layout Subsubsection*
-
-\lang british
-Matching value terms 
-\end_layout
-
-\begin_layout Standard
-
-\lang british
-\begin_inset Note Note
-status collapsed
-
-\begin_layout Plain Layout
-
-\lang british
-In this stage possible keyword interpretations are identified and assigned
- scores between 
-\begin_inset Formula $[0,1]$
-\end_inset
-
-.
-\end_layout
-
-\end_inset
-
-For some fields, a list of
+This step matches each token 
 \begin_inset Note Note
 status open
 
 \begin_layout Plain Layout
 
 \lang british
-possible
+(or a few of nearby tokens as a one)
 \end_layout
 
 \end_inset
 
- values is available.
- If so, several cases are distinguished: a full match, a partial match,
- and a match containing wildcards.
+ into a 
+\emph on
+schema or value term
+\emph default
+.
+ For each token, a list of its interpretations is obtained, including a
+ 
+\emph on
+score
+\emph default
+ providing a rough estimation of interpretation's likelihood when considered
+ individually ignoring influence of other nearby tokens.
+ 
+\end_layout
+
+\begin_layout Standard
+
+\lang british
+For matching value terms, a listing of known values is used when available
+ (several cases are distinguished: a full match, a partial match, and a
+ match containing wildcards).
  Otherwise, regular expressions constraining inputs, accepted by services,
- are used; these are divided into multiple levels of accuracy.
+ are used
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\lang british
+; these are divided into multiple levels of accuracy
+\begin_inset Marginal
+status open
+
+\begin_layout Plain Layout
+
+\lang british
+lol
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+.
 
 \color blue
  
 \color inherit
-Also, we down-rank unlikely interpretations, where entity names are matched
- as values (e.g., an entity name 
+Also, the unlikely interpretations are penalized, e.g.
+ entity names and numbers as wildcard value matches (e.g.
+\size small
+\emph on
+, 
+\size default
+\emph default
+the values of 
+\emph on
+dataset
+\emph default
+ contain numbers and an entity name 
 \size small
 \emph on
 `block'
 \size default
 \emph default
- contained within values of 
-\emph on
-dataset
-\emph default
 ).
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-vspace{-0.4cm}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsubsection*
-
-\lang british
-Matching schema terms
 \end_layout
 
 \begin_layout Standard
 
 \lang british
-\begin_inset Note Note
-status collapsed
-
-\begin_layout Plain Layout
-
-\lang british
-We found that basic string similarity metrics, such as the 
-\emph on
-Levenshtein
-\emph default
- edit-distance (where inserts, edits, and mutations are equal), introduced
- quite many false-positives
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-
-\lang british
- (e.g.
- 'file' for 'site' with high score)
-\end_layout
-
-\end_inset
-
-.
- Instead, w
-\end_layout
-
-\end_inset
-
-In the order of decreasing scores we check each keyword for 
+The schema terms are matched by checking each keyword for: 
 \begin_inset Note Note
 status open
 
@@ -2097,7 +2105,7 @@ quite trustful
 \end_inset
 
  full, lemma, and stem matches, and a stem match within a small string edit-dist
-ance.
+ance (in the order of decreasing scores).
 \begin_inset Note Note
 status collapsed
 
@@ -2161,47 +2169,34 @@ vspace{-0.5cm}
 \end_inset
 
 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-vspace{-0.3cm}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsubsection*
-
-\lang british
-Matching fields in service outputs
 \end_layout
 
 \begin_layout Standard
 
 \lang british
-We need to identify multiword keyword chunks corresponding to field names
- in structured query results: many of these are unclean technical names
- containing irrelevant or common terms as they are obtained directly from
- service responses in JSON or XML formats.
- Thus
-\begin_inset Marginal
-status collapsed
-
-\begin_layout Plain Layout
-
-\series bold
-thus->therefore?
-\end_layout
-
+Finally, matching fields in service outputs involves identifying multiword
+ keyword chunks corresponding to the field names (e.g.
+ 
+\family typewriter
+\size footnotesize
+number of events in a file
+\family default
+\size default
+ 
+\begin_inset Formula $\rightarrow$
 \end_inset
 
-, inspired by 
+ 
+\family typewriter
+\size footnotesize
+file.nevents
+\family default
+\size default
+).
+ Many of these names are directly extracted from service responses in JSON
+ or XML formats, which were not directly intended to be used by humans:
+ names contain irrelevant or common terms.
+ Thus, inspired by 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "xml_retrieval"
@@ -2231,8 +2226,11 @@ multifielded document
 \begin_inset Quotes erd
 \end_inset
 
- which contains field's technical name, its parent, its base-name, and its
- title if one exists.
+ which contains the field
+\color red
+ 
+\color inherit
+name, its parent, its base-name, and its title if one exists.
  To find the matches, the IR engine is queried for each chunk of k-nearby
  keywords (using 
 \begin_inset Formula $k\leq4$
@@ -2252,7 +2250,14 @@ lly inexpensive
 \end_inset
 
 ).
- The IR ranker uses the BM25F scoring function, where 
+ The IR ranker uses the BM25F scoring function 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "xml_retrieval"
+
+\end_inset
+
+, where 
 \begin_inset Quotes eld
 \end_inset
 
@@ -2261,7 +2266,8 @@ document fields
 \end_inset
 
  are assigned different weights and phrase matches are scored higher.
- Finally, the IR score is directly used as a score for the generated match.
+ Finally, the IR score is directly used as a score for the generated entry
+ point match.
 \begin_inset Note Note
 status collapsed
 
@@ -2304,6 +2310,19 @@ Finally, the same functionality could be also achieved through retrieving
 \end_inset
 
 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vspace{-0.4cm}
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
@@ -2323,11 +2342,11 @@ name "sub:Ranking-function"
 
 \color red
 \lang british
-In this step different combinations of the entry points are explored and
- then ranked.
+In this step different permutations of the entry points are evaluated and
+ ranked.
 
 \color inherit
- For each combination, the final score is obtained by combining the entry
+ The final score of solution candidate is obtained by combining the entry
  point scores of keyword interpretations
 \lang english
  (tags), 
@@ -2338,7 +2357,7 @@ In this step different combinations of the entry points are explored and
 \lang british
 and scores returned by 
 \color red
-contextualization rules
+contextualization rules,
 \color inherit
  
 \begin_inset Formula $h_{j}\in H$
@@ -2347,11 +2366,7 @@ contextualization rules
 .
  The latter aim to account for keyword interdependencies by
 \lang english
- promoting such 
-\color red
-interpretations
-\color inherit
-
+ promoting permutations where 
 \begin_inset Note Note
 status collapsed
 
@@ -2395,8 +2410,8 @@ only stop-words are distinguished now; '(tell|show|display|find) me?' filtered
 
 
 \lang british
- (i) where the nearby keywords refer to related schema terms, e.g., entity
- name and its value
+ (i) the nearby keywords refer to related schema terms, e.g., entity name
+ and its value
 \color blue
 
 \begin_inset Marginal
@@ -2413,7 +2428,7 @@ more details?
 
 
 \color inherit
- or promoting (ii) the frequent use-cases, e.g.
+ or (ii) matching frequent use-cases, e.g.
  retrieving entity by its 
 \begin_inset Quotes eld
 \end_inset
@@ -2810,11 +2825,21 @@ Implementation details
 \end_layout
 
 \begin_layout Standard
-The keyword search module is implemented in Python as well as the whole
- DAS data integration system.
- The ranker (i.e.
- step 3) simply performs an exhaustive search (enumeration of all the possibilit
-ies) with early pruning of suggestions that are not supported by the services.
+The keyword search as well as the DAS data integration system is implemented
+ in Python.
+ The ranker 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+(i.e.
+ step 3)
+\end_layout
+
+\end_inset
+
+ simply performs enumeration of all the possibilities with early pruning
+ of suggestions that are not supported by the services.
  There exist more complex alternatives, but this one is the simplest that
  allows early pruning, unlimited contextualization, and listing multiple
  results.
@@ -2829,8 +2854,8 @@ key "cython2011_behnel"
 
 \end_inset
 
- which, by compiling the critical parts of the code into bare C code, allow
- to easily obtain sufficient performance even if exhaustive search is performed.
+ which, by compiling the critical parts into a bare C code, allow to easily
+ obtain sufficient performance even if exhaustive search is performed.
 \begin_inset Note Note
 status collapsed
 
@@ -2985,12 +3010,8 @@ reference "sub:Matching-keywords"
 \end_inset
 
 , but focusing on a less specific domain than ours.
- Second, to obtain the global ranking
-\series bold
-,
-\series default
- the assignment problem (assigning tags to keywords) extended with weight
- contextualization
+ Second, to obtain the global ranking, the assignment problem (associating
+ each keyword with a tag/interpretation) extended with weight contextualization
 \begin_inset Foot
 status open
 
@@ -3004,14 +3025,26 @@ i.e.
 
 \end_inset
 
-, which is discussed in Section 
+ is considered (see Section 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:Discussion:-Assignment-Problem"
 
 \end_inset
 
-, is considered.
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\lang british
+ for further details
+\end_layout
+
+\end_inset
+
+).
  The resulting labels are interpreted as SQL queries and presented to users.
 
 \color red
@@ -3650,9 +3683,20 @@ name "sec:Discussion:-Assignment-Problem"
 
 \begin_layout Standard
 
+\lang british
+At larger scale 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
 \color red
 \lang british
-At larger scale (higher number of entities, their fields or service inputs)
+(higher number of entities, their fields or service inputs)
+\end_layout
+
+\end_inset
+
  the ranking algorithms more efficient than our current implementation are
  needed, but they add additional complexity.
  As introduced in Section 
@@ -3662,8 +3706,19 @@ reference "sec:Related-work"
 
 \end_inset
 
-, Contextualized Assignment Problem is one of the approaches to the keyword
+, Contextualized Assignment Problem is one of approaches to the keyword
  search over VDI.
+ 
+\color red
+
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+
+\color red
+\lang british
+.
 \series bold
 [TODO: contrast with others, e.g.
  HMM/dynamic programming gives only limited length of interdependencies,
@@ -3676,7 +3731,10 @@ incompatible
 \end_inset
 
  matchings]
-\series default
+\end_layout
+
+\end_inset
+
 
 \begin_inset Note Note
 status open
@@ -3690,10 +3748,23 @@ In this section, s
 
 \end_inset
 
- Stepping away from our implementation here we focus on theoretical basis
- of this problem.
- We present some open issues with this approach and propose an efficient
- algorithm for a special case when the number of contextualizations is low.
+ In this section, stepping away from our current implementation, we look
+ at the theoretical basis of this problem discussing the related works.
+ We present
+\begin_inset Marginal
+status open
+
+\begin_layout Plain Layout
+
+\color red
+\lang british
+present->raise? not too strong?
+\end_layout
+
+\end_inset
+
+ some unresolved issues with this approach and propose an efficient algorithm
+ for a special case when the number of contextualizations is low.
 \end_layout
 
 \begin_layout Standard
@@ -3847,6 +3918,16 @@ vspace{-0.0cm}
 \end_layout
 
 \begin_layout Standard
+\begin_inset Marginal
+status open
+
+\begin_layout Plain Layout
+Keymantic didn't know this.
+ from 1960s
+\end_layout
+
+\end_inset
+
 To efficiently list 
 \emph on
 k
@@ -3868,6 +3949,13 @@ key "murty_ranked"
 \end_inset
 
  smaller assignments with Munkres.
+ We've seen that solving the basic Weighted Assignment Problem can efficiently
+ generate the
+\color red
+ 
+\color inherit
+assignments, however this would not account for interdependencies between
+ the keywords interpretations.
 \begin_inset Note Note
 status collapsed
 
@@ -3942,31 +4030,40 @@ $^2$
 \end_layout
 
 \begin_layout Standard
-It was seen that basic Weighted Assignment Problem can already be used to
- efficiently generate the matchings, however they would not account for
- interdependencies between the keywords interpretations
+
 \series bold
 \color red
-, e.g.
- TODO ADD EXAMPLE.
-
-\series default
-\color inherit
- Thus the contextualization
-\series medium
- adjust the scores to account for 
 \begin_inset Note Note
 status open
 
 \begin_layout Plain Layout
 
-\series medium
-additional
+\series bold
+\color red
+, e.g.
+ TODO ADD EXAMPLE.
 \end_layout
 
 \end_inset
 
- interdependencies between the assignments, e.g., say keyword 
+
+\series default
+\color inherit
+ Even if keyword queries have no clear structure such as in natural language,
+ it was noticed that the nearby keywords are often related 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "characterization_search_behaviour_kumar2009"
+
+\end_inset
+
+.
+ To account for these likely dependencies, the contextualization
+\series medium
+ adjust the scores depending on the context, e.g., say 
+\series default
+\color red
+keyword 
 \begin_inset Formula $kw_{i}$
 \end_inset
 
@@ -3979,7 +4076,7 @@ additional
 \begin_inset Formula $tag_{i}$
 \end_inset
 
-.
+, and thus their scores get increased.
 \end_layout
 
 \begin_layout Standard
@@ -4096,19 +4193,6 @@ status collapsed
 
 .
  As a result, we suggest that further investigations are needed.
-\begin_inset Marginal
-status collapsed
-
-\begin_layout Plain Layout
-
-\series bold
-\lang british
-add references???
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Standard
@@ -4132,7 +4216,21 @@ vspace*{0.8cm}
 \begin_layout Subsection
 
 \lang british
-Solution for a low number of contextualizations
+Solution for a low number of contextual
+\lang english
+
+\begin_inset Marginal
+status open
+
+\begin_layout Plain Layout
+Keymantic didn't know Murty from 1960s, lol
+\end_layout
+
+\end_inset
+
+
+\lang british
+izations
 \begin_inset Note Note
 status open
 
@@ -4166,11 +4264,11 @@ We are not aware of any method allowing to compute the top-k optimal solutions
 \emph on
 if the number of all contextualization possibilities is low
 \emph default
-: one could simply enumerate all of the possibilities and combine the solutions
- to the standard assignment problem.
- Still, it is worth observing that, in this special case, there exist large
- similarities between the contextualized cost matrices, thus parts of sub-soluti
-ons can be reused.
+: one could simply enumerate all of contextualization possibilities and
+ combine solutions to the basic assignment problem.
+ It is worth observing that, in this special case, there exist large similaritie
+s between the contextualized cost matrices, thus parts of sub-solutions
+ can be reused.
 \begin_inset Note Note
 status collapsed
 
@@ -4621,7 +4719,7 @@ key "ypipes_link"
 status open
 
 \begin_layout Plain Layout
-regular users?
+synonym for regular users?
 \end_layout
 
 \end_inset
