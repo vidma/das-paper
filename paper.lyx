@@ -515,7 +515,9 @@ Data Aggregation System: a tool for virtual data integration
 \lang british
 At the CMS experiment at CERN, the 
 \emph on
-Data Aggregation System (DAS
+Data Aggregation System 
+\emph default
+(DAS
 \begin_inset CommandInset nomenclature
 LatexCommand nomenclature
 symbol "DAS"
@@ -523,8 +525,6 @@ description "CMS Data Aggregation System - The EII system used at CMS"
 
 \end_inset
 
-
-\emph default
 )
 \begin_inset CommandInset citation
 LatexCommand citep
@@ -544,8 +544,19 @@ and covers some specific use-cases
 
 \end_inset
 
- integrates several services, where the largest stores 700 GB of relational
- data.
+ integrates several services
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\lang british
+ storing various sorts of information about data captured at the experiment
+\end_layout
+
+\end_inset
+
+, where the largest stores 700 GB of relational data.
  DAS has no predefined schema, thus only minimal service mappings are needed
  to describe differences among the services.
  It
@@ -3659,19 +3670,7 @@ it seems it was summing the scores (no log()!) Weighted-bipartite matching
 \begin_layout Section
 
 \lang british
-Discussion: Keyword Search at larger scales
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-
-\lang british
-: Contextualized Weighted Assignment Problem
-\end_layout
-
-\end_inset
-
-
+Discussion: Contextualized Weighted Assignment Problem
 \begin_inset CommandInset label
 LatexCommand label
 name "sec:Discussion:-Assignment-Problem"
@@ -3697,8 +3696,15 @@ status open
 
 \end_inset
 
- the ranking algorithms more efficient than our current implementation are
- needed, but they add additional complexity.
+ more efficient ranking algorithms need to be used than our current implementati
+on discussed in Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Ranking-function"
+
+\end_inset
+
+, and they add additional assumptions and complexity.
  As introduced in Section 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -3748,23 +3754,37 @@ In this section, s
 
 \end_inset
 
- In this section, stepping away from our current implementation, we look
- at the theoretical basis of this problem discussing the related works.
- We present
+ 
+\color inherit
+In this section, stepping away from our current implementation, we discuss
+ the theoretical basis of this problem and the related works.
+ We raise
 \begin_inset Marginal
 status open
 
 \begin_layout Plain Layout
 
-\color red
 \lang british
 present->raise? not too strong?
 \end_layout
 
 \end_inset
 
- some unresolved issues with this approach and propose an efficient algorithm
- for a special case when the number of contextualizations is low.
+ some unresolved issues 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\color red
+\lang british
+with this approach
+\end_layout
+
+\end_inset
+
+ and propose an efficient algorithm for a special case when the number of
+ contextualizations is low.
 \end_layout
 
 \begin_layout Standard
