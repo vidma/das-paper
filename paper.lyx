@@ -4273,7 +4273,8 @@ $^2$
 
 \lang british
 We are not aware of any method allowing to compute the top-k optimal solutions
- efficiently to the earlier problem.
+ efficiently to the earlier problem (Keymantic can efficiently list only
+ approximately best results).
  Fortunately, the problem is simpler 
 \emph on
 if the number of all contextualization possibilities is low
