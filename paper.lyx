@@ -1248,20 +1248,7 @@ evaluated and
 
 \end_inset
 
- ranked by
-\begin_inset Marginal
-status collapsed
-
-\begin_layout Plain Layout
-
-\series bold
-\lang british
-is by needed?
-\end_layout
-
-\end_inset
-
- combining the scores of individual keywords
+ ranked by combining the scores of individual keywords
 \begin_inset Note Note
 status collapsed
 
@@ -2353,10 +2340,22 @@ name "sub:Ranking-function"
 
 \color red
 \lang british
-In this step different permutations of the entry points are evaluated and
- ranked.
+\begin_inset Marginal
+status open
+
+\begin_layout Plain Layout
+
+\color red
+\lang british
+is this clear?
+\end_layout
+
+\end_inset
+
 
 \color inherit
+In this step different permutations of the entry points are evaluated and
+ ranked.
  The final score of a solution candidate is obtained by combining the entry
  point scores of keyword interpretations
 \lang english
@@ -2366,11 +2365,7 @@ In this step different permutations of the entry points are evaluated and
 
 , 
 \lang british
-and scores returned by 
-\color red
-contextualization rules,
-\color inherit
- 
+and scores returned by contextualization rules, 
 \begin_inset Formula $h_{j}\in H$
 \end_inset
 
@@ -2432,7 +2427,7 @@ status open
 
 \color blue
 \lang british
-more details?
+more?
 \end_layout
 
 \end_inset
@@ -3942,8 +3937,8 @@ vspace{-0.0cm}
 status open
 
 \begin_layout Plain Layout
-Keymantic didn't know this.
- from 1960s
+Keymantic didn't know Murty.
+ from 1960s, more efficient than theirs
 \end_layout
 
 \end_inset
@@ -4069,7 +4064,7 @@ status open
 
 \series default
 \color inherit
- Even if keyword queries have no clear structure such as in natural language,
+ Even if keyword queries have no clear structure such as the natural language,
  it was noticed that the nearby keywords are often related 
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -4080,9 +4075,8 @@ key "characterization_search_behaviour_kumar2009"
 .
  To account for these likely dependencies, the contextualization
 \series medium
- adjust the scores depending on the context, e.g., say 
+ adjusts the scores depending on the context, e.g., say 
 \series default
-\color red
 keyword 
 \begin_inset Formula $kw_{i}$
 \end_inset
