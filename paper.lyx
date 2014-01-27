@@ -2357,7 +2357,7 @@ In this step different permutations of the entry points are evaluated and
  ranked.
 
 \color inherit
- The final score of solution candidate is obtained by combining the entry
+ The final score of a solution candidate is obtained by combining the entry
  point scores of keyword interpretations
 \lang english
  (tags), 
