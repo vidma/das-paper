@@ -1957,7 +1957,11 @@ status open
 
  into a 
 \emph on
-schema or value term
+schema 
+\emph default
+or a
+\emph on
+ value term
 \emph default
 .
  For each token, a list of its interpretations is obtained, including a
@@ -2332,22 +2336,7 @@ name "sub:Ranking-function"
 
 \begin_layout Standard
 
-\color red
 \lang british
-\begin_inset Marginal
-status open
-
-\begin_layout Plain Layout
-
-\color red
-\lang british
-is this clear?
-\end_layout
-
-\end_inset
-
-
-\color inherit
 In this step various permutations of the entry points, forming 
 \emph on
 mappings
@@ -2421,24 +2410,7 @@ only stop-words are distinguished now; '(tell|show|display|find) me?' filtered
 
 \lang british
  (i) the nearby keywords refer to related schema terms, e.g., entity name
- and its value
-\color blue
-
-\begin_inset Marginal
-status open
-
-\begin_layout Plain Layout
-
-\color blue
-\lang british
-more?
-\end_layout
-
-\end_inset
-
-
-\color inherit
- or (ii) matching frequent use-cases, e.g.
+ and its value or (ii) matching frequent use-cases, e.g.
  retrieving entity by its 
 \begin_inset Quotes eld
 \end_inset
@@ -3702,7 +3674,7 @@ reference "sub:Ranking-function"
 
 \end_inset
 
- and they add additional assumptions or complexity.
+ (and they would add additional assumptions or complexity).
  In Section 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -3756,19 +3728,7 @@ In this section, s
 \color inherit
 In this section, stepping away from our current implementation, we discuss
  the theoretical basis of this approach and the related works.
- We raise
-\begin_inset Marginal
-status open
-
-\begin_layout Plain Layout
-
-\lang british
-present->raise? not too strong?
-\end_layout
-
-\end_inset
-
- some unresolved issues 
+ We raise some unresolved issues 
 \begin_inset Note Note
 status open
 
@@ -3821,7 +3781,15 @@ Given
 \end_inset
 
 , and a 
-\begin_inset Formula $n\times m$
+\begin_inset Formula $n$
+\end_inset
+
+
+\begin_inset Formula $\times$
+\end_inset
+
+
+\begin_inset Formula $m$
 \end_inset
 
  matrix of scores (called 
@@ -3837,7 +3805,7 @@ the assignment problem
 \emph on
 ,
 \emph default
- reformulated for keyword search, 
+ reformulated for the keyword search, 
 \lang english
 asks to find a maximum
 \emph on
@@ -3921,16 +3889,6 @@ vspace{-0.0cm}
 \end_layout
 
 \begin_layout Standard
-\begin_inset Marginal
-status open
-
-\begin_layout Plain Layout
-Keymantic didn't know Murty.
- from 1960s, more efficient than theirs
-\end_layout
-
-\end_inset
-
 To efficiently list 
 \emph on
 k
@@ -4218,21 +4176,7 @@ vspace*{0.8cm}
 \begin_layout Subsection
 
 \lang british
-Solution for a low number of contextual
-\lang english
-
-\begin_inset Marginal
-status open
-
-\begin_layout Plain Layout
-Keymantic didn't know Murty from 1960s, lol
-\end_layout
-
-\end_inset
-
-
-\lang british
-izations
+Solution for a low number of contextualizations
 \begin_inset Note Note
 status open
 
@@ -4718,11 +4662,22 @@ key "ypipes_link"
 \end_inset
 
 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\lang british
 \begin_inset Marginal
 status open
 
 \begin_layout Plain Layout
 synonym for regular users?
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
