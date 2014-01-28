@@ -170,9 +170,35 @@ status open
 
 
 \backslash
+vspace{-0.1cm}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
 address{$^
 \backslash
 dagger$Member of the CMS Collaboration}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vspace{0.1cm}
 \end_layout
 
 \end_inset
