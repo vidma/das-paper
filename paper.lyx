@@ -491,31 +491,7 @@ off-line
 
  using metadata, such as constraints on inputs accepted by services.
  It was developed at CMS, the Compact Muon Solenoid experiment at CERN,
- where it makes a part of a 
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-
-\lang british
-data integration
-\end_layout
-
-\end_inset
-
-VDI tool presented next
-\begin_inset Marginal
-status open
-
-\begin_layout Plain Layout
-
-\lang british
-presented next OK?
-\end_layout
-
-\end_inset
-
-.
+ where it makes a part of an open source VDI tool presented next.
 \begin_inset Note Note
 status open
 
@@ -551,8 +527,8 @@ description "CMS Data Aggregation System - The EII system used at CMS"
 
 )
 \begin_inset CommandInset citation
-LatexCommand citep
-key "Kuznetsov2010,Kuznetsov2011"
+LatexCommand cite
+key "Kuznetsov2010,Kuznetsov2011,das_link"
 
 \end_inset
 
