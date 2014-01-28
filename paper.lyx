@@ -107,7 +107,9 @@ status open
 
 \begin_layout Plain Layout
 
-$^1$
+$^{1,
+\backslash
+dagger}$
 \end_layout
 
 \end_inset
@@ -118,7 +120,9 @@ status open
 
 \begin_layout Plain Layout
 
-$^2$
+$^{2,
+\backslash
+dagger}$
 \end_layout
 
 \end_inset
@@ -233,6 +237,15 @@ status open
 
 \backslash
 address{$^3$École Polytechnique Fédérale de Lausanne, Switzerland}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+address{$^
+\backslash
+dagger$Member of the CMS Collaboration}
 \end_layout
 
 \end_inset
@@ -376,8 +389,14 @@ Virtual Data Integration (VDI)
 \emph default
 \lang british
  is a lightweight
-\begin_inset Foot
+\begin_inset Note Note
 status open
+
+\begin_layout Plain Layout
+
+\lang british
+\begin_inset Foot
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -397,6 +416,11 @@ publish--subscribe
  (hard to apply to proprietary systems reluctant to change) and data-warehousing
  (problematic when large portions of data are volatile or when only limited
  interfaces are provided by services).
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
