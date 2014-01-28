@@ -1248,7 +1248,7 @@ evaluated and
 
 \end_inset
 
- ranked by combining the scores of individual keywords
+ ranked by combining the entry point scores
 \begin_inset Note Note
 status collapsed
 
@@ -1446,8 +1446,7 @@ reference "fig:query-results"
 \end_inset
 
 .
- For more details on the internals of this and other execution steps see
- Section 
+ For more details on the internals of the processing steps see Section 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:Description-of-KWS"
@@ -2008,17 +2007,12 @@ lol
  
 \color inherit
 Also, the unlikely interpretations are penalized, e.g.
- entity names and numbers as wildcard value matches (e.g.
-\size small
-\emph on
-, 
-\size default
-\emph default
-the values of 
+ entity names and numbers are questionable wildcard value matches (the values
+ of 
 \emph on
 dataset
 \emph default
- contain numbers and an entity name 
+ are string typed, but contain numbers and an entity name 
 \size small
 \emph on
 `block'
@@ -2230,7 +2224,7 @@ multifielded document
 \color inherit
 name, its parent, its base-name, and its title if one exists.
  To find the matches, the IR engine is queried for each chunk of k-nearby
- keywords (using 
+ keywords, using 
 \begin_inset Formula $k\leq4$
 \end_inset
 
@@ -2247,7 +2241,7 @@ lly inexpensive
 
 \end_inset
 
-).
+.
  The IR ranker uses the BM25F scoring function 
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -2354,18 +2348,28 @@ is this clear?
 
 
 \color inherit
-In this step different permutations of the entry points are evaluated and
- ranked.
- The final score of a solution candidate is obtained by combining the entry
- point scores of keyword interpretations
+In this step various permutations of the entry points, forming 
+\emph on
+mappings
+\emph default
+ between keywords 
+\begin_inset Formula $kw_{i}$
+\end_inset
+
+ into their interpretations 
+\begin_inset Formula $tag_{i}$
+\end_inset
+
+, are evaluated and ranked.
+ The score of a mapping is obtained by combining the entry point scores,
 \lang english
- (tags), 
+ 
 \begin_inset Formula $score_{tag_{i}|kw_{i}}$
 \end_inset
 
-, 
+, and
 \lang british
-and scores returned by contextualization rules, 
+ scores returned by contextualization rules, 
 \begin_inset Formula $h_{j}\in H$
 \end_inset
 
@@ -2781,7 +2785,7 @@ status collapsed
 \begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
-\scriptsize averaging\; score(tags):=\frac{{\displaystyle \sum_{kw_{i}\subset kwq}{\displaystyle \left(score_{tag_{i}|kw_{i}}+{\displaystyle \sum_{h_{j}\in H}h_{j}(tag_{i,i-1,..,1})}\right)}}}{\#\; non\; stopword\; keywords}
+\scriptsize averaging\; score(mapping):=\frac{{\displaystyle \sum_{tag_{i}\subset mapping}{\displaystyle \left(score_{tag_{i}|kw_{i}}+{\displaystyle \sum_{h_{j}\in H}h_{j}(tag_{i,i-1,..,1})}\right)}}}{\#\; non\; stopword\; keywords}
 \end{equation}
 
 \end_inset
@@ -2805,7 +2809,7 @@ vspace{-1cm}
 \begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
-\scriptsize{\displaystyle likelihood\; score(tags):=\sum_{kw_{i}\subset kwq}{\displaystyle \left({\displaystyle {\displaystyle \log}\left(score_{tag_{i}|kw_{i}}\right)}+{\displaystyle \sum_{h_{j}\in H}h_{j}(tag_{i,i-1,..,1})}\right)}}
+\scriptsize{\displaystyle likelihood\; score(mapping):=\sum_{tag_{i}\subset mapping}{\displaystyle \left({\displaystyle {\displaystyle \log}\left(score_{tag_{i}|kw_{i}}\right)}+{\displaystyle \sum_{h_{j}\in H}h_{j}(tag_{i,i-1,..,1})}\right)}}
 \end{equation}
 
 \end_inset
@@ -2844,8 +2848,8 @@ status open
 
 \end_inset
 
- simply performs enumeration of all the possibilities with early pruning
- of suggestions that are not supported by the services.
+ simply enumerates all the possibilities mappings with early pruning of
+ suggestions that are not supported by the services.
  There exist more complex alternatives, but this one is the simplest that
  allows early pruning, unlimited contextualization, and listing multiple
  results.
@@ -3678,7 +3682,7 @@ name "sec:Discussion:-Assignment-Problem"
 \begin_layout Standard
 
 \lang british
-At larger scale 
+At a larger scale, 
 \begin_inset Note Note
 status open
 
@@ -3691,24 +3695,23 @@ status open
 
 \end_inset
 
- more efficient ranking algorithms need to be used than our current implementati
-on discussed in Section 
+ more efficient ranking algorithms are need than discussed in Section 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sub:Ranking-function"
 
 \end_inset
 
-, and they add additional assumptions and complexity.
- As introduced in Section 
+ and they add additional assumptions or complexity.
+ In Section 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:Related-work"
 
 \end_inset
 
-, the contextualized weighted assignment problem is one of approaches to
- the keyword search over VDI.
+, the contextualized weighted assignment problem was introduced as one of
+ approaches to the keyword search over VDI.
  
 \color red
 
@@ -3752,7 +3755,7 @@ In this section, s
  
 \color inherit
 In this section, stepping away from our current implementation, we discuss
- the theoretical basis of this problem and the related works.
+ the theoretical basis of this approach and the related works.
  We raise
 \begin_inset Marginal
 status open
@@ -3779,7 +3782,7 @@ with this approach
 \end_inset
 
  and propose an efficient algorithm for a special case when the number of
- contextualizations is low.
+ contextualizations is very low.
 \end_layout
 
 \begin_layout Standard
@@ -3818,19 +3821,7 @@ Given
 \end_inset
 
 , and a 
-\begin_inset Formula $n$
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-x
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset Formula $m$
+\begin_inset Formula $n\times m$
 \end_inset
 
  matrix of scores (called 
@@ -3842,24 +3833,21 @@ weights
 \emph on
 , 
 \emph default
-the 
+the assignment problem
 \emph on
-assignment problem,
+,
 \emph default
  reformulated for keyword search, 
 \lang english
 asks to find a maximum
 \emph on
 \lang british
- weighted bipartite matching
-\emph default
-, i.e.,
-\series bold
-\lang english
  
-\series default
-to maximize the sum of weights such that each keyword is assigned to one
- tag, and each tag is chosen no more than once.
+\emph default
+weighted bipartite matching -
+\lang english
+ maximize the sum of weights such that each keyword is assigned to one tag,
+ and a tag is chosen no more than once.
  This can be efficiently solved in 
 \begin_inset Formula $\Theta(n^{2}m)$
 \end_inset
@@ -3969,8 +3957,8 @@ key "murty_ranked"
 \color red
  
 \color inherit
-assignments, however this would not account for interdependencies between
- the keywords interpretations.
+assignments, however this still would not account for interdependencies
+ between the keywords interpretations.
 \begin_inset Note Note
 status collapsed
 
@@ -4049,7 +4037,7 @@ $^2$
 \series bold
 \color red
 \begin_inset Note Note
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -4064,7 +4052,7 @@ status open
 
 \series default
 \color inherit
- Even if keyword queries have no clear structure such as the natural language,
+Even if keyword queries have no clear structure such as the natural language,
  it was noticed that the nearby keywords are often related 
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -4272,9 +4260,9 @@ $^2$
 \begin_layout Standard
 
 \lang british
-We are not aware of any method allowing to compute the top-k optimal solutions
- efficiently to the earlier problem (Keymantic can efficiently list only
- approximately best results).
+We are not aware of any method allowing to efficiently compute the top-k
+ optimal solutions to the earlier problem (Keymantic can efficiently list
+ only the approximately best results).
  Fortunately, the problem is simpler 
 \emph on
 if the number of all contextualization possibilities is low
