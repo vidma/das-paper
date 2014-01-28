@@ -183,7 +183,11 @@ status open
 
 
 \backslash
-address{on  behalf of the CMS Collaboration}
+address{on  behalf of the CMS Collaboration; 
+\backslash
+,$^
+\backslash
+dagger$Member of the CMS Collaboration}
 \end_layout
 
 \end_inset
@@ -237,15 +241,8 @@ status open
 
 \backslash
 address{$^3$École Polytechnique Fédérale de Lausanne, Switzerland}
-\end_layout
-
-\begin_layout Plain Layout
-
-
 \backslash
-address{$^
-\backslash
-dagger$Member of the CMS Collaboration}
+vspace{-0.2cm}
 \end_layout
 
 \end_inset
@@ -311,7 +308,7 @@ Digital Science and Computing Center,
 
 
 \begin_inset Note Note
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset ERT
@@ -327,19 +324,6 @@ ead{$^1$vidmantas.zemleris@cern.ch}
 \end_inset
 
 
-\end_layout
-
-\end_inset
-
-
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-vspace{-0.4cm}
 \end_layout
 
 \end_inset
@@ -370,7 +354,7 @@ status open
 
 
 \backslash
-vspace{-1cm}
+vspace{-1.2cm}
 \end_layout
 
 \end_inset
@@ -389,12 +373,6 @@ Virtual Data Integration (VDI)
 \emph default
 \lang british
  is a lightweight
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-
-\lang british
 \begin_inset Foot
 status collapsed
 
@@ -416,11 +394,6 @@ publish--subscribe
  (hard to apply to proprietary systems reluctant to change) and data-warehousing
  (problematic when large portions of data are volatile or when only limited
  interfaces are provided by services).
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \end_inset
@@ -499,6 +472,21 @@ status open
 
 \lang british
 in the next section.
+\end_layout
+
+\end_inset
+
+
+\lang english
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vspace{-0.3cm}
 \end_layout
 
 \end_inset
@@ -1596,7 +1584,7 @@ status open
 
 
 \backslash
-vspace{-0.3cm}
+vspace{-0.0cm}
 \end_layout
 
 \end_inset
@@ -1652,7 +1640,7 @@ status open
 
 
 \backslash
-vspace{-0.6cm}
+vspace{-0.8cm}
 \end_layout
 
 \end_inset
@@ -2820,8 +2808,8 @@ status open
 
 \end_inset
 
- simply enumerates all the possibilities mappings with early pruning of
- suggestions that are not supported by the services.
+ simply enumerates all the possible mappings with early pruning of suggestions
+ that are not supported by the services.
  There exist more complex alternatives, but this one is the simplest that
  allows early pruning, unlimited contextualization, and listing multiple
  results.
